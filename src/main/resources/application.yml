@@ -1,0 +1,15 @@
+#设置Tomcat端口，默认8080
+server.port: 8080
+#设置Tomcat编码
+server.tomcat.uri-encoding: UTF-8
+#开发时关闭缓存,不然没法看到实时页面
+spring.thymeleaf.cache: false
+
+#数据库配置
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+spring.datasource.url: jdbc:postgresql://8.130.38.30:3306/university?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&currentSchema=db_user
+spring.datasource.username: root
+spring.datasource.password: 20021229bin
+
+#配置模型路径
+mybatis.type-aliases-package: com/neu/wb/realdemo/mapper
