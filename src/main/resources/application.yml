@@ -15,7 +15,7 @@ spring:
       password: 20021229.bin
 
 #配置模型路径
-mybatis.type-aliases-package: com/neu/wb/realdemo/mapper
+mybatis.type-aliases-package: com/neu/group/dao
 
 #日志
 logging:
