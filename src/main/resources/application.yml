@@ -6,10 +6,18 @@ server.tomcat.uri-encoding: UTF-8
 spring.thymeleaf.cache: false
 
 #数据库配置
-spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
-spring.datasource.url: jdbc:postgresql://8.130.38.30:3306/university?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&currentSchema=db_user
-spring.datasource.username: root
-spring.datasource.password: 20021229bin
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://8.130.38.30:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&currentSchema=db_user
+      username: root
+      password: 20021229.bin
 
 #配置模型路径
 mybatis.type-aliases-package: com/neu/wb/realdemo/mapper
+
+#日志
+logging:
+  level:
+    root: info
