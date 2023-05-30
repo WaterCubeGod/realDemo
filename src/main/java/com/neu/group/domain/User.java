@@ -1,11 +1,13 @@
 package com.neu.group.domain;
 
+import org.apache.ibatis.type.Alias;
 import org.springframework.stereotype.Component;
 
 /**
  * User: 用户实体类
  */
-
+//对于实体类取别名，使得xml文件能正确找到对应的实体类
+@Alias("User")
 public class User {
     private int id;
     private String username;

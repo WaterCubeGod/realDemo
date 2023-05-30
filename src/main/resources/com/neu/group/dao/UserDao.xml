@@ -5,7 +5,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neu.group.dao.UserDao">
 <!--    //通过账号id和密码来查询某一行-->
-    <select id="selectByUsernameAndPassword" resultType="com.neu.group.domain.User">
+    <select id="selectByUsernameAndPassword" resultType="User">
         SELECT id,password,username,type FROM user WHERE id = ${id} AND password = ${password};
     </select>
 <!--    //插入一行-->
