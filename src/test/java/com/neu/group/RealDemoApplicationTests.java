@@ -21,7 +21,7 @@ class RealDemoApplicationTests {
 
     @Test
     void login(){
-        User user = userDao.selectByUsernameAndPassword(1,"123456");
+        User user = userDao.selectByUsernameAndPassword("熊梓详","123456");
         System.out.println(user);
     }
 

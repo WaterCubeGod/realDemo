@@ -1,7 +1,6 @@
 package com.neu.group.domain;
 
 import org.apache.ibatis.type.Alias;
-import org.springframework.stereotype.Component;
 
 /**
  * User: 用户实体类

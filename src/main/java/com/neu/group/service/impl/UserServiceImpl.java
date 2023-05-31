@@ -4,7 +4,6 @@ import com.neu.group.dao.UserDao;
 import com.neu.group.domain.User;
 import com.neu.group.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +21,9 @@ public class UserServiceImpl implements UserService {
     //用户登录
     @Override
     @Transactional
-    public User login(int id, String password) {
+    public User login(String username, String password) {
 
-        return userDao.selectByUsernameAndPassword(id,password);
+        return userDao.selectByUsernameAndPassword(username,password);
     }
 
     //用户注册
@@ -53,5 +52,11 @@ public class UserServiceImpl implements UserService {
     public List<User> selectUserDividerByPage(int count) {
 
         return userDao.selectAllUser(count);
+    }
+
+    //返回用户数量
+    @Override
+    public Integer countUser() {
+        return userDao.countUser();
     }
 }

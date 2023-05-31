@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
 
     //登录接口
-    User login(int id, String password);
+    User login(String username, String password);
 
     //注册接口
     boolean register(String username, String password, int type);
@@ -20,5 +20,8 @@ public interface UserService {
 
     //分页查询接口
     List<User> selectUserDividerByPage(int count);
+
+    //用户总数
+    Integer countUser();
 
 }

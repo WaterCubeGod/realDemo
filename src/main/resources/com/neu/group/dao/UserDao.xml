@@ -6,18 +6,23 @@
 <mapper namespace="com.neu.group.dao.UserDao">
 <!--    //通过账号id和密码来查询某一行-->
     <select id="selectByUsernameAndPassword" resultType="User">
-        SELECT id,password,username,type FROM user WHERE id = ${id} AND password = ${password};
+        SELECT id,password,username,type FROM user WHERE username = #{username} AND password = #{password};
     </select>
 <!--    //插入一行-->
-    <select id="insertUser" resultType="java.lang.Integer">
-        INSERT INTO user(username,password,type) VALUES (${username},${password},${type});
-    </select>
+    <insert id="insertUser">
+        INSERT INTO user(username,password,type) VALUES (#{username},#{password},#{type});
+    </insert>
 <!--    //删除一行:必须知道对应的id和密码-->
     <delete id="deleteUser" >
-        DELETE FROM user WHERE id = ${id} AND password = ${password};
+        DELETE FROM user WHERE id = #{id} AND password = #{password};
     </delete>
 <!--    //查找10行数据-->
-    <select id="selectAllUser">
-        SELECT id,username,type FROM user WHERE id > ${count} limit 10
+    <select id="selectAllUser" resultType="User">
+        SELECT id,username,password,type FROM user WHERE id > #{count} limit 10
     </select>
+    <!-- 查看用户总数 -->
+    <select id="countUser" resultType="java.lang.Integer">
+        SELECT COUNT(*) from user
+    </select>
+
 </mapper>
