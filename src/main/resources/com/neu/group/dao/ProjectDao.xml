@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.group.dao.ProjectDao">
+    <resultMap type="com.neu.group.domain.Project" id="projectMap">
+        <result column="project_id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_description" property="projectDescription"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 根据用户查找项目 -->
+    <select id="selectProjectByUser" resultMap="projectMap">
+        SELECT project_id,user_id,project_name,project_description,create_time
+        FROM project
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="selectProjectByProjectName" resultMap="projectMap">
+        SELECT project_id,user_id,project_name,project_description,create_time
+        FROM project
+        WHERE user_id = #{userId} AND project_name like CONCAT(CONCAT(#{projectName},'%'))
+    </select>
+
+    <!-- 新增一行 -->
+    <insert id="insertProject">
+        INSERT INTO project(project_name,project_description,user_id)
+        VALUES (#{projectName},#{projectDescription},#{userId})
+    </insert>
+
+    <!-- 编辑一行 -->
+    <update id="updateProject">
+        UPDATE project
+        SET project_name = #{projectName}, project_description = #{projectDescription}
+        WHERE project_id = #{projectId}
+    </update>
+
+    <!-- 删除一行 -->
+    <delete id="deleteProject">
+        DELETE FROM project
+        WHERE project_id = #{projectId}
+    </delete>
+
+</mapper>

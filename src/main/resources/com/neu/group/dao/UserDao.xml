@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neu.group.dao.UserDao">
 
-<!--    //通过账号id和密码来查询某一行-->
+<!--    //通过账号id和密码来查询-->
     <select id="selectByUsernameAndPassword" resultType="User">
         SELECT id,password,username,type FROM user WHERE username = #{username} AND password = #{password};
     </select>
@@ -26,7 +26,7 @@
 
 <!--    //查找10行数据-->
     <select id="selectAllUser" resultType="User">
-        SELECT id,username,password,type FROM user WHERE type = 0 limit #{count},10
+        SELECT id,username,password,type FROM user WHERE type = 0
     </select>
 
     <!-- 查看用户总数 -->
@@ -36,7 +36,10 @@
 
     <!-- 模糊查询 -->
     <select id="selectByUsername" resultType="User">
-        SELECT id,username,password,type FROM user WHERE username LIKE CONCAT(CONCAT(#{username},'%')) limit #{count},10
+        SELECT id,username,password,type
+        FROM user
+        WHERE username LIKE CONCAT(CONCAT(#{username},'%')) AND type = 0
+        limit #{count},10
     </select>
 
 </mapper>

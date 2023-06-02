@@ -5,21 +5,21 @@ onload = () => {
 
 const handleCreateProject = () => {
   let params = {
-    createdBy: $util.getItem('userInfo').username,
-    lastUpdatedBy: $util.getItem('userInfo').username,
+    userId: $util.getItem('userInfo').id,
     projectName: $('#projectName').val(),
-    projectContent: $('#projectDescribe').val()
+    projectDescription: $('#projectDescription').val()
   }
   if (!params.projectName) return alert('项目名称不能为空！')
-  if (!params.projectContent) return alert('项目描述不能为空！')
+  if (!params.projectDescription) return alert('项目描述不能为空！')
   $.ajax({
-    url: API_BASE_URL + '/addProjectInfo',
-    type: "POST",
+    url: API_BASE_URL + '/project',
+    type: "PUT",
     data: JSON.stringify(params),
     dataType: "json",
     contentType: "application/json",
     success() {
       alert('创建成功！')
+      location.href = "/pages/questionnaire/index.html"
     }
   })
 }

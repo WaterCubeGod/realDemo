@@ -1,5 +1,5 @@
 onload = () => {
-  $('#headerUsername').text($util.getItem('user').username)
+  $('#headerUsername').text($util.getItem('userInfo').username)
   handleHeaderLoad()
   fetchProjectList()
 }
@@ -8,14 +8,13 @@ let projectList = []
 
 const fetchProjectList = () => {
   let params = {
-    createdBy: $util.getItem('userInfo').username,
     projectName: $('#projectName').val()
   }
   $.ajax({
-    url: API_BASE_URL + '/queryProjectList',
+    url: API_BASE_URL + '/project/' + $util.getItem('userInfo').id,
     type: "POST",
-    data: JSON.stringify(params),
     dataType: "json",
+    data: JSON.stringify(params),
     contentType: "application/json",
     success(res) {
       projectList = res.data
@@ -28,9 +27,9 @@ const fetchProjectList = () => {
               <div>${item.projectName}</div>
               <div>
                 <button type="button" class="btn btn-link" onclick="onCreateQuestionnaire()">创建问卷</button>
-                <button type="button" class="btn btn-link" onclick="onSeeProject('${item.id}')">查看</button>
-                <button type="button" class="btn btn-link" onclick="onEditProject('${item.id}')">编辑</button>
-                <button type="button" class="btn btn-link" onclick="onDelProject('${item.id}')">删除</button>
+                <button type="button" class="btn btn-link" onclick="onSeeProject(${item.projectId})">查看</button>
+                <button type="button" class="btn btn-link" onclick="onEditProject(${item.projectId})">编辑</button>
+                <button type="button" class="btn btn-link" onclick="onDelProject(${item.projectId})">删除</button>
               </div>
             </div>
             <div class="list-footer">
@@ -57,7 +56,8 @@ const onSeeProject = (id) => {
 }
 
 const onEditProject = (id) => {
-  let project = projectList.filter(item => item.id === id)[0]
+  console.log()
+  let project = projectList.filter(item => item.projectId === id)[0]
   $util.setPageParam('editProject', project)
   location.href = "/pages/editProject/index.html"
 }
@@ -67,12 +67,12 @@ const onDelProject = (pid) => {
 
   if (state) {
     let params = {
-      id:pid
+      projectId:pid
     }
     //alert(JSON.stringify(params))
     $.ajax({
-      url: API_BASE_URL + '/deleteProjectById',
-      type: "POST",
+      url: API_BASE_URL + '/project',
+      type: "DELETE",
       data: JSON.stringify(params),
       dataType: "json",
       contentType: "application/json",

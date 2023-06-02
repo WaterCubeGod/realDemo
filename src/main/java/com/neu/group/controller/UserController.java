@@ -58,16 +58,16 @@ public class UserController {
         int count = jsonObject.getInt("count");
         String username = jsonObject.getString("username");
 
-        if(username == null){
-            return new R(true,userService.selectUserDividerByPage(count),"");
-        }
         return new R(true,userService.selectUserByUsername(username,count),"");
     }
 
     //用户数量统计
     @GetMapping
     public R countUser(){
-        return new R(true,userService.countUser()/10 + 1,"");
+        System.out.println(userService.countUser()%10);
+
+        return new R(true,userService.countUser()/10 +
+                (userService.countUser()%10 == 0 ? 0:1),"");
     }
 
 
