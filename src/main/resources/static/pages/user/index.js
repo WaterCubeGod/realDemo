@@ -15,12 +15,14 @@ const fetchUserList = () => {
     pageNum,
     pageSize,
     totalPag,
-    userName: $('#username').val()
+    count: (pageNum - 1) * pageSize,
+    username: $('#username').val()
   }
   $.ajax({
-    url: API_BASE_URL + '/users/' + (params.pageNum - 1) * pageSize,
-    type: 'GET',
+    url: API_BASE_URL + '/users',
+    type: 'POST',
     dataType: 'json',
+    data: JSON.stringify(params),
     contentType: 'application/json',
     success(res) {
       $('#table #tbody').html('')
@@ -39,7 +41,7 @@ const fetchUserList = () => {
             <td>${TYPE}</td>
             <td>
               <button type="button" class="btn btn-link">重置密码</button>
-              <button type="button" class="btn btn-link" onclick="handleEdit('${item.id}')">编辑</button>
+              <button type="button" class="btn btn-link" onclick="handleEdit(${item.id})">编辑</button>
               <button type="button" class="btn btn-link btn-red">关闭</button>
               <button type="button" class="btn btn-link btn-red" onclick="deleteUser('${item.id}','${item.password}')">删除</button>
             </td>
@@ -90,24 +92,25 @@ const handleTableChange = (page) => {
             alert("超过最大页数")
           }
         }
+        $('#currentPage').text(pageNum)
+        $('#totalPage').text(totalPag)
+        fetchUserList()
       } else {
         alert("最大页数")
       }
     }
   })
-
-  $('#currentPage').text(pageNum)
-  $('#totalPage').text(totalPag)
-  fetchUserList()
 }
 
 const handleCreateUser = () => {
   $util.setPageParam('user', undefined)
+  $util.setPageParam('code', 0);
   location.href = '/pages/createUser/index.html'
 }
 
 const handleEdit = (id) => {
   let user = userList.filter(item => item.id === id)[0]
   $util.setPageParam('user', user)
+  $util.setPageParam('code', 1);
   location.href = '/pages/createUser/index.html'
 }

@@ -1,10 +1,17 @@
 onload = () => {
+
   $('#headerUsername').text($util.getItem('userInfo').username)
-  $('#headerDivB').text('创建用户')
+
+  if($util.getPageParam('code') === 0){
+    $('#headerDivB').text('创建用户')
+  }else if($util.getPageParam('code') === 1){
+    $('#headerDivB').text('编辑用户')
+    $('#button').text('编辑用户')
+  }
 
   let user = $util.getPageParam('user')
   // console.log('--- 用户信息 ---');
-  // console.log(user);
+  console.log(user);
   if (user) {
     $('#username').val(user.username)
     $('#password').val(user.password)
@@ -30,15 +37,14 @@ const handleCreateUser = () => {
 
   // 修改
   if(user.id) {
-
+    console.log(API_BASE_URL + '/users/' + user.id + "/" + user.username + "/" + user.password)
     $.ajax({
-      url: API_BASE_URL + '/admin/modifyUserInfo',
-      type: 'POST',
-      data: JSON.stringify(user),
+      url: API_BASE_URL + '/users/' + user.id + "/" + user.username + "/" + user.password,
+      type: 'GET',
       dataType: 'json',
       contentType: 'application/json',
       success(res) {
-        if (res.code === "666") {
+        if (res.flag === true) {
           location.href = '/pages/user/index.html'
         } else {
           alert(res.message)

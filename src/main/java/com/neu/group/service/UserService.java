@@ -18,8 +18,14 @@ public interface UserService {
     //注销接口
     boolean logout(int id, String password);
 
+    //编辑接口
+    boolean editUser(int id, String username, String password);
+
     //分页查询接口
     List<User> selectUserDividerByPage(int count);
+
+    //根据用户名查询
+    List<User> selectUserByUsername(String username, int count);
 
     //用户总数
     Integer countUser();

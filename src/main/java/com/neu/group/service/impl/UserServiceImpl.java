@@ -46,6 +46,16 @@ public class UserServiceImpl implements UserService {
         return count > 0;
     }
 
+    //用户编辑
+    @Override
+    @Transactional
+    public boolean editUser(int id, String username, String password) {
+
+        int count = userDao.updateUser(id,username,password);
+
+        return count > 0;
+    }
+
     //分页查询用户
     @Override
     @Transactional
@@ -54,8 +64,15 @@ public class UserServiceImpl implements UserService {
         return userDao.selectAllUser(count);
     }
 
+    @Override
+    @Transactional
+    public List<User> selectUserByUsername(String username, int count){
+        return userDao.selectByUsername(username,count);
+    }
+
     //返回用户数量
     @Override
+    @Transactional
     public Integer countUser() {
         return userDao.countUser();
     }

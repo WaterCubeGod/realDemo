@@ -10,9 +10,15 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://8.130.38.30:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&currentSchema=db_user
+      url: jdbc:mysql://8.130.38.30:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
       username: root
       password: 20021229.bin
+      initialSize: 10
+      minIdle: 10
+      maxActive: 40
+      maxWait: 60000
+      test-on-borrow: true
+      test-while-idle: true
 
 #配置模型路径
 mybatis.type-aliases-package: com/neu/group/domain

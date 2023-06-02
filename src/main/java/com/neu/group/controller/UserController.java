@@ -4,6 +4,7 @@ import com.neu.group.controller.utils.R;
 import com.neu.group.domain.User;
 import com.neu.group.service.UserService;
 
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,23 +31,37 @@ public class UserController {
     //用户注册
     @PutMapping
     public R register(@RequestBody User user){
-        Boolean flag = userService.register(user.getUsername(),user.getPassword(), user.getType());
+        boolean flag = userService.register(user.getUsername(),user.getPassword(), user.getType());
 
-        return new R(flag, "", flag ? "添加成功" : "添加失败");
+        return new R(flag, "", flag ? "添加成功" : "添加失败,用户名重复");
     }
 
     //注销用户
     @DeleteMapping("/{id}/{password}")
     public R logout(@PathVariable int id, @PathVariable String password){
-        Boolean flag = userService.logout(id,password);
+        boolean flag = userService.logout(id,password);
 
         return new R(flag, "", flag ? "删除成功" : "删除失败");
     }
 
+    @GetMapping("/{id}/{username}/{password}")
+    public R editUser(@PathVariable int id, @PathVariable String username,
+                      @PathVariable String password){
+        boolean flag = userService.editUser(id,username,password);
+
+        return new R(flag, "", flag ? "编辑成功" : "编辑失败,可能有重复用户名");
+    }
+
     //分页查询用户
-    @GetMapping("/{count}")
-    public R selectUserDividerByPage(@PathVariable int count){
-        return new R(true,userService.selectUserDividerByPage(count),"");
+    @PostMapping
+    public R selectUserDividerByPage(@RequestBody JSONObject jsonObject){
+        int count = jsonObject.getInt("count");
+        String username = jsonObject.getString("username");
+
+        if(username == null){
+            return new R(true,userService.selectUserDividerByPage(count),"");
+        }
+        return new R(true,userService.selectUserByUsername(username,count),"");
     }
 
     //用户数量统计
@@ -54,5 +69,6 @@ public class UserController {
     public R countUser(){
         return new R(true,userService.countUser()/10 + 1,"");
     }
+
 
 }
