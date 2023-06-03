@@ -1,12 +1,18 @@
 package com.neu.group.service.impl;
 
+import cc.aicode.e2e.ExcelHelper;
+import cc.aicode.e2e.exception.ExcelContentInvalidException;
+import cc.aicode.e2e.exception.ExcelParseException;
+import cc.aicode.e2e.exception.ExcelRegexpValidFailedException;
 import com.neu.group.dao.UserDao;
 import com.neu.group.domain.User;
 import com.neu.group.service.UserService;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,6 +40,26 @@ public class UserServiceImpl implements UserService {
         int count = userDao.insertUser(username,password,type);
 
         return count > 0;
+    }
+
+    //批量导入
+    @Override
+    @Transactional
+    public boolean bulkImport(String filePath) throws IOException, InvalidFormatException {
+        boolean flag = true;
+
+        ExcelHelper eh = ExcelHelper.readExcel(filePath);
+        List<User> users;
+        try {
+            users = eh.toEntitys(User.class);
+            for (User user : users) {
+                int count = userDao.insertUser(user.getUsername(),user.getPassword(), user.getType());
+                flag = (count > 0) && flag;
+            }
+        } catch (ExcelParseException | ExcelRegexpValidFailedException | ExcelContentInvalidException e) {
+            System.out.println(e.getMessage());
+        }
+        return flag;
     }
 
     //用户注销

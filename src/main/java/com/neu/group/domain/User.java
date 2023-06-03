@@ -1,16 +1,24 @@
 package com.neu.group.domain;
 
+import cc.aicode.e2e.annotation.ExcelEntity;
+import cc.aicode.e2e.annotation.ExcelProperty;
 import org.apache.ibatis.type.Alias;
 
 /**
  * User: 用户实体类
  */
 //对于实体类取别名，使得xml文件能正确找到对应的实体类
+
+@ExcelEntity
 @Alias("User")
 public class User {
+
     private int id;
+    @ExcelProperty(value = "username")
     private String username;
+    @ExcelProperty(value = "password")
     private String password;
+    @ExcelProperty(value = "type", regexp = "/[0,1]/" , regexpErrorMessage = "type必须在0-1之间")
     private int type;
 
     public User() {

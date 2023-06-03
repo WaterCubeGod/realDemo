@@ -67,6 +67,12 @@
             <classifier>jdk15</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>cc.aicode.java.e2e</groupId>
+            <artifactId>ExcelToEntity</artifactId>
+            <version>1.0.0.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>

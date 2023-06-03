@@ -5,9 +5,15 @@ import com.neu.group.domain.User;
 import com.neu.group.service.UserService;
 
 import net.sf.json.JSONObject;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * 用户表现层方法
@@ -16,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+    private static final String UPLOAD_DIR = "uploads";
 
     @Autowired
     private UserService userService;
@@ -32,6 +40,33 @@ public class UserController {
     @PutMapping
     public R register(@RequestBody User user){
         boolean flag = userService.register(user.getUsername(),user.getPassword(), user.getType());
+
+        return new R(flag, "", flag ? "添加成功" : "添加失败,用户名重复");
+    }
+
+    //批量导入用户
+    @PutMapping("/all")
+    public R register(MultipartFile file,HttpServletRequest request) throws IOException,
+            InvalidFormatException {
+        // 获取上传文件的存储路径
+        String applicationPath = request.getServletContext().getRealPath("");
+        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
+
+        // 获取文件数据
+        String fileName = file.getOriginalFilename();
+
+        // 创建上传目录
+        File fileUploadDirectory = new File(uploadFilePath);
+        if (!fileUploadDirectory.exists()) {
+            fileUploadDirectory.mkdirs();
+        }
+
+        // 将文件保存到指定路径中
+        String filePath = uploadFilePath + File.separator + fileName;
+        assert fileName != null;
+        file.transferTo(new File(fileUploadDirectory,fileName));
+
+        boolean flag = userService.bulkImport(filePath);
 
         return new R(flag, "", flag ? "添加成功" : "添加失败,用户名重复");
     }

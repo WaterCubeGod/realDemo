@@ -108,6 +108,39 @@ const handleCreateUser = () => {
   location.href = '/pages/createUser/index.html'
 }
 
+const handleBulkImport = () => {
+  $('#fileInput').click(); // 触发文件选择对话框
+}
+
+// 当文件选择发生变化时执行以下代码
+$('#fileInput').change(function() {
+  let file = this.files[0]; // 获取用户选择的文件对象
+
+  // 创建FormData对象并将文件对象添加到其中
+  let formData = new FormData();
+  formData.append('file', file);
+
+  // 发送Ajax请求
+  $.ajax({
+    url: API_BASE_URL + '/users/all',
+    type: 'PUT',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(response) {
+      // 请求成功的处理逻辑
+      if(response.flag === true){
+        alert("导入成功")
+      }else {
+        alert("导入失败")
+      }
+    },
+    error: function(xhr, status, error) {
+      // 请求出错的处理逻辑
+    }
+  });
+});
+
 const handleEdit = (id) => {
   let user = userList.filter(item => item.id === id)[0]
   $util.setPageParam('user', user)

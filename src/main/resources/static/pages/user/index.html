@@ -18,7 +18,8 @@
   <div class="container">
     <div class="top">
       <button type="button" class="btn btn-primary" onclick="handleCreateUser()">创建用户</button>
-      <button type="button" class="btn btn-primary">批量导入</button>
+      <button type="button" class="btn btn-primary" onclick="handleBulkImport()">批量导入</button>
+      <input type="file" id="fileInput" style="display: none;">
       <button type="button" class="btn btn-primary">导出Excel</button>
       <div class="input-group input-group-search">
         <input type="text" class="form-control" id="username" placeholder="请输入用户名" />

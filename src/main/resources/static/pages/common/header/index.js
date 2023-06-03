@@ -2,10 +2,13 @@
 const pathnames = ['/pages/questionnaire/index.html']
 
 const handleHeaderLoad = () => {
+  if ($util.getItem('userInfo').type === 0){
+    $('#headerUserManage').remove()
+  }
   if (pathnames.includes(location.pathname)) {
     $('#handerFallback').remove()
     $('#headerDivB').remove()
-  }  
+  }
 }
 
 const onMyProject = () => {
