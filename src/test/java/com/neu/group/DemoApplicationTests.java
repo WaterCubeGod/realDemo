@@ -1,23 +1,16 @@
 package com.neu.group;
 
 
-import com.neu.group.dao.UserDao;
 import com.neu.group.domain.User;
 import com.neu.group.service.UserService;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
-import java.io.InputStream;
+
 import java.util.List;
 
 @SpringBootTest
@@ -34,14 +27,14 @@ class DemoApplicationTests {
     public void queryUserList(){
 
         //调用userMapper的方法
-        List<User> list = userService.selectUserDividerByPage(0);
-        if(CollectionUtils.isEmpty(list)){
-            // 记录error级别的信息
-        }else{
-            System.out.println(list);
-            // 记录info级别的信息
-            log.info(">>queryUserList用户列表查询测试成功");
-        }
+//        List<User> list = userService.selectUserDividerByPage(0);
+//        if(CollectionUtils.isEmpty(list)){
+//            // 记录error级别的信息
+//        }else{
+//            System.out.println(list);
+//            // 记录info级别的信息
+//            log.info(">>queryUserList用户列表查询测试成功");
+//        }
     }
 
     @Test
@@ -61,7 +54,7 @@ class DemoApplicationTests {
     @Test
     public void insert(){
         //调用userMapper的方法
-        boolean flag = userService.register("一边飞一边","123456",0);
+        boolean flag = userService.register("一边啊11","123456",0);
         if(!flag){
             // 记录error级别的信息
         }else{

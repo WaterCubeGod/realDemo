@@ -27,7 +27,7 @@ class RealDemoApplicationTests {
 
     @Test
     void selectAllUser(){
-        List<User> users = userDao.selectAllUser(0);
+        List<User> users = userDao.selectAllUser();
         System.out.println(users);
     }
 }

@@ -5,15 +5,15 @@ import com.neu.group.domain.User;
 import com.neu.group.service.UserService;
 
 import net.sf.json.JSONObject;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * 用户表现层方法
@@ -23,7 +23,7 @@ import java.io.IOException;
 @RequestMapping("/users")
 public class UserController {
 
-    private static final String UPLOAD_DIR = "uploads";
+    Logger log = Logger.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -46,27 +46,25 @@ public class UserController {
 
     //批量导入用户
     @PutMapping("/all")
-    public R register(MultipartFile file,HttpServletRequest request) throws IOException,
-            InvalidFormatException {
-        // 获取上传文件的存储路径
-        String applicationPath = request.getServletContext().getRealPath("");
-        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
+    public R register(MultipartFile multiFile) throws IOException {
+        String fileName = multiFile.getOriginalFilename();
+        String prefix = fileName.substring(fileName.lastIndexOf("."));
+        boolean flag = false;
+        File file = null;
+        try {
+            file = File.createTempFile(fileName, prefix);
+            multiFile.transferTo(file);
+            flag = userService.bulkImport(file);
+        } catch (Exception e) {
+            log.error(">>文件类型转换错误");
 
-        // 获取文件数据
-        String fileName = file.getOriginalFilename();
-
-        // 创建上传目录
-        File fileUploadDirectory = new File(uploadFilePath);
-        if (!fileUploadDirectory.exists()) {
-            fileUploadDirectory.mkdirs();
+        } finally {
+            // 操作完上面的文件 需要删除在根目录下生成的临时文件
+            assert file != null;
+            File f = new File(file.toURI());
+            Files.delete(f.toPath());
+            file.deleteOnExit();
         }
-
-        // 将文件保存到指定路径中
-        String filePath = uploadFilePath + File.separator + fileName;
-        assert fileName != null;
-        file.transferTo(new File(fileUploadDirectory,fileName));
-
-        boolean flag = userService.bulkImport(filePath);
 
         return new R(flag, "", flag ? "添加成功" : "添加失败,用户名重复");
     }
@@ -99,10 +97,16 @@ public class UserController {
     //用户数量统计
     @GetMapping
     public R countUser(){
-        System.out.println(userService.countUser()%10);
-
         return new R(true,userService.countUser()/10 +
                 (userService.countUser()%10 == 0 ? 0:1),"");
+    }
+
+    //导出用户excel
+    @PostMapping("/export")
+    public R exportUserExcel() {
+
+        return new R(true,userService.selectAllUser(),"");
+
     }
 
 

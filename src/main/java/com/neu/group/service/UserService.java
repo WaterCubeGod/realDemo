@@ -3,6 +3,7 @@ package com.neu.group.service;
 import com.neu.group.domain.User;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface UserService {
     boolean register(String username, String password, int type);
 
     //批量及加入接口
-    boolean bulkImport(String filePath) throws IOException, InvalidFormatException;
+    boolean bulkImport(File file) throws IOException, InvalidFormatException;
 
     //注销接口
     boolean logout(int id, String password);
@@ -27,7 +28,7 @@ public interface UserService {
     boolean editUser(int id, String username, String password);
 
     //分页查询接口
-    List<User> selectUserDividerByPage(int count);
+    List<User> selectAllUser();
 
     //根据用户名查询
     List<User> selectUserByUsername(String username, int count);

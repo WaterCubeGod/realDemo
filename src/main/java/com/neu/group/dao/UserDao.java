@@ -28,8 +28,8 @@ public interface UserDao {
     Integer updateUser(@Param("id") int id, @Param("username") String username,
                        @Param("password") String password);
 
-    //查找10行数据
-    List<User> selectAllUser(@Param("count") int count);
+    //查找所有数据
+    List<User> selectAllUser();
 
     //查找有几行数据
     Integer countUser();

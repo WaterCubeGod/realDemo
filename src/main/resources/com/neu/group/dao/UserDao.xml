@@ -24,10 +24,11 @@
         UPDATE user SET username = #{username}, password = #{password} WHERE id = #{id};
     </update>
 
-<!--    //查找10行数据-->
+<!--    //查找所有用户数据-->
     <select id="selectAllUser" resultType="User">
         SELECT id,username,password,type FROM user WHERE type = 0
     </select>
+
 
     <!-- 查看用户总数 -->
     <select id="countUser" resultType="java.lang.Integer">
@@ -38,7 +39,7 @@
     <select id="selectByUsername" resultType="User">
         SELECT id,username,password,type
         FROM user
-        WHERE username LIKE CONCAT(CONCAT(#{username},'%')) AND type = 0
+        WHERE username LIKE CONCAT(CONCAT('%',#{username},'%')) AND type = 0
         limit #{count},10
     </select>
 

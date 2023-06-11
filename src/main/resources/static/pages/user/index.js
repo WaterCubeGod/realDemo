@@ -118,7 +118,7 @@ $('#fileInput').change(function() {
 
   // 创建FormData对象并将文件对象添加到其中
   let formData = new FormData();
-  formData.append('file', file);
+  formData.append('multiFile', file);
 
   // 发送Ajax请求
   $.ajax({
@@ -132,11 +132,12 @@ $('#fileInput').change(function() {
       if(response.flag === true){
         alert("导入成功")
       }else {
-        alert("导入失败")
+        alert("导入失败,请检查你的表是否符合规范")
       }
     },
     error: function(xhr, status, error) {
       // 请求出错的处理逻辑
+      alert(error)
     }
   });
 });
@@ -146,4 +147,46 @@ const handleEdit = (id) => {
   $util.setPageParam('user', user)
   $util.setPageParam('code', 1);
   location.href = '/pages/createUser/index.html'
+}
+
+const exportExcel = () => {
+  // 发起Ajax请求获取后台数据
+  $.ajax({
+    url: API_BASE_URL + '/users/export',
+    type: "POST",
+    dataType: "json",
+    contentType: "application/json",
+    success: function(response) {
+      // 导出Excel
+      let data = response.data;
+
+      // 创建一个新的Workbook（工作簿）
+      let wb = XLSX.utils.book_new();
+
+      // 创建一个新的Worksheet（工作表）
+      let ws = XLSX.utils.json_to_sheet(data);
+
+      // 将工作表添加到工作簿
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+      // 将工作簿转换为Excel文件的二进制数据
+      let wbout = XLSX.write(wb, { bookType: "xlsx", type: "binary" });
+
+      // 下载Excel文件
+      saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), "export.xlsx");
+    },
+    error: function(error) {
+      console.log("Error:", error);
+    }
+  });
+}
+
+// 字符串转ArrayBuffer
+function s2ab(s) {
+  let buf = new ArrayBuffer(s.length);
+  let view = new Uint8Array(buf);
+  for (let i = 0; i < s.length; i++) {
+    view[i] = s.charCodeAt(i) & 0xff;
+  }
+  return buf;
 }

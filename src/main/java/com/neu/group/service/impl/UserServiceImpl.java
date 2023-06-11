@@ -4,6 +4,7 @@ import cc.aicode.e2e.ExcelHelper;
 import cc.aicode.e2e.exception.ExcelContentInvalidException;
 import cc.aicode.e2e.exception.ExcelParseException;
 import cc.aicode.e2e.exception.ExcelRegexpValidFailedException;
+
 import com.neu.group.dao.UserDao;
 import com.neu.group.domain.User;
 import com.neu.group.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -45,13 +47,14 @@ public class UserServiceImpl implements UserService {
     //批量导入
     @Override
     @Transactional
-    public boolean bulkImport(String filePath) throws IOException, InvalidFormatException {
-        boolean flag = true;
+    public boolean bulkImport(File file) throws IOException, InvalidFormatException {
+        boolean flag = false;
 
-        ExcelHelper eh = ExcelHelper.readExcel(filePath);
+        ExcelHelper eh = ExcelHelper.readExcel(file);
         List<User> users;
         try {
             users = eh.toEntitys(User.class);
+            flag = true;
             for (User user : users) {
                 int count = userDao.insertUser(user.getUsername(),user.getPassword(), user.getType());
                 flag = (count > 0) && flag;
@@ -85,11 +88,11 @@ public class UserServiceImpl implements UserService {
     //分页查询用户
     @Override
     @Transactional
-    public List<User> selectUserDividerByPage(int count) {
-
-        return userDao.selectAllUser(count);
+    public List<User> selectAllUser() {
+        return userDao.selectAllUser();
     }
 
+    //查询
     @Override
     @Transactional
     public List<User> selectUserByUsername(String username, int count){

@@ -5,7 +5,6 @@ import com.neu.group.domain.Project;
 import com.neu.group.service.ProjectService;
 
 import net.sf.json.JSONObject;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
