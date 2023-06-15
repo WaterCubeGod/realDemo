@@ -11,7 +11,6 @@ public interface ProjectService {
 
     //根据用户查看工程
     List<Project> selectProjectByUser(int userId);
-
     //增加工程
     boolean addProject(String projectName, String projectDescription, int userId);
 
@@ -23,5 +22,8 @@ public interface ProjectService {
 
     //通过名称查找工程
     List<Project> searchProjectByName(int userId, String projectName);
+
+    //查看单个项目信息
+    Project seeProject(int userId, String projectName);
 
 }

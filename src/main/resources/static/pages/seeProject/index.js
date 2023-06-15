@@ -1,9 +1,14 @@
+let project = {}
 onload = () => {
   $('#headerDivB').text('项目详情')
 
-  let projectId = $util.getPageParam('seeProject')
-  console.log(projectId, 'projectId')
-  fetchProjectInfo(projectId)
+  project = $util.getPageParam('seeProject')
+
+  $('#projectName').text(project.projectName)
+  $('#createTime').text(project.createTime)
+  // $('#personInCharge').text(project.userId)
+  $('#personInCharge').text("张三")
+  $('#projectDescription').text(project.projectDescription)
 }
 
 const fetchProjectInfo = (id) => {
@@ -11,17 +16,17 @@ const fetchProjectInfo = (id) => {
     id
   }
   $.ajax({
-    url: API_BASE_URL + '/queryProjectList',
+    url: API_BASE_URL + '/project/' + project.userId + "/" + project.projectName,
     type: "POST",
     data: JSON.stringify(params),
     dataType: "json",
     contentType: "application/json",
     success(res) {
-      let info = res.data[0]
+      let info = res.data
       console.log(info, 'res')
       $('#projectName').text(info.projectName)
-      $('#createTime').text(info.createDate)
-      $('#projectDescription').text(info.projectContent)
+      $('#createTime').text(info.createTime)
+      $('#projectDescription').text(info.projectDescription)
     }
   })
 }

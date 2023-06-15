@@ -9,6 +9,7 @@ import com.neu.group.domain.User;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ExcelImportTests {
 
     @Test
+    @Rollback
     void excelTest() throws IOException, InvalidFormatException {
 
         ExcelHelper eh = ExcelHelper.readExcel("user.xls");

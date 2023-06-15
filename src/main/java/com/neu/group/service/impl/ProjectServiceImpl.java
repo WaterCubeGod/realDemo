@@ -11,9 +11,9 @@ import java.util.List;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-
     @Autowired
     ProjectDao projectDao;
+
 
     @Override
     @Transactional
@@ -44,4 +44,11 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> searchProjectByName(int userId, String projectName) {
         return projectDao.selectProjectByProjectName(userId,projectName);
     }
+
+    @Override
+    public Project seeProject(int userId, String projectName) {
+        return projectDao.selectByProjectName(userId,projectName);
+    }
+
+
 }

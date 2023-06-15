@@ -45,5 +45,8 @@ public class ProjectController {
         return new R(flag, "", flag ? "删除成功" : "删除失败");
     }
 
-
+    @PutMapping("/{userId}/{projectName}")
+    public R seeProject(@PathVariable int userId, @PathVariable String projectName) {
+        return new R(true, projectService.searchProjectByName(userId,projectName), "");
+    }
 }

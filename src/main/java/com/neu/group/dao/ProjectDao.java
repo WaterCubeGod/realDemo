@@ -31,4 +31,6 @@ public interface ProjectDao {
     int deleteProject(@Param("projectId") int projectId);
 
     List<Project> selectProjectByProjectName(@Param("userId") int userId, @Param("projectName") String projectName);
+
+    Project selectByProjectName(@Param("userId") int userId, @Param("projectName") String projectName);
 }

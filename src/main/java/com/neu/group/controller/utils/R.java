@@ -2,15 +2,14 @@ package com.neu.group.controller.utils;
 
 /**
  * 用于前端和后端格式统一
+ * 将后端发送给前端的请求封装
  */
-
 public class R {
     private Boolean flag;
     private Object data;
     private String message;
 
     public R(){
-
     }
 
     public R(Boolean flag) {

@@ -17,5 +17,15 @@ class UserTest {
         User user = userService.login("熊梓详", "123456");
         System.out.println(user);
     }
-
+    /*
+      测试用
+     */
+    @Test
+    void Test(){
+        User user = new User(1,"111","123",1);
+        int id = user.getId();
+        String password = user.getPassword();
+        int type = user.getType();
+        String username = user.getUsername();
+    }
 }

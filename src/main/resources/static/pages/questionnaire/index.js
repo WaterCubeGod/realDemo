@@ -43,6 +43,7 @@ const fetchProjectList = () => {
 }
 
 const onCreatePrject = () => {
+
   location.href = "/pages/createProject/index.html"
 }
 
@@ -51,7 +52,8 @@ const onCreateQuestionnaire = () => {
 }
 
 const onSeeProject = (id) => {
-  $util.setPageParam('seeProject', id)
+  let project = projectList.filter(item => item.projectId === id)[0]
+  $util.setPageParam('seeProject', project)
   location.href = "/pages/seeProject/index.html"
 }
 
