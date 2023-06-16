@@ -8,6 +8,7 @@ import cc.aicode.e2e.exception.ExcelRegexpValidFailedException;
 import com.neu.group.dao.UserDao;
 import com.neu.group.domain.User;
 import com.neu.group.service.UserService;
+import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-
+    Logger log = Logger.getLogger(UserServiceImpl.class);
     //用户登录
     @Override
     @Transactional
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
                 flag = (count > 0) && flag;
             }
         } catch (ExcelParseException | ExcelRegexpValidFailedException | ExcelContentInvalidException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return flag;
     }

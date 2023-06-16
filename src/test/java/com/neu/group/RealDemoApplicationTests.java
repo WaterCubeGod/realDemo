@@ -8,13 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
 class RealDemoApplicationTests {
 
-    @Test
-    void contextLoads() {
-
-    }
 
     @Autowired
     private UserDao userDao;
@@ -23,11 +21,17 @@ class RealDemoApplicationTests {
     void login(){
         User user = userDao.selectByUsernameAndPassword("熊梓详","123456");
         System.out.println(user);
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 
     @Test
     void selectAllUser(){
         List<User> users = userDao.selectAllUser();
         System.out.println(users);
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 }

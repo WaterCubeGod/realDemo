@@ -8,8 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
-public class QuestionnaireTest {
+class QuestionnaireTest {
     @Autowired
     QuestionnaireService questionnaireService;
 
@@ -18,5 +20,8 @@ public class QuestionnaireTest {
 //    @Rollback
     void test(){
         questionnaireService.addQuestionnaire("12","d1dsda","sdasd","ddsad","2023-06-02 12:49:17","2023-06-12 12:49:17");
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 }

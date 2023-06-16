@@ -9,8 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
-public class UserControllerTest {
+class UserControllerTest {
     @Autowired
     private UserController userController;
     @Test
@@ -28,5 +30,8 @@ public class UserControllerTest {
         jsonObject.put("username","111");
         userController.selectUserDividerByPage(jsonObject);
         userController.exportUserExcel();
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 }

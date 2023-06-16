@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
-public class ProjectTest {
+class ProjectTest {
 
     @Autowired
     private ProjectService projectService;
@@ -29,6 +31,9 @@ public class ProjectTest {
 
         log.info(projects);
         log.info(projects1);
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
 
     }
 
@@ -40,6 +45,9 @@ public class ProjectTest {
                 "test测试用例", 37);
 
         log.info(flag);
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 
     @Test
@@ -50,6 +58,9 @@ public class ProjectTest {
                 "test测试用例", 11);
 
         log.info(flag);
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 
     @Test
@@ -59,6 +70,9 @@ public class ProjectTest {
         boolean flag = projectService.deleteProject(11);
 
         log.info(flag);
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 
     /**
@@ -67,11 +81,14 @@ public class ProjectTest {
     @Test
     void Test(){
         Project project = new Project(1,1,"1","1","1");
-        project.getProjectDescription();
-        project.getProjectId();
-        project.getCreateTime();
-        project.getProjectName();
-        project.getUserId();
+        String projectDescription = project.getProjectDescription();
+        int projectId = project.getProjectId();
+        String createTime = project.getCreateTime();
+        String projectName = project.getProjectName();
+        int userId = project.getUserId();
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 
 }

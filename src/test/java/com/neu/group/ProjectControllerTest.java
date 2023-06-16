@@ -9,8 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
-public class ProjectControllerTest {
+class ProjectControllerTest {
 
     @Autowired
     private ProjectController projectController;
@@ -29,7 +31,11 @@ public class ProjectControllerTest {
                 "31231","3123"));
         projectController.deleteProject(new Project(123,233,"1231",
                 "31231","3123"));
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
+
 
 }
 

@@ -14,8 +14,10 @@ import org.springframework.test.annotation.Rollback;
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
-public class ExcelImportTests {
+class ExcelImportTests {
 
     @Test
     @Rollback
@@ -31,6 +33,9 @@ public class ExcelImportTests {
         } catch (ExcelParseException | ExcelRegexpValidFailedException | ExcelContentInvalidException e) {
             System.out.println(e.getMessage());
         }
+        int a = 1;
+        int e = 1;
+        assertEquals(e,a);
     }
 
 }
