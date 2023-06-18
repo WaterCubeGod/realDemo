@@ -142,3 +142,152 @@
 2023-06-15 20:12:50[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
 2023-06-15 20:12:50[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
 2023-06-15 20:12:50[ INFO ]true
+2023-06-16 16:33:17[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:33:19[ INFO ]>>insert用户插入测试成功
+2023-06-16 16:33:20[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:33:22[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 16:33:32[ INFO ]true
+2023-06-16 16:33:35[ INFO ]true
+2023-06-16 16:33:38[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:33:38[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:33:43[ INFO ]true
+2023-06-16 16:36:07[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:36:08[ INFO ]>>insert用户插入测试成功
+2023-06-16 16:36:09[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:36:11[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 16:36:19[ INFO ]true
+2023-06-16 16:36:20[ INFO ]true
+2023-06-16 16:36:21[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:36:21[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:36:22[ INFO ]true
+2023-06-16 16:42:31[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:42:33[ INFO ]>>insert用户插入测试成功
+2023-06-16 16:42:34[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:42:36[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 16:42:45[ INFO ]true
+2023-06-16 16:42:45[ INFO ]true
+2023-06-16 16:42:46[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:42:46[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:42:48[ INFO ]true
+2023-06-16 16:48:04[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:48:05[ INFO ]>>insert用户插入测试成功
+2023-06-16 16:48:06[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:48:08[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 16:48:14[ INFO ]true
+2023-06-16 16:48:15[ INFO ]true
+2023-06-16 16:48:15[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:48:15[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:48:17[ INFO ]true
+2023-06-16 16:50:49[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:50:49[ INFO ]>>insert用户插入测试成功
+2023-06-16 16:50:50[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:50:50[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 16:50:54[ INFO ]true
+2023-06-16 16:50:54[ INFO ]true
+2023-06-16 16:50:55[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:50:55[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:50:56[ INFO ]true
+2023-06-16 16:52:59[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:52:59[ INFO ]>>insert用户插入测试成功
+2023-06-16 16:53:00[ INFO ]>>delete用户删除测试成功
+2023-06-16 16:53:01[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 16:53:05[ INFO ]true
+2023-06-16 16:53:06[ INFO ]true
+2023-06-16 16:53:06[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:53:06[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 16:53:07[ INFO ]true
+2023-06-16 18:16:14[ INFO ]>>delete用户删除测试成功
+2023-06-16 18:16:15[ INFO ]>>insert用户插入测试成功
+2023-06-16 18:16:15[ INFO ]>>delete用户删除测试成功
+2023-06-16 18:16:16[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 18:16:18[ INFO ]true
+2023-06-16 18:16:19[ INFO ]true
+2023-06-16 18:16:19[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 18:16:19[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 18:16:20[ INFO ]true
+2023-06-16 18:27:48[ INFO ]>>delete用户删除测试成功
+2023-06-16 18:27:48[ INFO ]>>insert用户插入测试成功
+2023-06-16 18:27:49[ INFO ]>>delete用户删除测试成功
+2023-06-16 18:27:49[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 18:27:52[ INFO ]true
+2023-06-16 18:27:53[ INFO ]true
+2023-06-16 18:27:53[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 18:27:53[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 18:27:54[ INFO ]true
+2023-06-16 18:32:54[ INFO ]>>delete用户删除测试成功
+2023-06-16 18:32:54[ INFO ]>>insert用户插入测试成功
+2023-06-16 18:32:55[ INFO ]>>delete用户删除测试成功
+2023-06-16 18:32:55[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 18:32:58[ INFO ]true
+2023-06-16 18:32:58[ INFO ]true
+2023-06-16 18:32:58[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 18:32:58[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 18:33:00[ INFO ]true
+2023-06-16 21:18:59[ INFO ]>>delete用户删除测试成功
+2023-06-16 21:18:59[ INFO ]>>insert用户插入测试成功
+2023-06-16 21:19:00[ INFO ]>>delete用户删除测试成功
+2023-06-16 21:19:00[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 21:19:03[ INFO ]true
+2023-06-16 21:19:04[ INFO ]true
+2023-06-16 21:19:04[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 21:19:04[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 21:19:05[ INFO ]true
+2023-06-16 21:21:20[ INFO ]>>delete用户删除测试成功
+2023-06-16 21:21:21[ INFO ]>>insert用户插入测试成功
+2023-06-16 21:21:22[ INFO ]>>delete用户删除测试成功
+2023-06-16 21:21:22[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 21:21:25[ INFO ]true
+2023-06-16 21:21:25[ INFO ]true
+2023-06-16 21:21:26[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 21:21:26[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 21:21:27[ INFO ]true
+2023-06-16 21:29:09[ INFO ]>>delete用户删除测试成功
+2023-06-16 21:29:09[ INFO ]>>insert用户插入测试成功
+2023-06-16 21:29:10[ INFO ]>>delete用户删除测试成功
+2023-06-16 21:29:10[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 21:29:13[ INFO ]true
+2023-06-16 21:29:14[ INFO ]true
+2023-06-16 21:29:14[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 21:29:14[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 21:29:15[ INFO ]true
+2023-06-16 21:31:23[ INFO ]>>delete用户删除测试成功
+2023-06-16 21:31:23[ INFO ]>>insert用户插入测试成功
+2023-06-16 21:31:24[ INFO ]>>delete用户删除测试成功
+2023-06-16 21:31:24[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-16 21:31:28[ INFO ]true
+2023-06-16 21:31:28[ INFO ]true
+2023-06-16 21:31:29[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 21:31:29[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-16 21:31:29[ INFO ]true
+2023-06-18 17:04:34[ ERROR ]>>文件类型转换错误
+2023-06-18 17:08:26[ ERROR ]>>文件类型转换错误
+2023-06-18 17:09:24[ ERROR ]>>文件类型转换错误
+2023-06-18 17:12:28[ ERROR ]>>文件类型转换错误
+2023-06-18 17:21:24[ ERROR ]>>文件类型转换错误
+2023-06-18 17:23:24[ ERROR ]>>文件类型转换错误
+2023-06-18 17:26:39[ ERROR ]>>文件类型转换错误
+2023-06-18 17:41:40[ ERROR ]>>文件类型转换错误
+2023-06-18 17:43:06[ ERROR ]
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+### The error may exist in com/neu/group/dao/UserDao.xml
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: INSERT INTO user(username,password,type) VALUES (?,?,?);
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+; Duplicate entry '' for key 'user.username'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+2023-06-18 17:58:06[ ERROR ]
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+### The error may exist in com/neu/group/dao/UserDao.xml
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: INSERT INTO user(username,password,type) VALUES (?,?,?);
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+; Duplicate entry '' for key 'user.username'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+2023-06-18 18:02:20[ ERROR ]
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+### The error may exist in com/neu/group/dao/UserDao.xml
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: INSERT INTO user(username,password,type) VALUES (?,?,?);
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+; Duplicate entry '' for key 'user.username'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'

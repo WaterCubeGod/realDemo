@@ -26,7 +26,7 @@ const fetchProjectList = () => {
             <div class="list-header">
               <div>${item.projectName}</div>
               <div>
-                <button type="button" class="btn btn-link" onclick="onCreateQuestionnaire()">创建问卷</button>
+                <button type="button" class="btn btn-link" onclick="onCreateQuestionnaire(${item.projectId},'${item.projectName}')" value="${item.projectId}">创建问卷</button>
                 <button type="button" class="btn btn-link" onclick="onSeeProject(${item.projectId})">查看</button>
                 <button type="button" class="btn btn-link" onclick="onEditProject(${item.projectId})">编辑</button>
                 <button type="button" class="btn btn-link" onclick="onDelProject(${item.projectId})">删除</button>
@@ -47,8 +47,9 @@ const onCreatePrject = () => {
   location.href = "/pages/createProject/index.html"
 }
 
-const onCreateQuestionnaire = () => {
-  location.href = "/pages/createQuestionnaire/index.html"
+const onCreateQuestionnaire = (id,name) => {
+  // 重定向到相应界面，并传递参数
+  location.href = `/pages/createQuestionnaire/index.html?id=${id}&name=${name}`
 }
 
 const onSeeProject = (id) => {

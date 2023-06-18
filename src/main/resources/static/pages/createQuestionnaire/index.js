@@ -1,10 +1,18 @@
+const urlParams = new URLSearchParams(window.location.search);
 onload = () => {
   $('#headerUsername').text($util.getItem('userInfo').username)
   $('#headerDivB').text('创建问卷')
+  $('#selectLeo').val(urlParams.get('name'))
+  $('#selectLeo').text(urlParams.get('name'))
 }
 
 const onCreateTemplate = () => {
-  location.href = "/pages/createNewQuestionnaire/index.html"
+  const id = urlParams.get('id')
+  const pName = document.getElementById("selectLeo").value;
+
+  // const type = $('#selectType').val();
+  const type = document.getElementById("selectType").value;
+  location.href = `/pages/createNewQuestionnaire/index.html?id=${id}&projectName=${pName}&type=${type}`
 }
 
 const importHistoryQuestionnaire = () => {

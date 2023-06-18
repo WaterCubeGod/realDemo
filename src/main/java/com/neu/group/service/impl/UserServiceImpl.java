@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
                 int count = userDao.insertUser(user.getUsername(),user.getPassword(), user.getType());
                 flag = (count > 0) && flag;
             }
-        } catch (ExcelParseException | ExcelRegexpValidFailedException | ExcelContentInvalidException e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
         }
         return flag;

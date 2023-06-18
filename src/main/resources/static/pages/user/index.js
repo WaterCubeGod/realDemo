@@ -137,7 +137,7 @@ $('#fileInput').change(function() {
     },
     error: function(xhr, status, error) {
       // 请求出错的处理逻辑
-      alert(error)
+      alert("导入错误")
     }
   });
 });
