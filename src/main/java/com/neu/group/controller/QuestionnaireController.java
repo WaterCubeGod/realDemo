@@ -17,12 +17,19 @@ public class QuestionnaireController {
     public R createQuestionnaire(@RequestBody JSONObject jsonObject){
         String name = jsonObject.getString("name");
         String description = jsonObject.getString("description");
-        String projectBelong = jsonObject.getString("projectBelong");
+        int projectBelong = jsonObject.getInt("projectBelong");
         String type = jsonObject.getString("type");
         String createTime = jsonObject.getString("createTime");
         String finishTime = jsonObject.getString("finishTime");
         return new R(true,questionnaireService.
                 addQuestionnaire(name,description,projectBelong,type,createTime,finishTime),
                 "");
+    }
+
+    @PostMapping("/selectAll")
+    public R selectAll(@RequestBody JSONObject jsonObject) {
+        System.out.println(jsonObject);
+        int projectBelong = jsonObject.getInt("id");
+        return new R(true, questionnaireService.selectAll(projectBelong), "");
     }
 }

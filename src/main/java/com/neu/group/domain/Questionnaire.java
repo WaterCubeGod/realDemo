@@ -7,7 +7,7 @@ public class Questionnaire {
     int id;
     String name;
     String description;
-    String projectBelong;
+    int projectBelong;
     String type;
     String createTime;
     String finishTime;
@@ -15,7 +15,7 @@ public class Questionnaire {
     public Questionnaire() {
     }
 
-    public Questionnaire(int id, String name, String description, String projectBelong, String type, String createTime, String finishTime) {
+    public Questionnaire(int id, String name, String description, int projectBelong, String type, String createTime, String finishTime) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -49,11 +49,11 @@ public class Questionnaire {
         this.description = description;
     }
 
-    public String getProjectBelong() {
+    public int getProjectBelong() {
         return projectBelong;
     }
 
-    public void setProjectBelong(String projectBelong) {
+    public void setProjectBelong(int projectBelong) {
         this.projectBelong = projectBelong;
     }
 

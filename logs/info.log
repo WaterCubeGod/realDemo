@@ -291,3 +291,12 @@
 ### SQL: INSERT INTO user(username,password,type) VALUES (?,?,?);
 ### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
 ; Duplicate entry '' for key 'user.username'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '' for key 'user.username'
+2023-06-19 09:46:31[ INFO ]>>delete用户删除测试成功
+2023-06-19 09:46:31[ INFO ]>>insert用户插入测试成功
+2023-06-19 09:46:31[ INFO ]>>delete用户删除测试成功
+2023-06-19 09:46:31[ INFO ]>>qselectUserInfo用户登录测试成功
+2023-06-19 09:46:32[ INFO ]true
+2023-06-19 09:46:33[ INFO ]true
+2023-06-19 09:46:33[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-19 09:46:33[ INFO ][Project{projectId=1, userId=37, projectName='大学生家教双选系统', projectDescription='开始1', createTime='2023-06-02 12:49:17'}, Project{projectId=5, userId=37, projectName='测试', projectDescription='test测试用例', createTime='2023-06-05 09:34:17'}, Project{projectId=7, userId=37, projectName='测试1', projectDescription='test测试用例', createTime='2023-06-05 09:38:18'}, Project{projectId=12, userId=37, projectName='测试111', projectDescription='test测试用例', createTime='2023-06-15 10:52:52'}, Project{projectId=13, userId=37, projectName='测试1111', projectDescription='test测试用例', createTime='2023-06-15 11:06:10'}]
+2023-06-19 09:46:33[ INFO ]true
