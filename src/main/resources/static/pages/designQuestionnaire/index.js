@@ -4,7 +4,7 @@ const problem = []
 
 /**
  * 添加问题
- * 
+ *
  * @param {*} type 1：单选，2：多选，3：填空，4：矩阵，5：量表
  */
 const onAddQuestion = (type) => {
@@ -70,10 +70,12 @@ const cancelEdit = (problemIndex) => {
 const handleMoveUp = (problemIndex) => {
   if (problemIndex === 0) return
   $(`#question${problemIndex - 1}`).before($(`#question${problemIndex}`))
+
   let i = problem[problemIndex]
   problem[problemIndex] = problem[problemIndex - 1]
   problem[problemIndex - 1] = i
   moveCommon()
+  flash()
 }
 
 const handleMoveDown = (problemIndex) => {
@@ -83,6 +85,16 @@ const handleMoveDown = (problemIndex) => {
   problem[problemIndex] = problem[problemIndex + 1]
   problem[problemIndex + 1] = i
   moveCommon()
+  flash()
+}
+const flash = () => {
+  const element = document.querySelectorAll('.question-title');
+  for (let t = 0; t < element.length; t++) {
+    let innerText = element[t].innerText
+    const splitResult = innerText.split('.',2);
+    innerText =`${t+1}.` + splitResult[1];
+    element[t].innerText = innerText;
+  }
 }
 
 const moveCommon = () => {
@@ -223,6 +235,7 @@ const singleChoiceEditFinish = (problemIndex) => {
       </div>
     `)
   })
+  flash()
 }
 
 const handleAddMultipleChoice = () => {
@@ -288,6 +301,7 @@ const multipleChoiceEditFinish = (problemIndex) => {
       </div>
     `)
   })
+  flash()
 }
 
 const handleAddFillBlanks = () => {
@@ -319,9 +333,11 @@ const fillBlanksEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom2`).html(`
     <div style="border: 1px solid #CCCCCC; width: 50%; height: 70px;"></div>
   `)
+  flash()
 }
 
 const handleAddMatrix = () => {
+  // language=HTML
   let ele = `
     <div class="question" id="question${problem.length}" data-type="4" data-problemIndex="${problem.length}">
       <div class="top">
@@ -407,7 +423,7 @@ const matrixEditFinish = (problemIndex) => {
       <th>${item.chooseTerm}</th>
     `)
   })
-  
+  flash()
 }
 
 const handleAddGauge = () => {
@@ -484,6 +500,7 @@ const gaugeEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom2`).append(`
     <div>${problem[problemIndex].option[problem[problemIndex].option.length - 1].chooseTerm}</div>
   `)
+  flash()
 }
 
 const handleModifyTitle = () => {
