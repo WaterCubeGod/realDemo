@@ -528,6 +528,7 @@ const handleView = () => {
   let containerHTML = document.querySelector('.container').outerHTML
   localStorage.setItem('containerHTML', containerHTML) // 将数据存储到localStorage中
   location.href = '/pages/answerSheet/index.html'
+
 }
 
 
