@@ -46,3 +46,10 @@ body {
 .btn {
   padding: 6px 40px !important;
 }
+
+.questionnaire-title {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  margin: 20px 0 30px 0;
+}

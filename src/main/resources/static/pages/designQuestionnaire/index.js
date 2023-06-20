@@ -511,9 +511,7 @@ const handleModifyTitle = () => {
 
 
 const handleEditFinish = () => {
-  let params = {
-
-  }
+  let params = {}
   $.ajax({
     url: API_BASE_URL + '/question/addQuestion',
     type: "POST",
@@ -525,3 +523,11 @@ const handleEditFinish = () => {
     }
   })
 }
+
+const handleView = () => {
+  let containerHTML = document.querySelector('.container').outerHTML
+  localStorage.setItem('containerHTML', containerHTML) // 将数据存储到localStorage中
+  location.href = '/pages/answerSheet/index.html'
+}
+
+
