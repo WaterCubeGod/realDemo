@@ -27,7 +27,7 @@ const handleCreateQuestionnaire = () => {
     let params = {
         name: $('#surveyName').val(),
         description: $('#surveyDescription').val(),
-        projectBelong: urlParams.get('projectName'),
+        projectBelong: urlParams.get('id'),
         type: urlParams.get('type'),
         createTime: $('#startTime input').val(),
         finishTime: $('#endTime input').val(),
@@ -40,13 +40,16 @@ const handleCreateQuestionnaire = () => {
             data: JSON.stringify(params),
             dataType: "json",
             contentType: "application/json",
-        success: function(res) {
-            alert('创建成功！');
-            // 执行其他操作，如重定向到其他页面或刷新数据列表等
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('请求失败:', textStatus, errorThrown);
-        }
+            success: function (res) {
+
+                window.location.href = "http://localhost:8080/pages/designQuestionnaire/index.html"
+                alert('创建成功！');
+
+                // 执行其他操作，如重定向到其他页面或刷新数据列表等
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('请求失败！')
+            }
         }
     )
 }

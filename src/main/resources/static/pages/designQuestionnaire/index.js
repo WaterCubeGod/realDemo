@@ -164,7 +164,7 @@ const handleAddSingleChoice = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="1" data-problemIndex="${problem.length}">
       <div class="top">
-        <span class="question-title" id="questionTitle">1.请编辑问题？</span>
+        <span class="question-title" id="questionTitle">请编辑问题？</span>
         <span class="must-answer" id="mustAnswer" onclick="onMustAnswerClick(${problem.length})">必答题</span>
       </div>
       <div class="bottom">
@@ -229,7 +229,7 @@ const handleAddMultipleChoice = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="2" data-problemIndex="${problem.length}">
       <div class="top">
-        <span class="question-title" id="questionTitle">1.请编辑问题？</span>
+        <span class="question-title" id="questionTitle">请编辑问题？</span>
         <span class="must-answer" id="mustAnswer" onclick="onMustAnswerClick(${problem.length})">必答题</span>
       </div>
       <div class="bottom">
@@ -294,7 +294,7 @@ const handleAddFillBlanks = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="3" data-problemIndex="${problem.length}">
       <div class="top">
-        <span class="question-title" id="questionTitle">1.请编辑问题？</span>
+        <span class="question-title" id="questionTitle">请编辑问题？</span>
         <span class="must-answer" id="mustAnswer" onclick="onMustAnswerClick(${problem.length})">必答题</span>
       </div>
       <div class="bottom">
@@ -325,7 +325,7 @@ const handleAddMatrix = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="4" data-problemIndex="${problem.length}">
       <div class="top">
-        <span class="question-title" id="questionTitle">1.请编辑问题？</span>
+        <span class="question-title" id="questionTitle">请编辑问题？</span>
         <span class="must-answer" id="mustAnswer" onclick="onMustAnswerClick(${problem.length})">必答题</span>
       </div>
       <div class="bottom">
@@ -414,7 +414,7 @@ const handleAddGauge = () => {
   let ele = `
     <div class="question" id="question${problem.length}" data-type="5" data-problemIndex="${problem.length}">
       <div class="top">
-        <span class="question-title" id="questionTitle">1.请编辑问题？</span>
+        <span class="question-title" id="questionTitle">请编辑问题？</span>
         <span class="must-answer" id="mustAnswer" onclick="onMustAnswerClick(${problem.length})">必答题</span>
       </div>
       <div class="bottom">
