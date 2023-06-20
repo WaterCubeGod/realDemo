@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.group.dao.OptionDao">
+
+    <resultMap id="findeByidBymapcheck" type="com.neu.group.domain.Option"><!--  type就写返回的模型的名称-->
+        <!--下面第一行是主键-->
+        <id column="qn_id" property="qnId"></id>
+        <id column="q_id" property="qId"></id>
+        <!--properties是实体类中真实的属性，column是别名-->
+        <result column="content" property="content"></result>
+    </resultMap>
+
+
+
+    <insert id="addChoice">
+        insert into choice values(#{qnId},#{qId},#{oId},#{content})
+    </insert>
+
+    <select id="selectAllByQId" resultMap="findeByidBymapcheck">
+        select * from choice where qn_id = #{qnId} and q_id = #{qId} order by o_id
+    </select>
+
+</mapper>

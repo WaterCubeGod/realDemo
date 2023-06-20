@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.group.dao.QuestionDao">
+
+    <resultMap id="findeByidBymapcheck" type="com.neu.group.domain.Question"><!--  type就写返回的模型的名称-->
+        <!--下面第一行是主键-->
+        <id column="qn_id" property="qnId"></id>
+        <id column="q_id" property="qId"></id>
+        <!--properties是实体类中真实的属性，column是别名-->
+        <result column="title" property="title"></result>
+        <result column="req" property="req"></result>
+        <result column="type" property="type"></result>
+    </resultMap>
+
+    <insert id="addQuestion">
+        insert into question values(#{qnId},#{qId},#{title},#{req},#{type})
+    </insert>
+
+    <select id="selectAllByQnId" resultMap="findeByidBymapcheck">
+        select * from question where qn_id = #{id} order by q_id
+    </select>
+
+</mapper>
