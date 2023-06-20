@@ -70,6 +70,9 @@ public class QuestionServiceImpl implements QuestionService {
                                 option.getContent().get(i),
                                 option.getScore().get(i)) > 0;
                     }
+                    break;
+                default:
+                    break;
             }
         }
 
