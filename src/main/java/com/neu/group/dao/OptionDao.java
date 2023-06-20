@@ -16,6 +16,22 @@ public interface OptionDao {
                   @Param("oId") int oId,
                   @Param("content") String content);
 
-    List<Option> selectAllByQId(@Param("qnId") int qnId,
-                                @Param("qId") int qId);
+    int addMatrix(@Param("qnId") int qnId,
+                  @Param("qId") int qId,
+                  @Param("oId") int oId,
+                  @Param("content") String content);
+
+    int addMatrixColumn(@Param("qnId") int qnId,
+                        @Param("qId") int qId,
+                        @Param("oId") int oId,
+                        @Param("content") String content);
+
+    int addScale(@Param("qnId") int qnId,
+                 @Param("qId") int qId,
+                 @Param("oId") int oId,
+                 @Param("content") String content,
+                 @Param("score") int score);
+
+    List<Option> selectAllChoice(@Param("qnId") int qnId,
+                                 @Param("qId") int qId);
 }

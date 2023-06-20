@@ -18,7 +18,6 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
 
-
     @PutMapping("/addquestion")
     public R createQuestion(@RequestBody JSONArray jsonArray) {
         List<Option> options = JSONObject.parseArray(jsonArray.toJSONString(),Option.class);;

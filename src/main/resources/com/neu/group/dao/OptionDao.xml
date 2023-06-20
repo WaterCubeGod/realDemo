@@ -5,12 +5,29 @@
 <mapper namespace="com.neu.group.dao.OptionDao">
 
     <insert id="addChoice">
-        insert into choice values(#{qnId},#{qId},#{oId},#{content})
+        insert into choice(qn_id, q_id, o_id, content) values(#{qnId},#{qId},#{oId},#{content})
     </insert>
 
-    <select id="selectAllByQId" resultType="Option">
+    <insert id="addMatrix">
+        insert into matrix(qn_id, q_id, m_id, left_title) values(#{qnId},#{qId},#{oId},#{content})
+    </insert>
+
+    <insert id="addMatrixColumn">
+        insert into matrix_column(qn_id, q_id, c_id, column_text) values(#{qnId},#{qId},#{oId},#{content})
+    </insert>
+
+    <insert id="addScale">
+        insert into scale(qn_id, q_id, s_id, title, score) values(#{qnId},#{qId},#{oId},#{content}，#{score})
+    </insert>
+
+    <select id="selectAllChoice" resultType="Option">
         select qn_id as anId, q_id as qId, content
         from choice where qn_id = #{qnId} and q_id = #{qId} order by o_id
+    </select>
+
+    <select id="selectAllMatrix" resultType="Option">
+        select qn_id as anId, q_id as qId, left_title as content
+        from matrix where qn_id = #{qnId} and q_id = #{qId} order by m_id
     </select>
 
 </mapper>
