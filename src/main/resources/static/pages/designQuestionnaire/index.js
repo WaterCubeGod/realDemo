@@ -511,9 +511,11 @@ const handleModifyTitle = () => {
 
 
 const handleEditFinish = () => {
-  let params = {}
+  let params = {
+
+  }
   $.ajax({
-    url: API_BASE_URL + '/modifyQuestionnaire',
+    url: API_BASE_URL + '/question/addQuestion',
     type: "POST",
     data: JSON.stringify(params),
     dataType: "json",

@@ -17,6 +17,12 @@ public class Option extends Question{
     public Option() {
     }
 
+    public Option(List<String> content, List<String> column, List<Integer> score) {
+        this.content = content;
+        this.column = column;
+        this.score = score;
+    }
+
     /**
      *
      * @param qnId:问卷id
