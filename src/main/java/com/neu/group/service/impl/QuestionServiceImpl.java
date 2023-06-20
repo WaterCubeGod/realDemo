@@ -40,6 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
                     for (int i = 0; i < option.getContent().size(); i++) {
                         flag = flag && optionDao.addChoice(option.getQnId(),
                                 option.getqId(),
+                                i,
                                 option.getContent().get(i)) > 0;
                     }
                     break;

@@ -13,6 +13,7 @@ public interface OptionDao {
 
     int addChoice(@Param("qnId") int qnId,
                   @Param("qId") int qId,
+                  @Param("oId") int oId,
                   @Param("content") String content);
 
     List<Option> selectAllByQId(@Param("qnId") int qnId,
