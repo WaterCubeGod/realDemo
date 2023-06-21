@@ -20,10 +20,17 @@ public class QuestionController {
 
     @PutMapping("/addQuestion")
     public R createQuestion(@RequestBody JSONArray jsonArray) {
-        List<Option> options = JSONObject.parseArray(jsonArray.toJSONString(),Option.class);;
+        List<Option> options = JSONObject.parseArray(jsonArray.toJSONString(),Option.class);
         boolean flag = questionService.addQuestion(options);
 
         return new R(flag, "", flag ? "成功" : "失败");
+    }
+
+    @PostMapping("/seeQuestion")
+    public R seeQuestion(@RequestBody int qnId) {
+        List<Option> options = questionService.selectAllByQnId(qnId);
+
+        return new R(true, options, "");
     }
 
 }

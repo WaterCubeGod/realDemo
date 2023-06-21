@@ -1,6 +1,7 @@
 package com.neu.group.dao;
 
 import com.neu.group.domain.Option;
+import com.neu.group.domain.SingleOption;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -32,6 +33,15 @@ public interface OptionDao {
                  @Param("content") String content,
                  @Param("score") int score);
 
-    List<Option> selectAllChoice(@Param("qnId") int qnId,
+    List<SingleOption> selectAllChoice(@Param("qnId") int qnId,
+                                       @Param("qId") int qId);
+
+    List<SingleOption> selectAllMatrix(@Param("qnId") int qnId,
+                                 @Param("qId") int qId);
+
+    List<SingleOption> selectAllMatrixColumn(@Param("qnId") int qnId,
+                                 @Param("qId") int qId);
+
+    List<SingleOption> selectAllScale(@Param("qnId") int qnId,
                                  @Param("qId") int qId);
 }

@@ -9,7 +9,7 @@ public interface QuestionService {
 
     public boolean addQuestion(List<Option> options);
 
-    public List<Question> selectAllByQnId(int qnId);
+    public List<Option> selectAllByQnId(int qnId);
 
 
 

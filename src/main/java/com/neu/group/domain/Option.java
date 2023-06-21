@@ -10,16 +10,16 @@ public class Option extends Question{
 
     private List<String> content;
 
-    private List<String> column;
+    private List<String> columns;
 
     private List<Integer> score;
 
     public Option() {
     }
 
-    public Option(List<String> content, List<String> column, List<Integer> score) {
+    public Option(List<String> content, List<String> columns, List<Integer> score) {
         this.content = content;
-        this.column = column;
+        this.columns = columns;
         this.score = score;
     }
 
@@ -31,14 +31,14 @@ public class Option extends Question{
      * @param req:是否必答
      * @param type:类型
      * @param content:行选项
-     * @param column:列选项
+     * @param columns:列选项
      * @param score:列分数
      */
     public Option(int qnId, int qId, String title, int req, int type,
-                  List<String> content, List<String> column, List<Integer> score) {
+                  List<String> content, List<String> columns, List<Integer> score) {
         super(qnId, qId, title, req, type);
         this.content = content;
-        this.column = column;
+        this.columns = columns;
         this.score = score;
     }
 
@@ -50,12 +50,12 @@ public class Option extends Question{
         this.content = content;
     }
 
-    public List<String> getColumn() {
-        return column;
+    public List<String> getColumns() {
+        return columns;
     }
 
-    public void setColumn(List<String> column) {
-        this.column = column;
+    public void setColumns(List<String> columns) {
+        this.columns = columns;
     }
 
     public List<Integer> getScore() {
@@ -70,7 +70,7 @@ public class Option extends Question{
     public String toString() {
         return "Option{" +
                 "content=" + content +
-                ", column=" + column +
+                ", columns=" + columns +
                 ", score=" + score +
                 '}';
     }

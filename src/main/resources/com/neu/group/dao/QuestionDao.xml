@@ -19,7 +19,7 @@
     </insert>
 
     <select id="selectAllByQnId" resultMap="findeByidBymapcheck">
-        select * from question where qn_id = #{id} order by q_id
+        select * from question where qn_id = #{qnId} order by q_id
     </select>
 
 </mapper>
