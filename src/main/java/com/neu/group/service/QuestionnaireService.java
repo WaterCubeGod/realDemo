@@ -14,4 +14,7 @@ public interface QuestionnaireService {
                              @Param("finish_time") String finishTime);
 
     List<Questionnaire> selectAll(@Param("project_belong") int projectBelong);
+
+    Questionnaire selectQn(@Param("project_belong") int projectBelong,
+                           @Param("name") String name);
 }

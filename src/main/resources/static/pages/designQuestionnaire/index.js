@@ -511,7 +511,10 @@ const handleModifyTitle = () => {
 
 
 const handleEditFinish = () => {
-  let params = {}
+  let params = {
+    qnId: $util.getItem("questionnaire").id
+
+  }
   $.ajax({
     url: API_BASE_URL + '/question/addQuestion',
     type: "POST",

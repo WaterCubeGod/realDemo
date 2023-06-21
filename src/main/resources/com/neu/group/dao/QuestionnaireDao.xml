@@ -26,4 +26,8 @@
     <select id="selectAll" resultMap="findeByidBymapcheck">
         select * from questionnaire where project_belong = #{project_belong}
     </select>
+
+    <select id="selectQn" resultMap="findeByidBymapcheck">
+        select * from questionnaire where project_belong = #{project_belong} and name = #{name}
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.neu.group.controller;
 
 import com.neu.group.controller.utils.R;
+import com.neu.group.domain.Questionnaire;
 import com.neu.group.service.QuestionnaireService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,11 @@ public class QuestionnaireController {
         String type = jsonObject.getString("type");
         String createTime = jsonObject.getString("createTime");
         String finishTime = jsonObject.getString("finishTime");
-        return new R(true,questionnaireService.
-                addQuestionnaire(name,description,projectBelong,type,createTime,finishTime),
-                "");
+        boolean flag = questionnaireService.
+                addQuestionnaire(name,description,projectBelong,type,createTime,finishTime);
+
+        Questionnaire questionnaire = questionnaireService.selectQn(projectBelong, name);
+        return new R(flag, questionnaire, "");
     }
 
     @PostMapping("/selectAll")

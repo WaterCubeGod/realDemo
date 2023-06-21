@@ -31,4 +31,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
         return questionnaireDao.selectAll(projectBelong);
     }
+
+    @Override
+    public Questionnaire selectQn(int projectBelong, String name) {
+        return questionnaireDao.selectQn(projectBelong, name);
+    }
 }

@@ -41,14 +41,13 @@ const handleCreateQuestionnaire = () => {
             dataType: "json",
             contentType: "application/json",
             success: function (res) {
-
+                $util.setPageParam("questionnaire",res.data)
                 window.location.href = "http://localhost:8080/pages/designQuestionnaire/index.html"
                 alert('创建成功！');
-
                 // 执行其他操作，如重定向到其他页面或刷新数据列表等
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('请求失败！')
+                alert('创建失败！请修改问卷名称!')
             }
         }
     )
