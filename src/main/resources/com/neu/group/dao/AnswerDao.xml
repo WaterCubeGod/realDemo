@@ -4,23 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neu.group.dao.AnswerDao">
 
-    <resultMap id="findeByidBymapcheck" type="com.neu.group.domain.Answer"><!--  type就写返回的模型的名称-->
-        <!--下面第一行是主键-->
-        <id column="id" property="id"></id>
-        <!--properties是实体类中真实的属性，column是别名-->
-        <result column="qn_id" property="qnId"></result>
-        <result column="qn_name" property="qnName"></result>
-        <result column="q_id" property="qId"></result>
-        <result column="user_id" property="userId"></result>
-        <result column="user_name" property="userName"></result>
-        <result column="create_time" property="createTime"></result>
-        <result column="content" property="content"></result>
-        <result column="choice" property="choice"></result>
-        <result column="columns" property="columns"></result>
-        <result column="score" property="score"></result>
-
-    </resultMap>
-
     <insert id="createAnswer">
         insert into answer(id, qn_id, qn_name, q_id, user_id, user_name, create_time, type)
         values (#{id}, #{qnId}, #{qnName}, #{qId},
@@ -47,8 +30,8 @@
         values (#{id}, #{choice}, #{score})
     </insert>
 
-    <select id="selectAnswer" resultMap="findeByidBymapcheck">
-        select *
+    <select id="selectAnswer" resultType="Answer">
+        select id, qn_id as qnId, q_id as qId, user_id as userId, create_time as createTime, type, qn_name as qnName, user_name as userName
         from answer
         where qn_id = #{qn_id} and user_id = #{userId}
         order by q_id
@@ -63,8 +46,8 @@
                    end;
     </select>
 
-    <select id="selectAnswerByUser" resultMap="findeByidBymapcheck">
-        SELECT *
+    <select id="selectAnswerByUser" resultType="Answer">
+        SELECT id, qn_id as qnId, q_id as qId, user_id as userId, create_time as createTime, type, qn_name as qnName, user_name as userName
         FROM answer
         WHERE (qn_id, user_id) IN (
             SELECT qn_id, user_id

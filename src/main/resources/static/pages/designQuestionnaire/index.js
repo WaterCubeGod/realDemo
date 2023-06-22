@@ -456,6 +456,7 @@ const handleAddGauge = () => {
         </div>
       </div>
       <div class="bottom2" style="display: none; align-items: center; justify-content: space-between;"></div>
+      <div class="bottom3" style="display: none; align-items: center; justify-content: space-between;"></div>
     </div>
   `
   return ele
@@ -483,13 +484,26 @@ const gaugeDelOption = (problemIndex, optionIndex) => {
 const gaugeEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'flex')
+  $(`#question${problemIndex} .bottom3`).css('display', 'flex')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
-  $(`#question${problemIndex} .bottom2`).html('')
-  $(`#question${problemIndex} .bottom2`).append(`
-    <div>${problem[problemIndex].option[0].chooseTerm}</div>
-  `)
+  // $(`#question${problemIndex} .bottom2`).html('')
+  // $(`#question${problemIndex} .bottom3`).html('')
+
+  // $(`#question${problemIndex} .bottom2`).append(`
+  //   <div>${problem[problemIndex].option[0].chooseTerm}</div>
+  // `)
   problem[problemIndex].option.map(item => {
     $(`#question${problemIndex} .bottom2`).append(`
+      <div>
+        <label class="radio-inline">
+          <div>${item.chooseTerm}</div>
+        </label>
+      </div>
+    `)
+  })
+
+  problem[problemIndex].option.map(item => {
+    $(`#question${problemIndex} .bottom3`).append(`
       <div>
         <label class="radio-inline">
           <input type="radio" name="fraction" />${item.fraction}
@@ -497,9 +511,9 @@ const gaugeEditFinish = (problemIndex) => {
       </div>
     `)
   })
-  $(`#question${problemIndex} .bottom2`).append(`
-    <div>${problem[problemIndex].option[problem[problemIndex].option.length - 1].chooseTerm}</div>
-  `)
+  // $(`#question${problemIndex} .bottom2`).append(`
+  //   <div>${problem[problemIndex].option[problem[problemIndex].option.length - 1].chooseTerm}</div>
+  // `)
   flash()
 }
 
@@ -529,9 +543,9 @@ const handleEditFinish = () => {
     }
     switch (params.type) {
       case '1':
-        const option = question[i].querySelectorAll('.radio-inline');
-        for (let j = 0; j < option.length; j++) {
-          params.content.push(option[j].innerText)
+        const option1 = question[i].querySelectorAll('.radio-inline');
+        for (let j = 0; j < option1.length; j++) {
+          params.content.push(option1[j].innerText)
         }
         // for (const t in Option) {
         //   console.log(t)
@@ -540,12 +554,39 @@ const handleEditFinish = () => {
 
         break
       case '2':
+        const option2 = question[i].querySelectorAll('.checkbox-inline');
+        for (let j = 0; j < option2.length; j++) {
+          params.content.push(option2[j].innerText)
+        }
         break
       case '3':
         break
       case '4':
+        const option3 = question[i].querySelectorAll('.table');
+        //获取表头
+        const theadRow = option3[0].getElementsByTagName("thead")[0].getElementsByTagName("tr")[0];
+        //填入表头的每个值
+        const thCells = theadRow.getElementsByTagName("th");
+        for (let j = 1; j < thCells.length; j++) {
+          params.columns.push(thCells[j].innerHTML);
+        }
+        // 获取表体值
+        const tbody = option3[0].getElementsByTagName("tbody")[0];
+        const tbodyRows = tbody.getElementsByTagName("tr");
+        for (let j = 0; j < tbodyRows.length; j++) {
+          let tdCells = tbodyRows[j].getElementsByTagName("td");
+          let firstCell = tdCells[0].innerHTML; // 获取第一个单元格的值
+          params.content.push(firstCell);
+        }
         break
       case '5':
+        const option5 = question[i].querySelectorAll('.radio-inline');
+        for (let j = 0; j < option5.length/2; j++) {
+          params.content.push(option5[j].innerText)
+        }
+        for (let j = option5.length/2; j < option5.length; j++) {
+          params.score.push(option5[j].innerText)
+        }
         break
     }
     paramsArray.push(params)
@@ -560,6 +601,11 @@ const handleEditFinish = () => {
     contentType: "application/json",
     success(res) {
       console.log(res)
+      alert('编辑成功!')
+      location.href = '/pages/questionnaire/index.html'
+    },
+    error(res) {
+      alert('编辑失败！')
     }
   })
 }
