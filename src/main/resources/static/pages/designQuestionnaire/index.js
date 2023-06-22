@@ -1,6 +1,12 @@
-let questionnaireTitle = '问卷标题'
-let questionnaireDescription = '问卷说明'
+let questionnaireTitle
+let questionnaireDescription
 const problem = []
+onload = () => {
+  questionnaireTitle = $util.getPageParam('questionnaire').name
+  questionnaireDescription = $util.getPageParam('questionnaire').description
+  $('.questionnaire-title > span').text(questionnaireTitle)
+  $('.questionnaire-description > span').text(questionnaireDescription)
+}
 
 /**
  * 添加问题
@@ -225,7 +231,6 @@ const singleChoiceEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
-  $(`#question${problemIndex} .bottom2`).html('')
   problem[problemIndex].option.map(item => {
     $(`#question${problemIndex} .bottom2`).append(`
       <div style="display: flex; align-items: center;">
@@ -291,7 +296,6 @@ const multipleChoiceEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
-  $(`#question${problemIndex} .bottom2`).html('')
   problem[problemIndex].option.map(item => {
     $(`#question${problemIndex} .bottom2`).append(`
       <div style="display: flex; align-items: center;">

@@ -8,148 +8,6 @@ onload = () => {
         fetchQuestionList(link);
     }
 
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">1.单选题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom">
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="radio-inline">
-    //           <input type="radio" name="chooseTerm">选项1
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="radio-inline">
-    //           <input type="radio" name="chooseTerm">选项2
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="radio-inline">
-    //           <input type="radio" name="chooseTerm">选项3
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="radio-inline">
-    //           <input type="radio" name="chooseTerm">选项4
-    //         </label>
-    //       </div>
-    //     </div>
-    //   </div>
-    // `)
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">2.多选题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom">
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="checkbox-inline">
-    //           <input type="checkbox" name="chooseTerm">选项1
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="checkbox-inline">
-    //           <input type="checkbox" name="chooseTerm">选项2
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="checkbox-inline">
-    //           <input type="checkbox" name="chooseTerm">选项3
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="checkbox-inline">
-    //           <input type="checkbox" name="chooseTerm">选项4
-    //         </label>
-    //       </div>
-    //     </div>
-    //   </div>
-    // `)
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">3.填空题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom">
-    //       <textarea class="form-control" placeholder="请输入" rows="4" style="width: 70%;"></textarea>
-    //   </div>
-    // `)
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">4.矩阵题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom">
-    //       <table class="table">
-    //         <thead>
-    //           <tr>
-    //             <th></th>
-    //             <th>选项1</th>
-    //             <th>选项2</th>
-    //             <th>选项3</th>
-    //           </tr>
-    //         </thead>
-    //         <tbody>
-    //           <tr>
-    //             <td>标题1</td>
-    //             <td><input type="radio" name="chooseTerm1" /></td>
-    //             <td><input type="radio" name="chooseTerm1" /></td>
-    //             <td><input type="radio" name="chooseTerm1" /></td>
-    //           </tr>
-    //           <tr>
-    //             <td>标题2</td>
-    //             <td><input type="radio" name="chooseTerm2" /></td>
-    //             <td><input type="radio" name="chooseTerm2" /></td>
-    //             <td><input type="radio" name="chooseTerm2" /></td>
-    //           </tr>
-    //         </tbody>
-    //       </table>
-    //     </div>
-    //   </div>
-    // `)
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">5.量表题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom" style="display: flex; align-items: center; justify-content: space-between;">
-    //       <div>很满意</div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />5
-    //         </label>
-    //       </div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />4
-    //         </label>
-    //       </div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />3
-    //         </label>
-    //       </div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />2
-    //         </label>
-    //       </div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />1
-    //         </label>
-    //       </div>
-    //       <div>很不满意</div>
-    //     </div>
-    //   </div>
-    // `)
-
 }
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -172,6 +30,78 @@ const fetchQuestionList = (link) => {
         contentType: 'application/json',
         success(res) {
             console.log(res)
+
         }
     })
+}
+
+const handleAddSingleChoice = (question) => {
+    let ele = `
+    <div class="question" id="question${question.qId - 1}" data-type="1" data-problemIndex="${question.qId - 1}">
+      <div class="top">
+        <span class="question-title" id="questionTitle">question.name</span>
+        <span class="must-answer" id="mustAnswer">${question.req === 1 ? '必答题' : '非比答题'}</span>
+      </div>
+      <div class="bottom">
+        <textarea class="form-control textarea" id="problemName" rows="4">${question.title}</textarea>
+        <div class="option" id="option">
+          <div class="option-item" id="optionItem0">
+            <input type="text" class="form-control" id="chooseTerm">
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-link btn-add-option" onclick="singleChoiceAddOption(${problem.length})">添加选项</button>
+        </div>
+        <div class="btn-group">
+          <button type="button" id="cancelEdit" class="btn btn-default" onclick="cancelEdit(${problem.length})">取消编辑</button>
+          <button type="button" id="editFinish" class="btn btn-default" onclick="singleChoiceEditFinish(${problem.length})">完成编辑</button>
+        </div>
+      </div>
+      <div class="bottom2" style="display: none;">
+        
+      </div>
+    </div>
+  `
+    return ele
+}
+
+const singleChoiceEditFinish = (question) => {
+
+    // 获取要创建 div 元素的父容器
+    let parentContainer = document.getElementById('option');
+
+    // 定义循环的次数
+    let count = question.content.length;
+
+    // 使用 for 循环创建带有类名和 ID 的 div 元素
+    for (let i = 0; i < count; i++) {
+        // 创建 div 元素
+        let div = document.createElement('div');
+
+        // 设置 div 元素的类名和 ID
+        div.className = 'option-item';
+        div.id = 'optionItem' + i;
+
+        // 创建输入框元素
+        let input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'form-control';
+        input.id = 'chooseTerm' + i;
+
+        // 将输入框元素添加到 div 元素中
+        div.appendChild(input);
+
+        // 将 div 元素添加到父容器中
+        parentContainer.appendChild(div);
+    }
+}
+
+const flash = () => {
+    const element = document.querySelectorAll('.question-title');
+    for (let t = 0; t < element.length; t++) {
+        let innerText = element[t].innerText
+        const splitResult = innerText.split('.',2);
+        innerText =`${t+1}.` + splitResult[1];
+        element[t].innerText = innerText;
+    }
 }
