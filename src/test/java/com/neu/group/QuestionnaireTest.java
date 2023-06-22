@@ -15,11 +15,12 @@ class QuestionnaireTest {
     @Autowired
     QuestionnaireService questionnaireService;
 
+    @Transactional
     @Test
 //    @Transactional
 //    @Rollback
     void test(){
-        questionnaireService.addQuestionnaire("12","d1dsda",1,"ddsad","2023-06-02 12:49:17","2023-06-12 12:49:17");
+        questionnaireService.addQuestionnaire("aefuifee","d1dsda",1,"ddsad","2023-06-02 12:49:17","2023-06-12 12:49:17");
         int a = 1;
         int e = 1;
         assertEquals(e,a);

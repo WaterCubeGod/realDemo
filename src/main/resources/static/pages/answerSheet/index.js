@@ -1,12 +1,13 @@
 onload = () => {
-    const queryString = window.location.hash;
+    const queryString = window.location.href;
+    console.log(queryString)
     const url = new URL(queryString);
-    const link =  url.searchParams.get(name);
+    const link =  url.searchParams.get('link');
 
     if (link) {
         fetchQuestionList(link);
     }
-    //
+
     // $('#problem').append(`
     //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
     //     <div class="top">
@@ -165,7 +166,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 const fetchQuestionList = (link) => {
     $.ajax({
-        url: API_BASE_URL + '/seeQuestion/'+ link,
+        url: API_BASE_URL + '/question/seeQuestion/'+ link,
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json',

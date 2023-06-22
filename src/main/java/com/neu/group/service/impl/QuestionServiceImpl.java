@@ -54,6 +54,12 @@ public class QuestionServiceImpl implements QuestionService {
                                 option.getContent().get(i)) > 0;
                     }
                     break;
+                case 3:
+                    flag = flag && optionDao.addChoice(option.getQnId(),
+                            option.getqId(),
+                            1,
+                            null) > 0;
+                    break;
                 case 4:
                     //添加矩阵行
                     for (int i = 0; i < option.getContent().size(); i++) {
@@ -102,12 +108,17 @@ public class QuestionServiceImpl implements QuestionService {
     @Transactional
     @Override
     public List<Option> selectByLink(String link) {
+        List<Question> questions =  null;
+        Questionnaire a = questionnaireDao.selectByLink(link);
+        if(questionnaireDao.selectByLink(link) != null) {
+            questions = questionDao.
+                    selectAllByQnId(questionnaireDao.selectByLink(link).getId());
+            return questionList(questions);
+        }
 
-        List<Question> questions = questionDao.
-                selectAllByQnId(questionnaireDao.selectByLink(link).getId());
-
-        return questionList(questions);
+        return null;
     }
+
 
     //从题目获取题目选项并封装
     private List<Option> questionList(List<Question> questions) {
@@ -118,6 +129,7 @@ public class QuestionServiceImpl implements QuestionService {
             switch (question.getType()) {
                 case 1:
                 case 2:
+                case 3:
                     //添加选项
                     options.add(SPToP(optionDao.selectAllChoice(question.getQnId(),question.getqId()),
                             question));

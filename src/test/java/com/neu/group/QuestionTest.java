@@ -5,6 +5,7 @@ import com.neu.group.service.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class QuestionTest {
     @Autowired
     QuestionService questionService;
 
+    @Transactional
     @Test
     void insertTest() {
         List<String> contents = new ArrayList<>();
@@ -39,6 +41,7 @@ public class QuestionTest {
         questionService.addQuestion(options);
     }
 
+    @Transactional
     @Test
     void searchTest() {
         List<Option> options = questionService.selectAllByQnId(2);

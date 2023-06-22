@@ -39,4 +39,8 @@
     <select id="selectByLink" resultMap="findeByidBymapcheck">
         select * from questionnaire where link = #{link}
     </select>
+
+    <select id="selectById" resultMap="findeByidBymapcheck">
+        select * from questionnaire where id = #{id}
+    </select>
 </mapper>

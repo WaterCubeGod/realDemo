@@ -47,7 +47,7 @@ const fetchProjectInfo = (id) => {
             <td>${item.createTime}</td>
             <td>
               <button type="button" class="btn btn-link" onclick="preview(${item.id})">预览</button>
-              <button type="button" class="btn btn-link">发布</button>
+              <button type="button" class="btn btn-link" onclick="publish(${item.id})">发布</button>
               <button type="button" class="btn btn-link btn-red">说明</button>
               <button type="button" class="btn btn-link btn-red" >统计</button>
             </td>
@@ -61,4 +61,17 @@ const fetchProjectInfo = (id) => {
 const preview = (id) => {
   $util.setPageParam("id",id);
   location.href = '/pages/answerSheet/index.html';
+}
+
+const publish = (id) => {
+  $.ajax({
+    url: API_BASE_URL + '/questionnaire/submit?id=' + id,
+    type: "GET",
+    dataType: "json",
+    contentType: "application/json",
+    success(res) {
+      let link = res.data
+      alert("发布成功,链接为:" + link)
+    }
+  })
 }
