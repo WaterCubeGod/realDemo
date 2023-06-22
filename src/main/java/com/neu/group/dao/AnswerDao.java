@@ -14,8 +14,10 @@ public interface AnswerDao {
 
     int createAnswer(@Param("id") int id,
                      @Param("qnId") int qnId,
+                     @Param("qnName") int qnName,
                      @Param("qId") int qId,
                      @Param("userId") int userId,
+                     @Param("userName") int userName,
                      @Param("createTime") String createTime);
 
     int createAnswerChoice(@Param("id") int id,
@@ -32,7 +34,8 @@ public interface AnswerDao {
                           @Param("content") String content,
                           @Param("score") int score);
 
-    List<Answer> selectAnswer(@Param("qnId") int qnId);
+    List<Answer> selectAnswer(@Param("qnId") int qnId,
+                              @Param("userId") int userId);
 
     List<SingleAnswer> selectAnswerOptionById(@Param("type") int type,
                                               @Param("id") int id);

@@ -30,6 +30,7 @@ const fetchProjectList = () => {
                 <button type="button" class="btn btn-link" onclick="onSeeProject(${item.projectId})">查看</button>
                 <button type="button" class="btn btn-link" onclick="onEditProject(${item.projectId})">编辑</button>
                 <button type="button" class="btn btn-link" onclick="onDelProject(${item.projectId})">删除</button>
+                <button type="button" class="btn btn-link" onclick="onDelProject(${item.projectId})">统计</button>
               </div>
             </div>
             <div class="list-footer">
@@ -86,4 +87,12 @@ const onDelProject = (pid) => {
     })
   }
   
+}
+
+const onCountProject = (id) => {
+  console.log(id)
+  let project = projectList.filter(item => item.projectId === id)[0]
+
+  $util.setPageParam('editProject', project)
+  location.href = "/pages/editProject/index.html"
 }

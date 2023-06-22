@@ -7,10 +7,12 @@
     <resultMap id="findeByidBymapcheck" type="com.neu.group.domain.Answer"><!--  type就写返回的模型的名称-->
         <!--下面第一行是主键-->
         <id column="id" property="id"></id>
-        <result column="qn_id" property="qnId"></result>
         <!--properties是实体类中真实的属性，column是别名-->
+        <result column="qn_id" property="qnId"></result>
+        <result column="qn_name" property="qnName"></result>
         <result column="q_id" property="qId"></result>
         <result column="user_id" property="userId"></result>
+        <result column="user_name" property="userName"></result>
         <result column="create_time" property="createTime"></result>
         <result column="content" property="content"></result>
         <result column="choice" property="choice"></result>
@@ -20,9 +22,9 @@
     </resultMap>
 
     <insert id="createAnswer">
-        insert into answer(id, qn_id, q_id, user_id, create_time, type)
-        values (#{id}, #{qnId}, #{qId},
-                #{userId}, #{createTime}, #{type})
+        insert into answer(id, qn_id, qn_name, q_id, user_id, user_name, create_time, type)
+        values (#{id}, #{qnId}, #{qnName}, #{qId},
+                #{userId}, #{userName}, #{createTime}, #{type})
     </insert>
 
     <insert id="createAnswerChoice">
@@ -48,7 +50,7 @@
     <select id="selectAnswer" resultMap="findeByidBymapcheck">
         select *
         from answer
-        where qn_id = #{qnId}
+        where qn_id = #{qn_id} and user_id = #{userId}
         order by q_id
     </select>
 
@@ -59,6 +61,16 @@
                    when #{type} = 4 then (select * from answer_matrix where id = #{id})
                    when #{type} = 5 then (select * from answer_scale where id = #{id})
                    end;
+    </select>
+
+    <select id="selectAnswerByUser" resultMap="findeByidBymapcheck">
+        SELECT *
+        FROM answer
+        WHERE (qn_id, user_id) IN (
+            SELECT qn_id, user_id
+            FROM answer
+            GROUP BY qn_id
+        );
     </select>
 
 </mapper>

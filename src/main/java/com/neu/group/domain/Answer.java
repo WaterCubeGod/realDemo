@@ -8,8 +8,10 @@ import java.util.List;
 public class Answer {
     private int id;
     private int qnId;
+    private int qnName;
     private int qId;
     private int userId;
+    private int userName;
     private String createTime;
     private String content;
     private List<Integer> choice;
@@ -19,12 +21,14 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(int id, int qnId, int qId, int userId, String createTime,
-                  String content, List<Integer> choice, List<Integer> columns, int score) {
+    public Answer(int id, int qnId, int qnName, int qId, int userId, int userName,
+                  String createTime, String content, List<Integer> choice, List<Integer> columns, int score) {
         this.id = id;
         this.qnId = qnId;
+        this.qnName = qnName;
         this.qId = qId;
         this.userId = userId;
+        this.userName = userName;
         this.createTime = createTime;
         this.content = content;
         this.choice = choice;
@@ -104,13 +108,31 @@ public class Answer {
         this.score = score;
     }
 
+    public int getQnName() {
+        return qnName;
+    }
+
+    public void setQnName(int qnName) {
+        this.qnName = qnName;
+    }
+
+    public int getUserName() {
+        return userName;
+    }
+
+    public void setUserName(int userName) {
+        this.userName = userName;
+    }
+
     @Override
     public String toString() {
         return "Answer{" +
                 "id=" + id +
                 ", qnId=" + qnId +
+                ", qnName=" + qnName +
                 ", qId=" + qId +
                 ", userId=" + userId +
+                ", userName=" + userName +
                 ", createTime='" + createTime + '\'' +
                 ", content='" + content + '\'' +
                 ", choice=" + choice +
