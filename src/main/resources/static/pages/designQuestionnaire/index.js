@@ -511,16 +511,53 @@ const handleModifyTitle = () => {
 
 
 const handleEditFinish = () => {
-  let params = {
-    qnId: $util.getItem("questionnaire").id
+  const question = document.querySelectorAll('.question')
+  const questionTitle = document.querySelectorAll('.question-title')
+  const req = document.querySelectorAll('.must-answer')
+  const  paramsArray = []
+  for (let i = 0; i < question.length; i++) {
 
+    let params = {
+      qnId: $util.getPageParam("questionnaire").id,
+      qId: parseInt(question[i].getAttribute('data-problemindex'))  + 1,
+      title: questionTitle[i].textContent.split('.',2)[1],
+      req: req[i].textContent === '必答题' ? 1:0,
+      type: question[i].getAttribute('data-type'),
+      content: [],
+      columns: [],
+      score: []
+    }
+    switch (params.type) {
+      case '1':
+        const option = question[i].querySelectorAll('.radio-inline');
+        for (let j = 0; j < option.length; j++) {
+          params.content.push(option[j].innerText)
+        }
+        // for (const t in Option) {
+        //   console.log(t)
+        //   params.content.push(t.innerText)
+        // }
+
+        break
+      case '2':
+        break
+      case '3':
+        break
+      case '4':
+        break
+      case '5':
+        break
+    }
+    paramsArray.push(params)
+    console.log(params)
   }
+
   $.ajax({
     url: API_BASE_URL + '/question/addQuestion',
-    type: "POST",
-    data: JSON.stringify(params),
+    type: "PUT",
+    data: JSON.stringify(paramsArray),
     dataType: "json",
-    contentType: "application/jsoresn",
+    contentType: "application/json",
     success(res) {
       console.log(res)
     }
