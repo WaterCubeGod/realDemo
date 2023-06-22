@@ -45,7 +45,7 @@ public class QuestionServiceImpl implements QuestionService {
                     for (int i = 0; i < option.getContent().size(); i++) {
                         flag = flag && optionDao.addChoice(option.getQnId(),
                                 option.getqId(),
-                                option.getqId(),
+                                i+1,
                                 option.getContent().get(i)) > 0;
                     }
                     break;
@@ -54,14 +54,14 @@ public class QuestionServiceImpl implements QuestionService {
                     for (int i = 0; i < option.getContent().size(); i++) {
                         flag = flag && optionDao.addMatrix(option.getQnId(),
                                 option.getqId(),
-                                option.getqId(),
+                                i+1,
                                 option.getContent().get(i)) > 0;
                     }
                     //添加矩阵列
                     for (int i = 0; i < option.getColumns().size(); i++) {
                         flag = flag && optionDao.addMatrixColumn(option.getQnId(),
                                 option.getqId(),
-                                option.getqId(),
+                                i+1,
                                 option.getColumns().get(i)) > 0;
                     }
                     break;
@@ -70,7 +70,7 @@ public class QuestionServiceImpl implements QuestionService {
                     for (int i = 0; i < option.getContent().size(); i++) {
                         flag = flag && optionDao.addScale(option.getQnId(),
                                 option.getqId(),
-                                option.getqId(),
+                                i+1,
                                 option.getContent().get(i),
                                 option.getScore().get(i)) > 0;
                     }
