@@ -21,4 +21,9 @@ public interface QuestionnaireDao {
 
     Questionnaire selectQn(@Param("project_belong") int projectBelong,
                            @Param("name") String name);
+
+    int updateLink(@Param("link") String link,
+                   @Param("id") int id);
+
+    Questionnaire selectByLink(@Param("link") String link);
 }

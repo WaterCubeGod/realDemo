@@ -11,6 +11,6 @@ public interface QuestionService {
 
     public List<Option> selectAllByQnId(int qnId);
 
-
+    public List<Option> selectByLink(String link);
 
 }

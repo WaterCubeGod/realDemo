@@ -12,10 +12,12 @@ public class Questionnaire {
     String createTime;
     String finishTime;
 
+    String link;
+
     public Questionnaire() {
     }
 
-    public Questionnaire(int id, String name, String description, int projectBelong, String type, String createTime, String finishTime) {
+    public Questionnaire(int id, String name, String description, int projectBelong, String type, String createTime, String finishTime, String link) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,6 +25,7 @@ public class Questionnaire {
         this.type = type;
         this.createTime = createTime;
         this.finishTime = finishTime;
+        this.link = link;
     }
 
     public int getId() {
@@ -81,16 +84,25 @@ public class Questionnaire {
         this.finishTime = finishTime;
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     @Override
     public String toString() {
         return "Questionnaire{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", projectBelong='" + projectBelong + '\'' +
+                ", projectBelong=" + projectBelong +
                 ", type='" + type + '\'' +
                 ", createTime='" + createTime + '\'' +
                 ", finishTime='" + finishTime + '\'' +
+                ", link='" + link + '\'' +
                 '}';
     }
 }

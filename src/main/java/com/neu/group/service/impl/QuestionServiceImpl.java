@@ -2,8 +2,10 @@ package com.neu.group.service.impl;
 
 import com.neu.group.dao.OptionDao;
 import com.neu.group.dao.QuestionDao;
+import com.neu.group.dao.QuestionnaireDao;
 import com.neu.group.domain.Option;
 import com.neu.group.domain.Question;
+import com.neu.group.domain.Questionnaire;
 import com.neu.group.domain.SingleOption;
 import com.neu.group.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     OptionDao optionDao;
+
+    @Autowired
+    QuestionnaireDao questionnaireDao;
 
     @Transactional
     @Override
@@ -90,6 +95,22 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Option> selectAllByQnId(int qnId) {
 
         List<Question> questions = questionDao.selectAllByQnId(qnId);
+
+        return questionList(questions);
+    }
+
+    @Transactional
+    @Override
+    public List<Option> selectByLink(String link) {
+
+        List<Question> questions = questionDao.
+                selectAllByQnId(questionnaireDao.selectByLink(link).getId());
+
+        return questionList(questions);
+    }
+
+    //从题目获取题目选项并封装
+    private List<Option> questionList(List<Question> questions) {
         List<Option> options = new ArrayList<>();
 
         for (Question question : questions) {
@@ -123,6 +144,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         return options;
     }
+
     //将单个选项集合为题目
     private Option SPToP(List<SingleOption> singleOptions, Question question) {
         int qnId = question.getQnId();

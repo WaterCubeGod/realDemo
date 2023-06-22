@@ -17,4 +17,9 @@ public interface QuestionnaireService {
 
     Questionnaire selectQn(@Param("project_belong") int projectBelong,
                            @Param("name") String name);
+
+    boolean updateLink(@Param("link") String link,
+                       @Param("id") int id);
+
+    Questionnaire selectByLink(@Param("link") String link);
 }

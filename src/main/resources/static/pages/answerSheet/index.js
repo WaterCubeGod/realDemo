@@ -1,5 +1,11 @@
 onload = () => {
+    const queryString = window.location.hash;
+    const url = new URL(queryString);
+    const link =  url.searchParams.get(name);
 
+    if (link) {
+        fetchQuestionList(link);
+    }
     //
     // $('#problem').append(`
     //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
@@ -156,3 +162,15 @@ window.addEventListener('DOMContentLoaded', function () {
       <button type="button" class="btn btn-primary">提 交</button>
     </div>`)
 });
+
+const fetchQuestionList = (link) => {
+    $.ajax({
+        url: API_BASE_URL + '/seeQuestion/'+ link,
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        success(res) {
+            console.log(res)
+        }
+    })
+}

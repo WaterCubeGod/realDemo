@@ -36,4 +36,14 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     public Questionnaire selectQn(int projectBelong, String name) {
         return questionnaireDao.selectQn(projectBelong, name);
     }
+
+    @Override
+    public boolean updateLink(String link, int id) {
+        return questionnaireDao.updateLink(link, id) > 0;
+    }
+
+    @Override
+    public Questionnaire selectByLink(String link) {
+        return questionnaireDao.selectByLink(link);
+    }
 }

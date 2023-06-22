@@ -15,6 +15,7 @@
         <result column="type" property="type"></result>
         <result column="create_time" property="createTime"></result>
         <result column="finish_time" property="finishTime"></result>
+        <result column="link" property="link"></result>
     </resultMap>
 
     <insert id="createQuestionnaire">
@@ -29,5 +30,13 @@
 
     <select id="selectQn" resultMap="findeByidBymapcheck">
         select * from questionnaire where project_belong = #{project_belong} and name = #{name}
+    </select>
+
+    <update id="updateLink">
+        update questionnaire set link = #{link} where id = #{id}
+    </update>
+
+    <select id="selectByLink" resultMap="findeByidBymapcheck">
+        select * from questionnaire where link = #{link}
     </select>
 </mapper>

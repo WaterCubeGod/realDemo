@@ -33,4 +33,11 @@ public class QuestionController {
         return new R(true, options, "");
     }
 
+    @GetMapping("/seeQuestion/{link}")
+    public R requestQuestion(@PathVariable String link) {
+        List<Option> options = questionService.selectByLink(link);
+
+        return new R(true, options, "");
+    }
+
 }
