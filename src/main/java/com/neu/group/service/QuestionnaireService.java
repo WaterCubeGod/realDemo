@@ -22,4 +22,6 @@ public interface QuestionnaireService {
                        @Param("id") int id);
 
     Questionnaire selectByLink(@Param("link") String link);
+
+    Questionnaire selectById(@Param("id") int id);
 }

@@ -1,153 +1,15 @@
 onload = () => {
-    const queryString = window.location.hash;
+    const queryString = window.location.href;
+    console.log(queryString)
     const url = new URL(queryString);
-    const link =  url.searchParams.get(name);
+    const link = url.searchParams.get('link');
+    const id = $util.getPageParam('id')
 
     if (link) {
         fetchQuestionList(link);
+    } else if (!(id === undefined)){
+        previewQuestionList(id)
     }
-    //
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">1.单选题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom">
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="radio-inline">
-    //           <input type="radio" name="chooseTerm">选项1
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="radio-inline">
-    //           <input type="radio" name="chooseTerm">选项2
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="radio-inline">
-    //           <input type="radio" name="chooseTerm">选项3
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="radio-inline">
-    //           <input type="radio" name="chooseTerm">选项4
-    //         </label>
-    //       </div>
-    //     </div>
-    //   </div>
-    // `)
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">2.多选题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom">
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="checkbox-inline">
-    //           <input type="checkbox" name="chooseTerm">选项1
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="checkbox-inline">
-    //           <input type="checkbox" name="chooseTerm">选项2
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="checkbox-inline">
-    //           <input type="checkbox" name="chooseTerm">选项3
-    //         </label>
-    //       </div>
-    //       <div style="display: flex; align-items: center; margin-bottom: 3px;">
-    //         <label class="checkbox-inline">
-    //           <input type="checkbox" name="chooseTerm">选项4
-    //         </label>
-    //       </div>
-    //     </div>
-    //   </div>
-    // `)
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">3.填空题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom">
-    //       <textarea class="form-control" placeholder="请输入" rows="4" style="width: 70%;"></textarea>
-    //   </div>
-    // `)
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">4.矩阵题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom">
-    //       <table class="table">
-    //         <thead>
-    //           <tr>
-    //             <th></th>
-    //             <th>选项1</th>
-    //             <th>选项2</th>
-    //             <th>选项3</th>
-    //           </tr>
-    //         </thead>
-    //         <tbody>
-    //           <tr>
-    //             <td>标题1</td>
-    //             <td><input type="radio" name="chooseTerm1" /></td>
-    //             <td><input type="radio" name="chooseTerm1" /></td>
-    //             <td><input type="radio" name="chooseTerm1" /></td>
-    //           </tr>
-    //           <tr>
-    //             <td>标题2</td>
-    //             <td><input type="radio" name="chooseTerm2" /></td>
-    //             <td><input type="radio" name="chooseTerm2" /></td>
-    //             <td><input type="radio" name="chooseTerm2" /></td>
-    //           </tr>
-    //         </tbody>
-    //       </table>
-    //     </div>
-    //   </div>
-    // `)
-    // $('#problem').append(`
-    //   <div class="question" id="question1" data-type="1" data-problemIndex="1">
-    //     <div class="top">
-    //       <span class="question-title" id="questionTitle">5.量表题</span>
-    //       <span class="must-answer" id="mustAnswer">必答题</span>
-    //     </div>
-    //     <div class="bottom" style="display: flex; align-items: center; justify-content: space-between;">
-    //       <div>很满意</div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />5
-    //         </label>
-    //       </div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />4
-    //         </label>
-    //       </div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />3
-    //         </label>
-    //       </div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />2
-    //         </label>
-    //       </div>
-    //       <div>
-    //         <label class="radio-inline">
-    //           <input type="radio" name="fraction" />1
-    //         </label>
-    //       </div>
-    //       <div>很不满意</div>
-    //     </div>
-    //   </div>
-    // `)
 
 }
 
@@ -158,19 +20,191 @@ window.addEventListener('DOMContentLoaded', function () {
     targetElement.innerHTML = containerHTML
     targetElement.querySelector('.top').remove()
     $('.container').append(`
-    <div class="btn-div">
-      <button type="button" class="btn btn-primary">提 交</button>
-    </div>`)
+        <div class="btn-div">
+            <button type="button" class="btn btn-primary">提 交</button>
+        </div>
+        `)
 });
 
 const fetchQuestionList = (link) => {
     $.ajax({
-        url: API_BASE_URL + '/seeQuestion/'+ link,
+        url: API_BASE_URL + '/question/seeQuestion/' + link,
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json',
         success(res) {
-            console.log(res)
+            console.log(res);
+            const questions = res.data;
+            allEditFinish(questions);
         }
     })
+}
+
+const previewQuestionList = (id) => {
+    let params = {
+        qnId: id
+    }
+    $.ajax({
+        url: API_BASE_URL + '/question/seeQuestion',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(params),
+        contentType: 'application/json',
+        success(res) {
+            console.log(res);
+            const questions = res.data;
+            allEditFinish(questions);
+        }
+    })
+}
+
+const allEditFinish = (questions) => {
+    for (let i = 0; i < questions.length; i++) {
+        switch (questions[i].type) {
+            case 1:
+                singleChoiceEditFinish(questions[i])
+                break
+            case 2:
+                multipleChoiceEditFinish(questions[i])
+                break
+            case 3:
+                fillBlanksEditFinish(questions[i])
+                break
+            case 4:
+                matrixEditFinish(questions[i])
+                break
+            case 5:
+                gaugeEditFinish(questions[i])
+                break
+        }
+    }
+}
+
+const singleChoiceEditFinish = (question) => {
+    $('#problem').append(`
+    <div class="question" id="question${question.qId - 1}" data-type="1" data-problemIndex="question${question.qId}">
+      <div class="top">
+        <span class="question-title" id="questionTitle">${question.qId}.${question.title}</span>
+        <span class="must-answer" id="mustAnswer">${question.req === 1 ? '必答题' : '非必答题'}</span>
+      </div>
+      <div class="bottom"></div>
+    </div>
+  `)
+    for (let i = 0; i < question.content.length; i++) {
+        $(`#question${question.qId - 1} .bottom`).append(`
+        <div style="display: flex; align-items: center; margin-bottom: 3px;">
+           <label class="radio-inline">
+             <input type="radio" name="chooseTerm">${question.content[i]}
+           </label>
+        </div>
+    `)
+    }
+}
+
+const multipleChoiceEditFinish = (question) => {
+    $('#problem').append(`
+              <div class="question" id="question${question.qId - 1}" data-type="2" data-problemIndex="${question.qId}">
+                <div class="top">
+                  <span class="question-title" id="questionTitle">${question.qId}.${question.title}</span>
+                  <span class="must-answer" id="mustAnswer">${question.req === 1 ? '必答题' : '非必答题'}</span>
+                </div>
+                <div class="bottom"></div>
+              </div>
+    `)
+    for (let i = 0; i < question.content.length; i++) {
+        $(`#question${question.qId - 1} .bottom`).append(`
+        <div style="display: flex; align-items: center; margin-bottom: 3px;">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" name="chooseTerm">${question.content[i]}
+                    </label>
+        </div>
+    `)
+    }
+}
+
+const fillBlanksEditFinish = (question) => {
+    $('#problem').append(`
+              <div class="question" id="question${question.qId - 1}" data-type="3" data-problemIndex="${question.qId}">
+                <div class="top">
+                  <span class="question-title" id="questionTitle">${question.qId}.${question.title}</span>
+                  <span class="must-answer" id="mustAnswer">${question.req === 1 ? '必答题' : '非必答题'}</span>
+                </div>
+                <div class="bottom">
+                  <textarea class="form-control" placeholder="请输入" rows="4" style="width: 70%;"></textarea>
+              </div>
+            `)
+}
+
+const matrixEditFinish = (question) => {
+    $('#problem').append(`
+              <div class="question" id="question${question.qId - 1}" data-type="4" data-problemIndex="${question.qId}">
+                <div class="top">
+                  <span class="question-title" id="questionTitle">${question.qId}.${question.title}</span>
+                  <span class="must-answer" id="mustAnswer">${question.req === 1 ? '必答题' : '非必答题'}</span>
+                </div>
+                <div class="bottom">
+                 <table class="table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                 </div>
+              </div>
+            `)
+    for (let i = 0; i < question.columns.length; i++) {
+        $(`#question${question.qId - 1} .table > thead > tr`).append(`
+            <th>${question.columns[i]}</th>
+        `)
+    }
+    for (let i = 0; i < question.content.length; i++) {
+        $(`#question${question.qId - 1} .table > tbody`).append(`
+            <tr>
+                <td>${question.content[i]}</td>
+            </tr>
+        `)
+    }
+    for (let i = 0; i < question.columns.length; i++) {
+            $(`#question${question.qId - 1} .table > tbody > tr`).append(`
+                <td><input type="radio" name="chooseTerm${question.qId - 1}" /></td>
+        `)
+    }
+}
+
+const gaugeEditFinish = (question) => {
+    $('#problem').append(`
+              <div class="question" id="question${question.qId - 1}" data-type="5" data-problemIndex="${question.qId}">
+                <div class="top">
+                  <span class="question-title" id="questionTitle">${question.qId}.${question.title}</span>
+                  <span class="must-answer" id="mustAnswer">${question.req === 1 ? '必答题' : '非必答题'}</span>
+                </div>
+                <div class="bottom">
+                 <table class="table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th></th>
+                      </tr>
+                    </tbody>
+                  </table>
+                 </div>
+              </div>
+            `)
+    for (let i = 0; i < question.content.length; i++) {
+        $(`#question${question.qId - 1} .table > thead > tr`).append(`
+            <th>${question.content[i]}</th>
+        `)
+    }
+    for (let i = 0; i < question.columns.length; i++) {
+        $(`#question${question.qId - 1} .table > tbody > tr`).append(`
+            <th><input type="radio" name="fraction" />${question.score[i]}</th>
+        `)
+    }
 }

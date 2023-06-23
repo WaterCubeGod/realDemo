@@ -46,4 +46,10 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     public Questionnaire selectByLink(String link) {
         return questionnaireDao.selectByLink(link);
     }
+
+    @Override
+    public Questionnaire selectById(int id) {
+        return questionnaireDao.selectById(id);
+    }
+
 }

@@ -27,15 +27,16 @@ public class QuestionController {
     }
 
     @PostMapping("/seeQuestion")
-    public R seeQuestion(@RequestBody int qnId) {
-        List<Option> options = questionService.selectAllByQnId(qnId);
+    public R seeQuestion(@RequestBody JSONObject jsonObject) {
+        List<Option> options = questionService.selectAllByQnId(jsonObject.getInteger("qnId"));
 
         return new R(true, options, "");
     }
 
     @GetMapping("/seeQuestion/{link}")
     public R requestQuestion(@PathVariable String link) {
-        List<Option> options = questionService.selectByLink(link);
+
+        List<Option> options = questionService.selectByLink("http://localhost:8080/pages/answerSheet/index.html?link=" + link);
 
         return new R(true, options, "");
     }
