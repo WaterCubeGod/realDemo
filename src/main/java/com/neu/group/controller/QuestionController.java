@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.neu.group.controller.utils.R;
 import com.neu.group.domain.Option;
+import com.neu.group.domain.Questionnaire;
 import com.neu.group.service.QuestionService;
 
+import com.neu.group.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,8 @@ public class QuestionController {
 
     @Autowired
     QuestionService questionService;
+    @Autowired
+    QuestionnaireService questionnaireService;
 
     @PutMapping("/addQuestion")
     public R createQuestion(@RequestBody JSONArray jsonArray) {
@@ -29,16 +33,34 @@ public class QuestionController {
     @PostMapping("/seeQuestion")
     public R seeQuestion(@RequestBody JSONObject jsonObject) {
         List<Option> options = questionService.selectAllByQnId(jsonObject.getInteger("qnId"));
+        Questionnaire questionnaire = questionnaireService.selectById(jsonObject.getInteger("qnId"));
 
-        return new R(true, options, "");
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(parseToJsonArray(options));
+        jsonArray.add(JSONObject.toJSONString(questionnaire));
+
+        return new R(true, jsonArray, "");
     }
 
     @GetMapping("/seeQuestion/{link}")
     public R requestQuestion(@PathVariable String link) {
+        String qLink = "http://localhost:8080/pages/answerSheet/index.html?link=" + link;
+        List<Option> options = questionService.selectByLink(qLink);
+        Questionnaire questionnaire = questionService.selectQuestionnaire(qLink);
 
-        List<Option> options = questionService.selectByLink("http://localhost:8080/pages/answerSheet/index.html?link=" + link);
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(parseToJsonArray(options));
+        jsonArray.add(JSONObject.toJSONString(questionnaire));
 
-        return new R(true, options, "");
+        return new R(true, jsonArray, "");
+    }
+
+    private JSONArray parseToJsonArray(List<Option> options) {
+        JSONArray jsonArray = new JSONArray();
+        for (Option option : options) {
+            jsonArray.add(JSONObject.toJSONString(option));
+        }
+        return jsonArray;
     }
 
 }

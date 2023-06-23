@@ -33,8 +33,7 @@ const fetchQuestionList = (link) => {
         dataType: 'json',
         contentType: 'application/json',
         success(res) {
-            console.log(res);
-            const questions = res.data;
+            const questions = res.data[0];
             allEditFinish(questions);
         }
     })
@@ -52,7 +51,7 @@ const previewQuestionList = (id) => {
         contentType: 'application/json',
         success(res) {
             console.log(res);
-            const questions = res.data;
+            const questions = res.data[0];
             allEditFinish(questions);
         }
     })
@@ -60,22 +59,25 @@ const previewQuestionList = (id) => {
 
 const allEditFinish = (questions) => {
     for (let i = 0; i < questions.length; i++) {
-        switch (questions[i].type) {
+        let question = eval("(" + questions[i] + ")");
+        switch (question.type) {
             case 1:
-                singleChoiceEditFinish(questions[i])
+                singleChoiceEditFinish(question)
                 break
             case 2:
-                multipleChoiceEditFinish(questions[i])
+                multipleChoiceEditFinish(question)
                 break
             case 3:
-                fillBlanksEditFinish(questions[i])
+                fillBlanksEditFinish(question)
                 break
             case 4:
-                matrixEditFinish(questions[i])
+                matrixEditFinish(question)
                 break
             case 5:
-                gaugeEditFinish(questions[i])
+                gaugeEditFinish(question)
                 break
+            default:
+                console.log(question.type)
         }
     }
 }
@@ -162,15 +164,17 @@ const matrixEditFinish = (question) => {
     }
     for (let i = 0; i < question.content.length; i++) {
         $(`#question${question.qId - 1} .table > tbody`).append(`
-            <tr>
+            <tr id="tr${i}">
                 <td>${question.content[i]}</td>
             </tr>
         `)
     }
-    for (let i = 0; i < question.columns.length; i++) {
-            $(`#question${question.qId - 1} .table > tbody > tr`).append(`
-                <td><input type="radio" name="chooseTerm${question.qId - 1}" /></td>
+    for (let i = 0; i < question.content.length; i++) {
+        for (let j = 0; j < question.columns.length; j++) {
+            $(`#question${question.qId - 1} .table > tbody  #tr${i}`).append(`
+                <td><input type="radio" name="chooseTerm${i}" /></td>
         `)
+        }
     }
 }
 

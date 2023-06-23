@@ -105,6 +105,7 @@ public class QuestionServiceImpl implements QuestionService {
         return questionList(questions);
     }
 
+    //通过链接获取题目
     @Transactional
     @Override
     public List<Option> selectByLink(String link) {
@@ -117,6 +118,13 @@ public class QuestionServiceImpl implements QuestionService {
         }
 
         return null;
+    }
+
+    @Transactional
+    @Override
+    public Questionnaire selectQuestionnaire(String link) {
+
+        return questionnaireDao.selectByLink(link);
     }
 
 
