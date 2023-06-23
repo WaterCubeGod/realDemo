@@ -14,16 +14,16 @@ onload = () => {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    let containerHTML = localStorage.getItem('containerHTML');
-    // 执行渲染操作，例如将数据插入到HTML元素中
-    let targetElement = document.querySelector('body');
-    targetElement.innerHTML = containerHTML
-    targetElement.querySelector('.top').remove()
-    $('.container').append(`
-        <div class="btn-div">
-            <button type="button" class="btn btn-primary">提 交</button>
-        </div>
-        `)
+    // let containerHTML = localStorage.getItem('containerHTML');
+    // // 执行渲染操作，例如将数据插入到HTML元素中
+    // let targetElement = document.querySelector('body');
+    // targetElement.innerHTML = containerHTML
+    // targetElement.querySelector('.top').remove()
+    // $('.container').append(`
+    //     <div class="btn-div">
+    //         <button type="button" class="btn btn-primary">提 交</button>
+    //     </div>
+    //     `)
 });
 
 const fetchQuestionList = (link) => {
