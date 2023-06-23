@@ -3,26 +3,28 @@ onload = () => {
     console.log(queryString)
     const url = new URL(queryString);
     const link = url.searchParams.get('link');
+    const id = $util.getPageParam('id')
 
     if (link) {
         fetchQuestionList(link);
-    } else {
-        preview()
+    } else if (!(id === undefined)){
+        previewQuestionList(id)
     }
 
 }
 
-const preview = () => {
-    window.addEventListener('DOMContentLoaded', function () {
-        let containerHTML = localStorage.getItem('containerHTML');
-        // 执行渲染操作，例如将数据插入到HTML元素中
-        let targetElement = document.querySelector('body');
-        targetElement.innerHTML = containerHTML
-        targetElement.querySelector('.top').remove()
-        $('.container').append(`
+window.addEventListener('DOMContentLoaded', function () {
+    let containerHTML = localStorage.getItem('containerHTML');
+    // 执行渲染操作，例如将数据插入到HTML元素中
+    let targetElement = document.querySelector('body');
+    targetElement.innerHTML = containerHTML
+    targetElement.querySelector('.top').remove()
+    $('.container').append(`
+        <div class="btn-div">
+            <button type="button" class="btn btn-primary">提 交</button>
+        </div>
         `)
-    });
-}
+});
 
 const fetchQuestionList = (link) => {
     $.ajax({
@@ -33,29 +35,50 @@ const fetchQuestionList = (link) => {
         success(res) {
             console.log(res);
             const questions = res.data;
-            for (let i = 0; i < questions.length; i++) {
-                switch (questions[i].type) {
-                    case 1:
-                        singleChoiceEditFinish(questions[i])
-                        break
-                    case 2:
-                        multipleChoiceEditFinish(questions[i])
-                        break
-                    case 3:
-                        fillBlanksEditFinish(questions[i])
-                        break
-                    case 4:
-                        matrixEditFinish(questions[i])
-                        break
-                    case 5:
-                        gaugeEditFinish(questions[i])
-                        break
-                }
-            }
+            allEditFinish(questions);
         }
     })
 }
 
+const previewQuestionList = (id) => {
+    let params = {
+        qnId: id
+    }
+    $.ajax({
+        url: API_BASE_URL + '/question/seeQuestion',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(params),
+        contentType: 'application/json',
+        success(res) {
+            console.log(res);
+            const questions = res.data;
+            allEditFinish(questions);
+        }
+    })
+}
+
+const allEditFinish = (questions) => {
+    for (let i = 0; i < questions.length; i++) {
+        switch (questions[i].type) {
+            case 1:
+                singleChoiceEditFinish(questions[i])
+                break
+            case 2:
+                multipleChoiceEditFinish(questions[i])
+                break
+            case 3:
+                fillBlanksEditFinish(questions[i])
+                break
+            case 4:
+                matrixEditFinish(questions[i])
+                break
+            case 5:
+                gaugeEditFinish(questions[i])
+                break
+        }
+    }
+}
 
 const singleChoiceEditFinish = (question) => {
     $('#problem').append(`

@@ -27,8 +27,8 @@ public class QuestionController {
     }
 
     @PostMapping("/seeQuestion")
-    public R seeQuestion(@RequestBody int qnId) {
-        List<Option> options = questionService.selectAllByQnId(qnId);
+    public R seeQuestion(@RequestBody JSONObject jsonObject) {
+        List<Option> options = questionService.selectAllByQnId(jsonObject.getInteger("qnId"));
 
         return new R(true, options, "");
     }
