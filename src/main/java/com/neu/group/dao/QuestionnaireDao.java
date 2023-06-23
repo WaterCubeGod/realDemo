@@ -28,4 +28,6 @@ public interface QuestionnaireDao {
     Questionnaire selectByLink(@Param("link") String link);
 
     Questionnaire selectById(@Param("id") int id);
+
+    int deleteQn(int id);
 }

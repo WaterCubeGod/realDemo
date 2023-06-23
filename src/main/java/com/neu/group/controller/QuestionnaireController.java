@@ -58,4 +58,10 @@ public class QuestionnaireController {
         return new R(false, "", "");
     }
 
+    @GetMapping("/delete")
+    public R deleteQuestionnaire(int id) {
+        boolean flag = questionnaireService.deleteQn(id);
+        return new R(flag, "", flag ? "删除成功" : "删除失败,问卷正在发布中");
+    }
+
 }
