@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,5 +55,48 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     public Questionnaire selectById(int id) {
         return questionnaireDao.selectById(id);
     }
+
+    @Override
+    public boolean deleteQn(int id) {
+        Questionnaire questionnaire = questionnaireDao.selectById(id);
+        if(isBelongPeriodTime(questionnaire.getCreateTime(),questionnaire.getFinishTime())) {
+            return false;
+        }
+        return questionnaireDao.deleteQn(id) > 0;
+    }
+
+    /*
+     *  判断当前时间是否在设置的dark mode时间段内
+     *  @param date1: 开始时间（hh:mm）
+     *  @param date2: 结束时间（hh:mm）
+     */
+    private boolean isBelongPeriodTime(String date1, String date2) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date currentTime = new Date(System.currentTimeMillis());
+        Date startTimeDate;
+        Date endTimeDate;
+        Calendar date = Calendar.getInstance();
+        Calendar begin = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
+        try {
+            date.setTime(df.parse(df.format(currentTime)));
+            startTimeDate = df.parse(date1);
+            endTimeDate = df.parse(date2);
+            begin.setTime(startTimeDate);
+            end.setTime(endTimeDate);
+
+            // 修改比较逻辑，包括日期部分
+            if (endTimeDate.before(startTimeDate)) {
+                return date.after(begin) && date.before(end);
+            } else if (endTimeDate.equals(startTimeDate)) {
+                return date.equals(begin) && date.equals(end) || (date.after(begin) && date.before(end));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        // 这里是时间段的起止都在同一天的情况，只需要判断当前时间是否在这个时间段内即可
+        return date.after(begin) && date.before(end);
+    }
+
 
 }

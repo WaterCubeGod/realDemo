@@ -1,7 +1,9 @@
 package com.neu.group;
 
 import com.neu.group.domain.Option;
+import com.neu.group.domain.Questionnaire;
 import com.neu.group.service.QuestionService;
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @SpringBootTest
 public class QuestionTest {
-
+    Logger log = Logger.getLogger(QuestionTest.class);
     @Autowired
     QuestionService questionService;
 
@@ -38,7 +40,13 @@ public class QuestionTest {
         Option option = new Option(2,3,"量表",0,5,contents,null,scores);
         options.add(option);
 
-        questionService.addQuestion(options);
+        boolean flag = questionService.addQuestion(options);
+
+        if(flag) {
+            log.info(">>添加题目测试成功");
+        } else {
+            log.debug(">>添加问卷测试失败");
+        }
     }
 
     @Transactional
@@ -46,5 +54,41 @@ public class QuestionTest {
     void searchTest() {
         List<Option> options = questionService.selectAllByQnId(2);
         System.out.println(options);
+
+        if(options != null) {
+            log.info(">>查找题目测试成功");
+        } else {
+            log.debug(">>查找问卷测试失败");
+        }
+    }
+
+    @Transactional
+    @Test
+    void searchByLinkTest() {
+        List<Option> options = questionService.selectByLink(
+                "http://localhost:8080/pages/answerSheet/index.html?link=d4c13f98-6862-43c5-982d-18b12d1df7cc"
+        );
+        System.out.println(options);
+
+        if(options != null) {
+            log.info(">>通过链接查找题目测试成功");
+        } else {
+            log.debug(">>通过链接查找题目测试失败");
+        }
+    }
+
+    @Transactional
+    @Test
+    void searchQuestionnaireTest() {
+        Questionnaire questionnaire = questionService.selectQuestionnaire(
+                "http://localhost:8080/pages/answerSheet/index.html?link=d4c13f98-6862-43c5-982d-18b12d1df7cc"
+        );
+        System.out.println(questionnaire);
+
+        if(questionnaire != null) {
+            log.info(">>通过链接查找问卷测试成功");
+        } else {
+            log.debug(">>通过链接查找问卷测试失败");
+        }
     }
 }

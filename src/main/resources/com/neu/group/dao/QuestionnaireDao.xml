@@ -16,31 +16,51 @@
         <result column="create_time" property="createTime"></result>
         <result column="finish_time" property="finishTime"></result>
         <result column="link" property="link"></result>
+        <result column="is_delete" property="isDelete"></result>
     </resultMap>
 
     <insert id="createQuestionnaire">
         insert into questionnaire(name, description, project_belong, type, create_time, finish_time)
         values (#{name}, #{description}, #{project_belong},
-                                          #{type}, #{create_time}, #{finish_time} )
+                #{type}, #{create_time}, #{finish_time})
     </insert>
 
     <select id="selectAll" resultMap="findeByidBymapcheck">
-        select * from questionnaire where project_belong = #{project_belong}
+        select *
+        from questionnaire
+        where project_belong = #{project_belong}
+          and is_delete = 1
     </select>
 
     <select id="selectQn" resultMap="findeByidBymapcheck">
-        select * from questionnaire where project_belong = #{project_belong} and name = #{name}
+        select *
+        from questionnaire
+        where project_belong = #{project_belong}
+        and name = #{name}
+        and is_delete = 1
     </select>
 
     <update id="updateLink">
-        update questionnaire set link = #{link} where id = #{id}
+        update questionnaire
+        set link = #{link}
+        where id = #{id}
     </update>
 
     <select id="selectByLink" resultMap="findeByidBymapcheck">
-        select * from questionnaire where link = #{link}
+        select *
+        from questionnaire
+        where link = #{link}
     </select>
 
     <select id="selectById" resultMap="findeByidBymapcheck">
-        select * from questionnaire where id = #{id}
+        select *
+        from questionnaire
+        where id = #{id}
     </select>
+
+    <update id="deleteQn">
+        update questionnaire
+        set is_delete = 0
+        where id = #{id}
+    </update>
 </mapper>
