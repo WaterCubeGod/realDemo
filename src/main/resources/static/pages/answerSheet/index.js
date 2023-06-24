@@ -52,6 +52,9 @@ const previewQuestionList = (id) => {
         success(res) {
             console.log(res);
             const questions = res.data[0];
+            let questionnaire = eval("(" + res.data[1]  + ")");
+            $('#questionnaire-title').text(questionnaire.name)
+            $('#questionnaire-description').text(questionnaire.description)
             allEditFinish(questions);
         }
     })
