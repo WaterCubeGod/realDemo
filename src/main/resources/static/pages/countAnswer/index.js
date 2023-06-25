@@ -172,6 +172,7 @@ editTable = (question) => {
           </tr>
   `)
   }
+
   $(`#table${question.qId} > tbody`).append(`
   <tr style="background:#f5f5f5;font-weight:600;" total="1">
             <td><b>本题有效填写人次</b></td>
