@@ -1,7 +1,7 @@
 package com.neu.group.service;
 
 import com.neu.group.domain.Option;
-import com.neu.group.domain.Question;
+import com.neu.group.domain.Questionnaire;
 
 import java.util.List;
 
@@ -12,5 +12,7 @@ public interface QuestionService {
     public List<Option> selectAllByQnId(int qnId);
 
     public List<Option> selectByLink(String link);
+
+    public Questionnaire selectQuestionnaire(String link);
 
 }

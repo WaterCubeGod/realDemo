@@ -39,6 +39,7 @@ const fetchProjectInfo = (id) => {
     success(res) {
       let info = res.data
       console.log(info, 'res')
+      $('#table #tbody').html('')
       res.data.map((item, index) => {
         $('#table #tbody').append(`
           <tr>
@@ -47,8 +48,8 @@ const fetchProjectInfo = (id) => {
             <td>${item.createTime}</td>
             <td>
               <button type="button" class="btn btn-link" onclick="preview(${item.id})">预览</button>
-              <button type="button" class="btn btn-link">发布</button>
-              <button type="button" class="btn btn-link btn-red">说明</button>
+              <button type="button" class="btn btn-link" onclick="publish(${item.id})">发布</button>
+              <button type="button" class="btn btn-link btn-red" onclick="deleteQn(${item.id})">删除</button>
               <button type="button" class="btn btn-link btn-red" >统计</button>
             </td>
           </tr>
@@ -61,4 +62,30 @@ const fetchProjectInfo = (id) => {
 const preview = (id) => {
   $util.setPageParam("id",id);
   location.href = '/pages/answerSheet/index.html';
+}
+
+const publish = (id) => {
+  $.ajax({
+    url: API_BASE_URL + '/questionnaire/submit?id=' + id,
+    type: "GET",
+    dataType: "json",
+    contentType: "application/json",
+    success(res) {
+      let link = res.data
+      alert("发布成功,链接为:" + link)
+    }
+  })
+}
+
+const deleteQn = (id) => {
+  $.ajax({
+    url: API_BASE_URL + '/questionnaire/delete?id=' + id,
+    type: "GET",
+    dataType: "json",
+    contentType: "application/json",
+    success(res) {
+      alert(res.message)
+      fetchProjectInfo(project.projectId)
+    }
+  })
 }

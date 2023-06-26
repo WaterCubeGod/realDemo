@@ -4,20 +4,22 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("Questionnaire")
 public class Questionnaire {
-    int id;
-    String name;
-    String description;
-    int projectBelong;
-    String type;
-    String createTime;
-    String finishTime;
+    private int id;
+    private String name;
+    private String description;
+    private int projectBelong;
+    private String type;
+    private String createTime;
+    private String finishTime;
+    private String link;
 
-    String link;
+    int isDelete;
 
     public Questionnaire() {
     }
 
-    public Questionnaire(int id, String name, String description, int projectBelong, String type, String createTime, String finishTime, String link) {
+    public Questionnaire(int id, String name, String description, int projectBelong,
+                         String type, String createTime, String finishTime, String link, int isDelete) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,6 +28,7 @@ public class Questionnaire {
         this.createTime = createTime;
         this.finishTime = finishTime;
         this.link = link;
+        this.isDelete = isDelete;
     }
 
     public int getId() {
@@ -90,6 +93,14 @@ public class Questionnaire {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
     }
 
     @Override

@@ -1,6 +1,12 @@
-let questionnaireTitle = '问卷标题'
-let questionnaireDescription = '问卷说明'
+let questionnaireTitle
+let questionnaireDescription
 const problem = []
+onload = () => {
+  questionnaireTitle = $util.getPageParam('questionnaire').name
+  questionnaireDescription = $util.getPageParam('questionnaire').description
+  $('.questionnaire-title > span').text(questionnaireTitle)
+  $('.questionnaire-description > span').text(questionnaireDescription)
+}
 
 /**
  * 添加问题
@@ -224,8 +230,9 @@ const singleChoiceDelOption = (problemIndex, optionIndex) => {
 const singleChoiceEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
-  $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
+  $(`#question${problemIndex} .bottom`).html('')
   $(`#question${problemIndex} .bottom2`).html('')
+  $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   problem[problemIndex].option.map(item => {
     $(`#question${problemIndex} .bottom2`).append(`
       <div style="display: flex; align-items: center;">
@@ -290,8 +297,9 @@ const multipleChoiceDelOption = (problemIndex, optionIndex) => {
 const multipleChoiceEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
-  $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
+  $(`#question${problemIndex} .bottom`).html('')
   $(`#question${problemIndex} .bottom2`).html('')
+  $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   problem[problemIndex].option.map(item => {
     $(`#question${problemIndex} .bottom2`).append(`
       <div style="display: flex; align-items: center;">
@@ -329,6 +337,8 @@ const handleAddFillBlanks = () => {
 const fillBlanksEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
+  $(`#question${problemIndex} .bottom`).html('')
+  $(`#question${problemIndex} .bottom2`).html('')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   $(`#question${problemIndex} .bottom2`).html(`
     <div style="border: 1px solid #CCCCCC; width: 50%; height: 70px;"></div>

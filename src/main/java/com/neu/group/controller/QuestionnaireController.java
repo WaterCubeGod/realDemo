@@ -40,16 +40,28 @@ public class QuestionnaireController {
     }
 
     @GetMapping("/submit")
-    public R submitQuestionnaire(@RequestBody int id) {
-        // 生成唯一的问卷链接
-        String uniqueId = UUID.randomUUID().toString();
-        String questionnaireLink = "http://localhost:8080/pages/answerSheet/index.js?link=" + uniqueId;
+    public R submitQuestionnaire(int id) {
+        Questionnaire questionnaire = questionnaireService.selectById(id);
 
-        // 将问卷链接与用户的填写数据关联存储，可以使用数据库或其他存储解决方案
-        boolean flag = questionnaireService.updateLink(questionnaireLink, id);
+        if(questionnaire.getLink() == null) {
+            // 生成唯一的问卷链接
+            String uniqueId = UUID.randomUUID().toString();
+            String questionnaireLink = "http://localhost:8080/pages/answerSheet/index.html?link=" + uniqueId;
 
-        // 返回问卷链接给用户
-        return new R(flag, questionnaireLink, "");
+            // 将问卷链接与用户的填写数据关联存储，可以使用数据库或其他存储解决方案
+            boolean flag = questionnaireService.updateLink(questionnaireLink, id);
+
+            // 返回问卷链接给用户
+            return new R(flag, questionnaireLink, "");
+        }
+
+        return new R(false, "", "");
+    }
+
+    @GetMapping("/delete")
+    public R deleteQuestionnaire(int id) {
+        boolean flag = questionnaireService.deleteQn(id);
+        return new R(flag, "", flag ? "删除成功" : "删除失败,问卷正在发布中");
     }
 
 }
