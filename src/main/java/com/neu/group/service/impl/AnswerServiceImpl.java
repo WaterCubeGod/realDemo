@@ -114,7 +114,7 @@ public class AnswerServiceImpl implements AnswerService {
                     break;
             }
         }
-        return ;
+        return answers;
     }
 
     @Override

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目问卷答题统计</title>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="../common/header/index.css">
+  <link rel="stylesheet" href="../../static/bootstrap-3.4.1/css/bootstrap.min.css">
+  <script src="../../static/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+  <script src="../../static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+  <script src="../../my-config.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+<div id="divSumData" class="the-end" style="width: 766px; margin: 20px auto">
+  <div style="text-align: right;"></div>
+  <div id="ctl02_ContentPlaceHolder1_divStatData" export-container="1"></div>
+  <div class="report-title" export="1">问卷标题</div>
+  <div class="title-item" export="1" verify="" type="check">
+    <div class="title" exportbackup="1">
+      <dl class="clearfix">
+        <dt>第4题：</dt>
+        <dd>如果是，您需要雇佣大学生家教是为了哪些原因？<span>[多选题]</span></dd>
+      </dl>
+    </div>
+    <div class="count unit">
+      <div class="radiu-box" exportbackup="1">
+        <table class="wjxui-table" qi="40000">
+          <tbody>
+          <tr style="background:#f5f5f5;font-weight:600;">
+            <td title="点击按选项顺序排序" onmouseenter="setSortTip(this);" style="cursor: pointer;"
+                class="arrge">选项<i class="icon"></i></td>
+            <td onmouseenter="setSortTip(this);" id="sort-40000" title="点击排序" align="center"
+                class="arrge" style="width:50px;cursor: pointer;white-space:nowrap;">小计<i
+                    class="icon "></i></td>
+            <td align="left" style="width:360px;">比例</td>
+          </tr>
+          <tr>
+            <td val="1">补习家庭作业</td>
+            <td align="center">1</td>
+            <td percent="100">
+              <div class="bar">
+                <div style="width: 100%; display: block;" class="precent barcont"></div>
+              </div>
+              <div style="margin-top:3px;float:left;">100%</div>
+              <div style="clear:both;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td val="2">辅导孩子较差科目的学习</td>
+            <td align="center">0</td>
+            <td percent="0">
+              <div class="bar">
+                <div style="width: 0%; display: block;" class="precent barcont"></div>
+              </div>
+              <div style="margin-top:3px;float:left;">0%</div>
+              <div style="clear:both;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td val="3">教授孩子兴趣爱好的技能</td>
+            <td align="center">1</td>
+            <td percent="100">
+              <div class="bar">
+                <div style="width: 100%; display: block;" class="precent barcont"></div>
+              </div>
+              <div style="margin-top:3px;float:left;">100%</div>
+              <div style="clear:both;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td val="4">价格低廉</td>
+            <td align="center">0</td>
+            <td percent="0">
+              <div class="bar">
+                <div style="width: 0%; display: block;" class="precent barcont"></div>
+              </div>
+              <div style="margin-top:3px;float:left;">0%</div>
+              <div style="clear:both;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td val="5">其它</td>
+            <td align="center">0</td>
+            <td percent="0">
+              <div class="bar">
+                <div style="width: 0%; display: block;" class="precent barcont"></div>
+              </div>
+              <div style="margin-top:3px;float:left;">0%</div>
+              <div style="clear:both;"></div>
+            </td>
+          </tr>
+          <tr style="background:#f5f5f5;font-weight:600;" total="1">
+            <td><b>本题有效填写人次</b></td>
+            <td align="center"><b>1</b></td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div cat="4" id="divChart4" type="0" class="divResultCss clearfix" style="margin-top:10px;" dignore="1">
+      <div class="helplink fl"><a href="/help/help.aspx?helpid=306&amp;h=1" class="wjx_alink_gray"
+                                  target="_blank">查看多选题百分比计算方法</a></div>
+      <ul class="fr">
+        <li class="liSelect tabletoggleli" index="-1"><i class="comIcon vam"></i><span
+                class="vam">表格</span></li>
+        <li index="1"><i class="comIcon vam"></i><span class="vam">饼状</span></li>
+        <li index="6"><i class="comIcon vam"></i><span class="vam">圆环</span></li>
+        <li index="2"><i class="comIcon vam"></i><span class="vam">柱状</span></li>
+        <li index="4"><i class="comIcon vam"></i><span class="vam">条形</span></li>
+        <li index="3"><i class="comIcon vam"></i><span class="vam">折线</span></li>
+        <li class="widthzeroli" index="0"><i onmouseenter="layer.tips('隐藏零数据', this)"
+                                             onmouseout="layer.closeAll('tips')" class="comIcon"></i></li>
+      </ul>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="fillet__chart--dataGraph" style="height:335px;display:none;text-align:center;"
+         id="divChart4_img" exportbackup="1" export-style="margin-top:10px;"></div>
+    <div style="margin: 10px auto;display:none;text-align:right;" class="Picsetting chartControl ctrolBtnGroup"
+         dignore="1"><a href="javascript:" onclick="percentChart(this);" class="chartBtn">数值</a><a
+            href="javascript:" class="chartBtn" onclick="paixu('sort-40000')">排序</a><a href="javascript:"
+                                                                                       onclick="enlargeChart(this,true)"
+                                                                                       onmouseover="selEnlargeWay(this)"
+                                                                                       class="chartBtn">放大</a><a
+            href="javascript:" onclick="enlargeChart(this,false)" title="缩小" class="chartBtn">缩小</a><a
+            href="javascript:" class="chartBtn" onclick="setChartColor(this)"><span class="vam"> 配色</span></a><a
+            href="javascript:" onclick="printChart(this)" title="打印" class="chartBtn">打印</a><a
+            href="javascript:" onclick="saveChart(this);" title="保存" class="chartBtn">保存</a>
+      <div style="clear:both;"></div>
+    </div>
+    <div style="clear:both;"></div>
+  </div>
+</div>
+
+  <script type="module" src="../../utils/index.js"></script>
+  <script src="./index.js"></script>
+</body>
+</html>
