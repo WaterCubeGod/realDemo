@@ -24,25 +24,7 @@ onload = () => {
     }
 
 }
-
-window.addEventListener('DOMContentLoaded', function () {
-    const queryString = window.location.href;
-    const url = new URL(queryString);
-    const preview = url.searchParams.get('preview');
-    if (preview !== '1')
-        return;
-    let containerHTML = localStorage.getItem('containerHTML');
-    // 执行渲染操作，例如将数据插入到HTML元素中
-    let targetElement = document.querySelector('body');
-    targetElement.innerHTML = containerHTML
-    targetElement.querySelector('.top').remove()
-    $('.container').append(`
-        <div class="btn-div">
-            <button type="button" class="btn btn-primary" onclick="handleSubmit()">提 交</button>
-        </div>
-        `)
-});
-
+let questionnaire;
 const fetchQuestionList = (link) => {
     $.ajax({
         url: API_BASE_URL + '/question/seeQuestion/' + link,
@@ -50,12 +32,14 @@ const fetchQuestionList = (link) => {
         dataType: 'json',
         contentType: 'application/json',
         success(res) {
+            questionnaire = eval("(" + res.data[1]  + ")")
+            $(".questionnaire-title").text(questionnaire.name)
+            $(".questionnaire-description").text(questionnaire.description)
             const questions = res.data[0];
             allEditFinish(questions);
         }
     })
 }
-let questionnaire;
 const previewQuestionList = (id) => {
     let params = {
         qnId: id

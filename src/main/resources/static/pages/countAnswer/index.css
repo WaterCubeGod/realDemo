@@ -1,36 +1,88 @@
-.top {
-  display: flex;
-  margin-bottom: 20px;
+body {
+  background-color: #EEEEEE !important;
 }
 
-.top > .btn {
-  margin-right: 10px;
+.container {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px 2px rgba(43, 43, 43, 0.2);
+  padding: 20px 40px !important;
+  margin: 40px 0;
 }
 
-.input-group-search {
-  width: 280px;
-}
-
-.table th,
-.table td {
+.questionnaire-title {
   text-align: center;
 }
 
-.table .btn {
+.questionnaire-description {
+  border-bottom: 1px dashed #CCCCCC;
+  padding: 0 0 20px 10px;
+  margin: 20px 0;
+}
+
+.question {
+  padding: 8px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.question-title {
+  font-size: 17px;
+}
+
+.question > .top {
+  margin-bottom: 10px;
+}
+
+.must-answer {
+  color: red;
+  font-size: 13px;
+}
+
+.btn-div {
+  text-align: right;
+  margin: 40px 0 20px 0;
+}
+
+.btn {
+  padding: 6px 40px !important;
+}
+
+.questionnaire-title {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  margin: 20px 0 30px 0;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.fr {
+  float: right;
+}
+
+.divResultCss {
+  display: inline-block;
+}
+
+.divResultCss ul {
+  margin: 0;
   padding: 0;
+  list-style-type: none;
 }
 
-.btn-red {
-  color: red !important;
+.divResultCss ul li {
+  display: inline-block;
+  margin-right: 10px;
 }
 
-.nav {
-  text-align: right;
+.center-align {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.pagination {
-  width: 100%;
-  text-align: right;
-  margin: 0 !important;
-  margin-bottom: 20px !important;
+.count {
+  margin-right: 10px;
 }
