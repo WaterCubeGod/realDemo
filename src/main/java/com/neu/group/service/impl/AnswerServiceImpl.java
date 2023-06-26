@@ -24,20 +24,23 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public boolean addAnswer(List<Answer> answers) {
         boolean flag = true;
+        int userId = answers.get(0).getUserId();
+        answerDao.addAnswerId(userId);
+        int aId = answerDao.selectAIdByUserId(userId);
         for (Answer answer:
              answers) {
             int qnId = answer.getQnId();
             int qId = answer.getqId();
-            int userId = answer.getUserId();
             int type = answer.getType();
+            //先新加answer_id
             flag = flag && answerDao.createAnswer(qnId,
                     answer.getQnName(),
                     type,
                     qId,
                     userId,
                     answer.getUserName(),
-                    answer.getCreateTime()) > 0;
-            int id = answerDao.selectId(qnId, qId, userId);
+                    aId) > 0;
+            int id = answerDao.selectId(qnId, qId, userId,aId);
             //根据题目类型更新表格
             switch (type){
                 case 1:
@@ -60,7 +63,7 @@ public class AnswerServiceImpl implements AnswerService {
                     }
                     break;
                 case 5:
-                    answerDao.createAnswerScale(id, answer.getContent(),
+                    answerDao.createAnswerScale(id,answer.getChoice().get(0),
                             answer.getScore());
                     break;
                 default:

@@ -3,27 +3,44 @@ onload = () => {
     console.log(queryString)
     const url = new URL(queryString);
     const link = url.searchParams.get('link');
+    const preview = url.searchParams.get('preview')
     const id = $util.getPageParam('id')
+
 
     if (link) {
         fetchQuestionList(link);
-    } else if (!(id === undefined)){
+    } else if (!(id === undefined) && preview !== '1'){
+        $.ajax({
+            url: API_BASE_URL + '/questionnaire/selectById?id=' + id,
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success(res) {
+                $(".questionnaire-title").text(res.data.name)
+                $(".questionnaire-description").text(res.data.description)
+            }
+        })
         previewQuestionList(id)
     }
 
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    // let containerHTML = localStorage.getItem('containerHTML');
-    // // 执行渲染操作，例如将数据插入到HTML元素中
-    // let targetElement = document.querySelector('body');
-    // targetElement.innerHTML = containerHTML
-    // targetElement.querySelector('.top').remove()
-    // $('.container').append(`
-    //     <div class="btn-div">
-    //         <button type="button" class="btn btn-primary">提 交</button>
-    //     </div>
-    //     `)
+    const queryString = window.location.href;
+    const url = new URL(queryString);
+    const preview = url.searchParams.get('preview');
+    if (preview !== '1')
+        return;
+    let containerHTML = localStorage.getItem('containerHTML');
+    // 执行渲染操作，例如将数据插入到HTML元素中
+    let targetElement = document.querySelector('body');
+    targetElement.innerHTML = containerHTML
+    targetElement.querySelector('.top').remove()
+    $('.container').append(`
+        <div class="btn-div">
+            <button type="button" class="btn btn-primary" onclick="handleSubmit()">提 交</button>
+        </div>
+        `)
 });
 
 const fetchQuestionList = (link) => {
@@ -38,7 +55,7 @@ const fetchQuestionList = (link) => {
         }
     })
 }
-
+let questionnaire;
 const previewQuestionList = (id) => {
     let params = {
         qnId: id
@@ -52,7 +69,7 @@ const previewQuestionList = (id) => {
         success(res) {
             console.log(res);
             const questions = res.data[0];
-            let questionnaire = eval("(" + res.data[1]  + ")");
+            questionnaire = eval("(" + res.data[1]  + ")");
             $('#questionnaire-title').text(questionnaire.name)
             $('#questionnaire-description').text(questionnaire.description)
             allEditFinish(questions);
@@ -99,7 +116,7 @@ const singleChoiceEditFinish = (question) => {
         $(`#question${question.qId - 1} .bottom`).append(`
         <div style="display: flex; align-items: center; margin-bottom: 3px;">
            <label class="radio-inline">
-             <input type="radio" name="chooseTerm">${question.content[i]}
+             <input type="radio" name="chooseTerm${question.qId - 1}">${question.content[i]}
            </label>
         </div>
     `)
@@ -175,7 +192,7 @@ const matrixEditFinish = (question) => {
     for (let i = 0; i < question.content.length; i++) {
         for (let j = 0; j < question.columns.length; j++) {
             $(`#question${question.qId - 1} .table > tbody  #tr${i}`).append(`
-                <td><input type="radio" name="chooseTerm${i}" /></td>
+                <td><input type="radio" name="chooseTerm${question.qId-1}${i}" /></td>
         `)
         }
     }
@@ -214,4 +231,72 @@ const gaugeEditFinish = (question) => {
             <th><input type="radio" name="fraction" />${question.score[i]}</th>
         `)
     }
+}
+
+const handleSubmit = () =>{
+    const questions = document.querySelectorAll('.question');
+    let paramsArray = []
+    for (let i = 0; i < questions.length; i++) {
+        let params = {
+            id:0,
+            qnId:questionnaire.id,
+            qnName:questionnaire.name,
+            qId: i,
+            userId: 1,
+            userName:'TestName',
+            createTime: "t",
+            content: "",
+            choice:[],
+            columns:[],
+            score: 0,
+            type:parseInt(questions[i].getAttribute('data-type'))
+        }
+        switch (questions[i].getAttribute('data-type')) {
+            case '1':
+            case '2':
+                const choiceBox = questions[i].querySelectorAll('input')
+                for (let j = 0; j < choiceBox.length; j++) {
+                    if (choiceBox[j].checked){
+                        params.choice.push(j)
+                    }
+                }
+                break;
+            case '3':
+                params.content = questions[i].querySelector('.form-control').value
+                break;
+            case '4':
+                const row = questions[i].querySelector('tbody').querySelectorAll('tr')
+                for (let j = 0; j < row.length; j++) {
+                    const column = row[j].querySelectorAll('input')
+                    for (let k = 0; k < column.length; k++) {
+                        if (column[k].checked){
+                            params.choice.push(j)
+                            params.columns.push(k)
+                        }
+                    }
+                }
+                break;
+            case '5':
+                const th = questions[i].querySelector('tbody').querySelectorAll('th')
+                for (let j = 1; j < th.length; j++) {
+                    const choice = th[j].querySelector('input')
+                    if (choice.checked) {
+                        params.choice.push(j - 1)
+                        params.score = th[j].innerText
+                    }
+                }
+                break;
+        }
+        paramsArray.push(params)
+    }
+    $.ajax({
+        url: API_BASE_URL + '/answer/add',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(paramsArray),
+        contentType: 'application/json',
+        success(res) {
+            alert("提交成功")
+        }
+    })
 }

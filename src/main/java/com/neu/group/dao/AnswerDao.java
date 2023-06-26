@@ -13,12 +13,13 @@ import java.util.List;
 public interface AnswerDao {
 
     int createAnswer(@Param("qnId") int qnId,
-                     @Param("qnName") int qnName,
+                     @Param("qnName") String qnName,
                      @Param("type") int type,
                      @Param("qId") int qId,
                      @Param("userId") int userId,
-                     @Param("userName") int userName,
-                     @Param("createTime") String createTime);
+                     @Param("userName") String userName,
+                     @Param("aId") int aId
+                     );
 
     int createAnswerChoice(@Param("id") int id,
                      @Param("choice") int choice);
@@ -31,7 +32,7 @@ public interface AnswerDao {
                            @Param("content") String content);
 
     int createAnswerScale(@Param("id") int id,
-                          @Param("content") String content,
+                          @Param("choice") int choice,
                           @Param("score") int score);
 
     List<Answer> selectAnswer(@Param("qnId") int qnId,
@@ -41,5 +42,9 @@ public interface AnswerDao {
                                               @Param("id") int id);
     int selectId(@Param("qnId") int qnId,
                  @Param("qId") int qId,
-                 @Param("userId") int userId);
+                 @Param("userId") int userId,@Param("aId") int aId);
+
+    int addAnswerId(@Param("userId") int userId);
+
+    int selectAIdByUserId(@Param("userId") int userId);
 }

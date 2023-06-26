@@ -5,9 +5,9 @@
 <mapper namespace="com.neu.group.dao.AnswerDao">
 
     <insert id="createAnswer">
-        insert into answer(qn_id, qn_name, q_id, user_id, user_name, create_time, type)
+        insert into answer(qn_id, qn_name, q_id, user_id, user_name, type,a_id)
         values (#{qnId}, #{qnName}, #{qId},
-                #{userId}, #{userName}, #{createTime}, #{type})
+                #{userId}, #{userName}, #{type},#{aId})
     </insert>
 
     <insert id="createAnswerChoice">
@@ -56,9 +56,14 @@
         );
     </select>
     <select id="selectId" resultType="java.lang.Integer">
-        select id from answer where (qn_id,q_id,user_id) = (#{qnId},#{qId},#{userId})
+        select id from answer where (qn_id,q_id,user_id,a_id) = (#{qnId},#{qId},#{userId},#{aId})
+    </select>
+    <select id="selectAIdByUserId" resultType="java.lang.Integer">
+        select max(id) from answer_id where user_id =#{userId}
     </select>
 
-
+    <insert id="addAnswerId">
+        insert into answer_id(user_id) values (#{userId})
+    </insert>
 
 </mapper>

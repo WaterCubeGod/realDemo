@@ -230,7 +230,6 @@ const singleChoiceDelOption = (problemIndex, optionIndex) => {
 const singleChoiceEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
-  $(`#question${problemIndex} .bottom`).html('')
   $(`#question${problemIndex} .bottom2`).html('')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   problem[problemIndex].option.map(item => {
@@ -297,7 +296,7 @@ const multipleChoiceDelOption = (problemIndex, optionIndex) => {
 const multipleChoiceEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
-  $(`#question${problemIndex} .bottom`).html('')
+
   $(`#question${problemIndex} .bottom2`).html('')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   problem[problemIndex].option.map(item => {
@@ -337,7 +336,7 @@ const handleAddFillBlanks = () => {
 const fillBlanksEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
-  $(`#question${problemIndex} .bottom`).html('')
+
   $(`#question${problemIndex} .bottom2`).html('')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   $(`#question${problemIndex} .bottom2`).html(`
@@ -623,7 +622,7 @@ const handleEditFinish = () => {
 const handleView = () => {
   let containerHTML = document.querySelector('.container').outerHTML
   localStorage.setItem('containerHTML', containerHTML) // 将数据存储到localStorage中
-  location.href = '/pages/answerSheet/index.html'
+  location.href = '/pages/answerSheet/index.html?preview=1'
 
 }
 

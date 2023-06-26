@@ -8,12 +8,12 @@ import java.util.List;
 public class Answer {
     private int id;
     private int qnId;
-    private int qnName;
+    private String qnName;
 
     private int type;
     private int qId;
     private int userId;
-    private int userName;
+    private String userName;
     private String createTime;
     private String content;
     private List<Integer> choice;
@@ -23,11 +23,12 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(int id, int qnId, int qnName, int qId, int userId, int userName,
-                  String createTime, String content, List<Integer> choice, List<Integer> columns, int score) {
+
+    public Answer(int id, int qnId, String qnName, int type, int qId, int userId, String userName, String createTime, String content, List<Integer> choice, List<Integer> columns, int score) {
         this.id = id;
         this.qnId = qnId;
         this.qnName = qnName;
+        this.type = type;
         this.qId = qId;
         this.userId = userId;
         this.userName = userName;
@@ -37,7 +38,6 @@ public class Answer {
         this.columns = columns;
         this.score = score;
     }
-
 
     public int getId() {
         return id;
@@ -111,19 +111,19 @@ public class Answer {
         this.score = score;
     }
 
-    public int getQnName() {
+    public String getQnName() {
         return qnName;
     }
 
-    public void setQnName(int qnName) {
+    public void setQnName(String qnName) {
         this.qnName = qnName;
     }
 
-    public int getUserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUserName(int userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
