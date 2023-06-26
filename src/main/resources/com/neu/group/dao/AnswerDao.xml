@@ -5,8 +5,8 @@
 <mapper namespace="com.neu.group.dao.AnswerDao">
 
     <insert id="createAnswer">
-        insert into answer(id, qn_id, qn_name, q_id, user_id, user_name, create_time, type)
-        values (#{id}, #{qnId}, #{qnName}, #{qId},
+        insert into answer(qn_id, qn_name, q_id, user_id, user_name, create_time, type)
+        values (#{qnId}, #{qnName}, #{qId},
                 #{userId}, #{userName}, #{createTime}, #{type})
     </insert>
 
@@ -33,7 +33,7 @@
     <select id="selectAnswer" resultType="Answer">
         select id, qn_id as qnId, q_id as qId, user_id as userId, create_time as createTime, type, qn_name as qnName, user_name as userName
         from answer
-        where qn_id = #{qn_id} and user_id = #{userId}
+        where qn_id = #{qnId} and user_name = #{userName}
         order by q_id
     </select>
 
@@ -49,11 +49,16 @@
     <select id="selectAnswerByUser" resultType="Answer">
         SELECT id, qn_id as qnId, q_id as qId, user_id as userId, create_time as createTime, type, qn_name as qnName, user_name as userName
         FROM answer
-        WHERE (qn_id, user_id) IN (
-            SELECT qn_id, user_id
+        WHERE (qn_id, user_id,create_time) IN (
+            SELECT qn_id, user_id, create_time
             FROM answer
             GROUP BY qn_id
         );
     </select>
+    <select id="selectId" resultType="java.lang.Integer">
+        select id from answer where (qn_id,q_id,user_id) = (#{qnId},#{qId},#{userId})
+    </select>
+
+
 
 </mapper>

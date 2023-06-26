@@ -9,6 +9,8 @@ public class Answer {
     private int id;
     private int qnId;
     private int qnName;
+
+    private int type;
     private int qId;
     private int userId;
     private int userName;
@@ -35,6 +37,7 @@ public class Answer {
         this.columns = columns;
         this.score = score;
     }
+
 
     public int getId() {
         return id;
@@ -122,6 +125,14 @@ public class Answer {
 
     public void setUserName(int userName) {
         this.userName = userName;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     @Override

@@ -12,9 +12,9 @@ import java.util.List;
 @Mapper
 public interface AnswerDao {
 
-    int createAnswer(@Param("id") int id,
-                     @Param("qnId") int qnId,
+    int createAnswer(@Param("qnId") int qnId,
                      @Param("qnName") int qnName,
+                     @Param("type") int type,
                      @Param("qId") int qId,
                      @Param("userId") int userId,
                      @Param("userName") int userName,
@@ -35,8 +35,11 @@ public interface AnswerDao {
                           @Param("score") int score);
 
     List<Answer> selectAnswer(@Param("qnId") int qnId,
-                              @Param("userId") int userId);
+                              @Param("userName") String userName);
 
     List<SingleAnswer> selectAnswerOptionById(@Param("type") int type,
                                               @Param("id") int id);
+    int selectId(@Param("qnId") int qnId,
+                 @Param("qId") int qId,
+                 @Param("userId") int userId);
 }

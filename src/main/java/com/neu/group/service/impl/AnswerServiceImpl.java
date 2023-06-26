@@ -1,0 +1,125 @@
+package com.neu.group.service.impl;
+
+import com.neu.group.dao.AnswerDao;
+import com.neu.group.dao.QuestionnaireDao;
+import com.neu.group.domain.Answer;
+import com.neu.group.domain.Questionnaire;
+import com.neu.group.domain.SingleAnswer;
+import com.neu.group.service.AnswerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+@Service
+public class AnswerServiceImpl implements AnswerService {
+    @Autowired
+    AnswerDao answerDao;
+    @Autowired
+    QuestionnaireDao questionnaireDao;
+    @Transactional
+    @Override
+    public boolean addAnswer(List<Answer> answers) {
+        boolean flag = true;
+        for (Answer answer:
+             answers) {
+            int qnId = answer.getQnId();
+            int qId = answer.getqId();
+            int userId = answer.getUserId();
+            int type = answer.getType();
+            flag = flag && answerDao.createAnswer(qnId,
+                    answer.getQnName(),
+                    type,
+                    qId,
+                    userId,
+                    answer.getUserName(),
+                    answer.getCreateTime()) > 0;
+            int id = answerDao.selectId(qnId, qId, userId);
+            //根据题目类型更新表格
+            switch (type){
+                case 1:
+                case 2:
+                    //单双选
+                    for (int item:
+                         answer.getChoice()) {
+                        answerDao.createAnswerChoice(id,item);
+                    }
+                    break;
+                case 3:
+                    //填空
+                    answerDao.createAnswerBlank(id, answer.getContent());
+                    break;
+                case 4:
+                    //矩阵
+                    for (int i = 0; i < answer.getColumns().size(); i++) {
+                        answerDao.createAnswerMatrix(id,answer.getChoice().get(i),
+                                answer.getColumns().get(i));
+                    }
+                    break;
+                case 5:
+                    answerDao.createAnswerScale(id, answer.getContent(),
+                            answer.getScore());
+                    break;
+                default:
+                    System.out.println("未知的type：" + type);
+                    break;
+            }
+
+        }
+        return flag;
+    }
+
+    @Override
+    public List<Answer> selectAllByQnId(int qnId,String userName) {
+        List<Answer> answers = answerDao.selectAnswer(qnId, userName);
+        for (Answer answer:
+             answers) {
+            int type = answer.getType();
+            List<SingleAnswer> singleAnswers = answerDao.selectAnswerOptionById(type,
+                    answer.getId());
+            switch (type){
+                case 1:
+                case 2:
+                    List<Integer> listChoice = new ArrayList<>();
+                    for (SingleAnswer singleAnswer:
+                         singleAnswers) {
+                        listChoice.add(singleAnswer.getChoice());
+                    }
+                    answer.setChoice(listChoice);
+                    break;
+                case 3:
+                    //只有一个
+                     answer.setContent(singleAnswers.get(0).getContent());
+                    break;
+                case 4:
+                    List<Integer> choice = new ArrayList<>();
+                    List<Integer> columns = new ArrayList<>();
+                    for (SingleAnswer singleAnswer : singleAnswers) {
+                        choice.add(singleAnswer.getChoice());
+                        columns.add(singleAnswer.getColumns());
+                    }
+                    answer.setChoice(choice);
+                    answer.setColumns(columns);
+                    break;
+                case 5:
+                    answer.setChoice(Collections.singletonList(
+                            singleAnswers.get(0).getChoice()));
+                    answer.setScore(singleAnswers.get(0).getScore());
+                    break;
+                default:
+                    System.out.println("未知的type：" + type);
+                    break;
+            }
+        }
+        return ;
+    }
+
+    @Override
+    public List<Answer> selectByLink(String link,String userName ) {
+//        Questionnaire questionnaire = questionnaireDao.selectByLink(link);
+        return null;
+    }
+}
