@@ -54,4 +54,5 @@ public class SingleOption extends Question{
                 ", score='" + score + '\'' +
                 '}';
     }
+
 }

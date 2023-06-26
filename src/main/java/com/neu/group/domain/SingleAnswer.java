@@ -68,4 +68,20 @@ public class SingleAnswer {
                 ", score=" + score +
                 '}';
     }
+
+    public SingleAnswer(int id, int choice) {
+        this.id = id;
+        this.choice = choice;
+    }
+
+    public SingleAnswer(int id, int choice, int columns) {
+        this.id = id;
+        this.choice = choice;
+        this.columns = columns;
+    }
+
+    public SingleAnswer(int id, String content) {
+        this.id = id;
+        this.content = content;
+    }
 }

@@ -9,13 +9,13 @@ const fetchUserList = () => {
     let params = {
         username: $('#username').val()
     }
+    const path = new URLSearchParams(window.location.search)
     $.ajax({
-        url: API_BASE_URL + '/answer',
+        url: API_BASE_URL + '/answer' + '/statistics',
         type: 'POST',
-        dataType: 'json',
-        data: JSON.stringify(params),
-        contentType: 'application/json',
+        data: { qnId: path.get('qnId') }, // 直接传递整数值
         success(res) {
+            console.log(res)
             initAnswer(res.data[0])
             allAnswer(res.data[1])
             initAnswerForm(res.data[1])

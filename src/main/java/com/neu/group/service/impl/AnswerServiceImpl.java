@@ -78,6 +78,37 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public List<Answer> selectAllByQnId(int qnId,String userName) {
         List<Answer> answers = answerDao.selectAnswer(qnId, userName);
+        get(answers);
+        return answers;
+    }
+
+    @Override
+    public List<Answer> selectByLink(String link,String userName ) {
+//        Questionnaire questionnaire = questionnaireDao.selectByLink(link);
+        return null;
+    }
+    @Override
+    public List<Answer> selectAllQuestionnaireInProject(int projectId){
+        List<Questionnaire> questionnaires = questionnaireDao.selectAll(projectId);
+        List<Answer> representAns = new ArrayList<>();
+        for (Questionnaire item:
+             questionnaires) {
+
+            List<Answer> answers = answerDao.selectAnswer2(item.getId());
+            representAns.addAll(answers);
+
+        }
+        return representAns;
+    }
+
+    @Override
+    public List<Answer> selectAllAnswer(int qnId){
+        List<Answer> answers = answerDao.selectAllAnswerByQnId(qnId);
+        get(answers);
+        return answers;
+    }
+
+    private void get(List<Answer> answers) {
         for (Answer answer:
              answers) {
             int type = answer.getType();
@@ -88,14 +119,14 @@ public class AnswerServiceImpl implements AnswerService {
                 case 2:
                     List<Integer> listChoice = new ArrayList<>();
                     for (SingleAnswer singleAnswer:
-                         singleAnswers) {
+                            singleAnswers) {
                         listChoice.add(singleAnswer.getChoice());
                     }
                     answer.setChoice(listChoice);
                     break;
                 case 3:
                     //只有一个
-                     answer.setContent(singleAnswers.get(0).getContent());
+                    answer.setContent(singleAnswers.get(0).getContent());
                     break;
                 case 4:
                     List<Integer> choice = new ArrayList<>();
@@ -117,12 +148,6 @@ public class AnswerServiceImpl implements AnswerService {
                     break;
             }
         }
-        return answers;
     }
 
-    @Override
-    public List<Answer> selectByLink(String link,String userName ) {
-//        Questionnaire questionnaire = questionnaireDao.selectByLink(link);
-        return null;
-    }
 }

@@ -47,4 +47,8 @@ public interface AnswerDao {
     int addAnswerId(@Param("userId") int userId);
 
     int selectAIdByUserId(@Param("userId") int userId);
+
+    List<Answer> selectAnswer2(@Param("qnId") int qnId);
+
+    List<Answer> selectAllAnswerByQnId(@Param("qnId") int qnId);
 }

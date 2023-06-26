@@ -50,7 +50,7 @@ const fetchProjectInfo = (id) => {
               <button type="button" class="btn btn-link" onclick="preview(${item.id})">预览</button>
               <button type="button" class="btn btn-link" onclick="publish(${item.id})">发布</button>
               <button type="button" class="btn btn-link btn-red" onclick="deleteQn(${item.id})">删除</button>
-              <button type="button" class="btn btn-link btn-red" >统计</button>
+              <button type="button" class="btn btn-link btn-red" onclick="handleClick(${item.id})">统计</button>
             </td>
           </tr>
         `)
@@ -88,4 +88,8 @@ const deleteQn = (id) => {
       fetchProjectInfo(project.projectId)
     }
   })
+}
+
+const handleClick = (id) =>{
+  window.location.href = API_BASE_URL + '/pages/countAnswer/index.html?qnId=' + id;
 }

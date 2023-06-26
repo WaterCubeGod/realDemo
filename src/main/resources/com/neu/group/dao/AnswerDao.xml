@@ -5,9 +5,9 @@
 <mapper namespace="com.neu.group.dao.AnswerDao">
 
     <insert id="createAnswer">
-        insert into answer(qn_id, qn_name, q_id, user_id, user_name, type,a_id)
+        insert into answer(qn_id, qn_name, q_id, user_id, user_name, type, a_id)
         values (#{qnId}, #{qnName}, #{qId},
-                #{userId}, #{userName}, #{type},#{aId})
+                #{userId}, #{userName}, #{type}, #{aId})
     </insert>
 
     <insert id="createAnswerChoice">
@@ -31,39 +31,91 @@
     </insert>
 
     <select id="selectAnswer" resultType="Answer">
-        select id, qn_id as qnId, q_id as qId, user_id as userId, create_time as createTime, type, qn_name as qnName, user_name as userName
+        select id,
+               qn_id       as qnId,
+               q_id        as qId,
+               user_id     as userId,
+               create_time as createTime,
+               type,
+               qn_name     as qnName,
+               user_name   as userName
         from answer
-        where qn_id = #{qnId} and user_name = #{userName}
+        where qn_id = #{qnId}
+          and user_name = #{userName}
         order by q_id
     </select>
 
     <select id="selectAnswerOptionById" resultType="com.neu.group.domain.SingleAnswer">
-        select case
-                   when #{type} = 1 and #{type} = 2 then (select * from answer_choice where id = #{id})
-                   when #{type} = 3 then (select * from answer_blank where id = #{id})
-                   when #{type} = 4 then (select * from answer_matrix where id = #{id})
-                   when #{type} = 5 then (select * from answer_scale where id = #{id})
-                   end;
+        <if test="type == 1 or type == 2">
+            select id,choice from answer_choice where id = #{id}
+        </if>
+        <if test="type == 3">
+            select id,content from answer_blank where id = #{id}
+        </if>
+        <if test="type == 4">
+            select id,choice,columns from answer_matrix where id = #{id}
+        </if>
+        <if test="type == 5">
+            select id,choice,score from answer_scale where id = #{id}
+        </if>
+
     </select>
 
     <select id="selectAnswerByUser" resultType="Answer">
-        SELECT id, qn_id as qnId, q_id as qId, user_id as userId, create_time as createTime, type, qn_name as qnName, user_name as userName
+        SELECT id,
+               qn_id       as qnId,
+               q_id        as qId,
+               user_id     as userId,
+               create_time as createTime,
+               type,
+               qn_name     as qnName,
+               user_name   as userName
         FROM answer
-        WHERE (qn_id, user_id,create_time) IN (
-            SELECT qn_id, user_id, create_time
-            FROM answer
-            GROUP BY qn_id
-        );
+        WHERE (qn_id, user_id, create_time) IN (SELECT qn_id, user_id, create_time
+                                                FROM answer
+                                                GROUP BY qn_id);
     </select>
     <select id="selectId" resultType="java.lang.Integer">
-        select id from answer where (qn_id,q_id,user_id,a_id) = (#{qnId},#{qId},#{userId},#{aId})
+        select id
+        from answer
+        where (qn_id, q_id, user_id, a_id) = (#{qnId}, #{qId}, #{userId}, #{aId})
     </select>
     <select id="selectAIdByUserId" resultType="java.lang.Integer">
-        select max(id) from answer_id where user_id =#{userId}
+        select max(id)
+        from answer_id
+        where user_id = #{userId}
+    </select>
+    <select id="selectAnswer2" resultType="com.neu.group.domain.Answer">
+        SET sql_mode = (SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));
+        SELECT id,
+               q_id        AS qId,
+               user_id     AS userId,
+               create_time AS createTime,
+               type,
+               qn_name     AS qnName,
+               user_name   AS userName
+        FROM answer
+        WHERE qn_id = #{qnId}
+        group by a_id;
+    </select>
+    <select id="selectAllAnswerByQnId" resultType="com.neu.group.domain.Answer">
+        select id,
+               qn_id       as qnId,
+               q_id        as qId,
+               user_id     as userId,
+               create_time as createTime,
+               type,
+               qn_name     as qnName,
+               user_name   as userName
+        from answer
+        where qn_id = #{qnId}
     </select>
 
+
     <insert id="addAnswerId">
-        insert into answer_id(user_id) values (#{userId})
+        insert into answer_id(user_id)
+        values (#{userId})
     </insert>
+
 
 </mapper>

@@ -30,4 +30,5 @@ public interface QuestionnaireDao {
     Questionnaire selectById(@Param("id") int id);
 
     int deleteQn(int id);
+
 }

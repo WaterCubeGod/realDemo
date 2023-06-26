@@ -10,4 +10,9 @@ public interface AnswerService {
     public List<Answer> selectAllByQnId(int qnId,String userName);
 
     public List<Answer> selectByLink(String link,String userName);
+
+
+    List<Answer> selectAllQuestionnaireInProject(int projectId);
+
+    List<Answer> selectAllAnswer(int qnId);
 }

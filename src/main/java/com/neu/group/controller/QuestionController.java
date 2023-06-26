@@ -2,7 +2,7 @@ package com.neu.group.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.neu.group.controller.utils.R;
+import com.neu.group.controller.utils.*;
 import com.neu.group.domain.Option;
 import com.neu.group.domain.Questionnaire;
 import com.neu.group.service.QuestionService;
@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.neu.group.controller.utils.ParesToJsonArray.parseToJsonArray;
 
 @RestController
 @RequestMapping("/question")
@@ -55,12 +57,5 @@ public class QuestionController {
         return new R(true, jsonArray, "");
     }
 
-    private JSONArray parseToJsonArray(List<Option> options) {
-        JSONArray jsonArray = new JSONArray();
-        for (Option option : options) {
-            jsonArray.add(JSONObject.toJSONString(option));
-        }
-        return jsonArray;
-    }
 
 }

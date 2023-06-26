@@ -2,6 +2,7 @@ onload = () => {
   $('#headerUsername').text($util.getItem('userInfo').username)
   $('#headerDivB').text('项目问卷统计')
   $('#totalPage').text(totalPag)
+  console.log($util.getPageParam('project'))
   fetchUserList()
 }
 
@@ -19,10 +20,11 @@ const fetchUserList = () => {
     username: $('#username').val()
   }
   $.ajax({
-    url: API_BASE_URL + '/users',
+    url: API_BASE_URL + '/answer/count',
     type: 'POST',
     dataType: 'json',
-    data: JSON.stringify(params),
+    // data: JSON.stringify(params),
+    data:JSON.stringify($util.getPageParam('project')),
     contentType: 'application/json',
     success(res) {
       $('#table #tbody').html('')
@@ -45,7 +47,7 @@ const fetchUserList = () => {
 const handleTableChange = (page) => {
 
   $.ajax({
-    url: API_BASE_URL + '/users',
+    url: API_BASE_URL + '/answer/count',
     type: "GET",
     dataType: "json",
     contentType: "application/json",
