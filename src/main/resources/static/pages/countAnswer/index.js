@@ -17,7 +17,7 @@ const fetchUserList = () => {
     success(res) {
       initAnswer(res.data[0])
       allAnswer(res.data[1])
-      editEcharts()
+      initAnswerForm(res.data[1])
     }
   })
 }
@@ -155,6 +155,8 @@ editTable = (question) => {
     <div style="clear:both;"></div>
   </div>
   `)
+
+
   for (let i = 0; i < question.content; i++){
     $(`#table${question.qId} > tbody`).append(`
           <tr>
@@ -173,10 +175,11 @@ editTable = (question) => {
   `)
   }
 
+
   $(`#table${question.qId} > tbody`).append(`
   <tr style="background:#f5f5f5;font-weight:600;" total="1">
             <td><b>本题有效填写人次</b></td>
-            <td align="center"><b>${countAnswers[question.qId - 1].score}}</b></td>
+            <td align="center"><b>${countAnswers[question.qId - 1].score}</b></td>
             <td></td>
           </tr>
   `)
@@ -193,16 +196,16 @@ editEcharts = (type, question) => {
       pieCharts(question)
       break
     case 2:
-      type = '多选题'
+      doughnutChart(question)
       break
     case 3:
-      type = '填空题'
+      barChart(question)
       break
     case 4:
-      type = '矩阵题'
+      barChart2(question)
       break
     case 5:
-      type = '量表题'
+      lineChart(question)
       break
   }
 }
@@ -371,7 +374,6 @@ barChart2 = (question) => {
   for (let i = 0; i < question.content.length; i++) {
     yAxis.data.push(question.content[i])
   }
-  
 
   if(question.columns.length === 0) {
     let serie = {
