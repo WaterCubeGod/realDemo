@@ -64,4 +64,9 @@ public class QuestionnaireController {
         return new R(flag, "", flag ? "删除成功" : "删除失败,问卷正在发布中");
     }
 
+    @GetMapping("/selectById")
+    public R selectById(int id){
+        return new R(true,questionnaireService.selectById(id),"");
+    }
+
 }

@@ -12,14 +12,21 @@
     <script src="../../static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="questionnaire-title">
-    问卷标题
-</div>
-<div class="questionnaire-description">
-    问卷说明
+<div class="container">
+    <div class="questionnaire-title">
+        问卷标题
+    </div>
+    <div class="questionnaire-description">
+        问卷说明
+    </div>
+    <div class="problem" id="problem"></div>
+    <div class="btn-div">
+        <button type="button" class="btn btn-primary" onclick="handleSubmit()">提 交</button>
+    </div>
+
 </div>
 <script type="module" src="../../utils/index.js"></script>
-<div class="problem" id="problem"></div>
+
 <script src="./index.js"></script>
 </body>
 </html>

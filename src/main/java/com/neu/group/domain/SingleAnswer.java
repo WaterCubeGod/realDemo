@@ -2,7 +2,7 @@ package com.neu.group.domain;
 
 public class SingleAnswer {
     private int id;
-    private int content;
+    private String content;
     private int choice;
     private int columns;
     private int score;
@@ -10,7 +10,7 @@ public class SingleAnswer {
     public SingleAnswer() {
     }
 
-    public SingleAnswer(int id, int content, int choice, int columns, int score) {
+    public SingleAnswer(int id, String content, int choice, int columns, int score) {
         this.id = id;
         this.content = content;
         this.choice = choice;
@@ -26,11 +26,11 @@ public class SingleAnswer {
         this.id = id;
     }
 
-    public int getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(int content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
