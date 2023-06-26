@@ -3,6 +3,7 @@ onload = () => {
 }
 
 const  countAnswers = []
+const total = 0
 
 const fetchUserList = () => {
   let params = {
@@ -29,8 +30,7 @@ initAnswer = (questions) => {
       conChoice: [],
       columns: [],
       colChoice: [],
-      score: 0,
-      total: questions.length
+      score: 0
     }
     let question = eval("(" + questions[i] + ")");
     switch (question.type) {
@@ -62,11 +62,14 @@ initAnswer = (questions) => {
     }
     countAnswers.push(answer)
   }
+  countAnswers.push(total)
 }
 
 allAnswer = (answers) => {
+
   for (let i = 0; i < answers.length; i++) {
     let answer = eval("(" + answers[i] + ")");
+    countAnswers.total += 1
     switch (answer.type) {
       case 1:
       case 2:
@@ -155,7 +158,13 @@ editTable = (question) => {
     <div style="clear:both;"></div>
   </div>
   `)
+  if (question.type === 4) {
+    for (let i = 0; i < question.content; i++) {
+      for (let j = 0; j < question.columns; j++) {
 
+      }
+    }
+  }
 
   for (let i = 0; i < question.content; i++){
     $(`#table${question.qId} > tbody`).append(`
