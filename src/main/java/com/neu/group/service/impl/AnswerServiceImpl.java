@@ -107,7 +107,7 @@ public class AnswerServiceImpl implements AnswerService {
     }
     //查找相同题目的答案
     @Override
-    public List<Answer> selectAnswerInSameQuestion(List<Option> options,int qnId){
+    public List<Answer> selectAnswerInSameQuestion(List<Option> options, int qnId){
         List<Questionnaire> questionnaires = questionnaireDao.selectAll(
                 questionnaireDao.selectProjectBelong(qnId));
         List<Answer> answers = new ArrayList<>();
@@ -118,6 +118,7 @@ public class AnswerServiceImpl implements AnswerService {
                 answers.addAll( answerDao.selectSameAnswer(questionnaire.getId(),option.getqId() -1));
             }
         }
+        get(answers);
         return answers;
     }
 

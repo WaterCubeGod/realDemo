@@ -131,11 +131,17 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Option> selectSameQuestionInProject(int qId, int qnId) {
         //找到具体问题
         Question question = questionDao.selectQuestion(qnId, qId);
+        question.setqId(qId);
+        question.setQnId(qnId);
         //封装为question
         List<Question> questions = new ArrayList<>();
         questions.add(question);
         //封装成options
         List<Option> options = questionList(questions);
+        for (Option option:
+             options) {
+            System.out.println(option);
+        }
         //找到对应qnId的projectId
 
         //找到对应的所有问卷
@@ -158,7 +164,7 @@ public class QuestionServiceImpl implements QuestionService {
                         options.get(0).getColumns().equals(options2.get(i).getColumns()) &&
                         options.get(0).getScore().equals(options2.get(i).getScore())) {
                     //说明两个option是相同的
-                    returnOption.add(options.get(i));
+                    returnOption.add(options2.get(i));
             }
         }
         return returnOption;

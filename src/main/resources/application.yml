@@ -10,9 +10,10 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://8.130.38.30:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+#      url: jdbc:mysql://8.130.38.30:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      url: jdbc:mysql://localhost:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
       username: root
-      password: 20021229.bin
+      password: Xzx_2003
       initialSize: 10
       minIdle: 10
       maxActive: 40

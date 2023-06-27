@@ -3,7 +3,7 @@ onload = () => {
 }
 
 const countAnswers = []
-
+let questionLength = 0
 const fetchUserList = () => {
     const path = new URLSearchParams(window.location.search)
     $.ajax({
@@ -12,6 +12,7 @@ const fetchUserList = () => {
         data: { qnId: path.get('qnId') }, // 直接传递整数值
         success(res) {
             console.log(res)
+            questionLength = res.data[0].length
             initAnswer(res.data[0])
             allAnswer(res.data[1])
             initAnswerForm(res.data[0])
@@ -598,16 +599,27 @@ lineChart = (question) => {
 }
 
 countSame = (question) => {
+    for (let i = 1; i <= questionLength; i++) {
+
+    document.querySelector('.title-item' + i).remove()
+    }
     const path = new URLSearchParams(window.location.search)
     let params = {
-        qnId: path.get('qnId'),
+        qnId: parseInt(path.get('qnId')),
         qId: question.qId
     }
+    console.log(params)
     $.ajax({
-        url: API_BASE_URL + '/answer' + '/statistics',
+        url: API_BASE_URL + '/answer' + '/getAnswerInSameQuestion',
         type: 'POST',
-        data: params, // 直接传递整数值
+        data: {
+            qnId: parseInt(path.get('qnId')),
+            qId: question.qId
+        }, // 直接传递整数值
         success(res) {
+            console.log(res.data[0])
+            console.log("------------")
+            console.log(res.data[1])
             initAnswer(res.data[0])
             allAnswer(res.data[1])
             initAnswerForm(res.data[0])

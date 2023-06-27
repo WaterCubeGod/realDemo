@@ -33,7 +33,7 @@ public class AnswerController {
     }
     @PostMapping("/count")
     public R getAnsweredQuestionnaireInProject(@RequestBody JSONObject jsonObject){
-        Integer projectId = jsonObject.getInteger("projecStId");
+        Integer projectId = jsonObject.getInteger("projectId");
         List<Answer> answers = answerService.selectAllQuestionnaireInProject(projectId);
         boolean flag = !answers.isEmpty();
         return new R(flag, answers,flag?"成功":"失败");
