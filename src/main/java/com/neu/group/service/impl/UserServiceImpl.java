@@ -8,6 +8,10 @@ import com.neu.group.service.UserService;
 import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +23,9 @@ import java.util.List;
  * UserServiceImpl: UserService接口的实现
  */
 @Service
+@CacheConfig(cacheNames = "users")
 public class UserServiceImpl implements UserService {
+
 
     @Autowired
     private UserDao userDao;
@@ -27,6 +33,7 @@ public class UserServiceImpl implements UserService {
     //用户登录
     @Override
     @Transactional
+    @Cacheable(key="username and password")
     public User login(String username, String password) {
 
         return userDao.selectByUsernameAndPassword(username,password);
@@ -35,6 +42,7 @@ public class UserServiceImpl implements UserService {
     //用户注册
     @Override
     @Transactional
+    @CachePut(key="#p0")
     public boolean register(String username, String password, int type) {
 
         int count = userDao.insertUser(username,password,type);
@@ -45,6 +53,7 @@ public class UserServiceImpl implements UserService {
     //批量导入
     @Override
     @Transactional
+    @CachePut(key="#p0")
     public boolean bulkImport(File file) throws IOException, InvalidFormatException {
         boolean flag = false;
 
@@ -66,6 +75,7 @@ public class UserServiceImpl implements UserService {
     //用户注销
     @Override
     @Transactional
+    @CacheEvict(key="#p0")
     public boolean logout(int id, String password) {
 
         int count = userDao.deleteUser(id,password);
@@ -76,6 +86,7 @@ public class UserServiceImpl implements UserService {
     //用户编辑
     @Override
     @Transactional
+    @CachePut(key="#p0")
     public boolean editUser(int id, String username, String password) {
 
         int count = userDao.updateUser(id,username,password);
@@ -86,6 +97,7 @@ public class UserServiceImpl implements UserService {
     //分页查询用户
     @Override
     @Transactional
+    @Cacheable(key="#p0")
     public List<User> selectAllUser() {
         return userDao.selectAllUser();
     }
@@ -93,6 +105,7 @@ public class UserServiceImpl implements UserService {
     //查询
     @Override
     @Transactional
+    @Cacheable(key="#p0")
     public List<User> selectUserByUsername(String username, int count){
         return userDao.selectByUsername(username,count);
     }
@@ -100,6 +113,7 @@ public class UserServiceImpl implements UserService {
     //返回用户数量
     @Override
     @Transactional
+    @Cacheable(key="#p0")
     public Integer countUser() {
         return userDao.countUser();
     }

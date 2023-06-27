@@ -10,16 +10,42 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-#      url: jdbc:mysql://8.130.38.30:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
-      url: jdbc:mysql://localhost:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      url: jdbc:mysql://8.130.38.30:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      #      url: jdbc:mysql://localhost:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
       username: root
-      password: Xzx_2003
+      password: 20021229.bin
       initialSize: 10
       minIdle: 10
       maxActive: 40
       maxWait: 60000
       test-on-borrow: true
       test-while-idle: true
+
+  # Redis数据库索引（默认为0）
+  redis.database: 1
+  # Redis服务器地址
+  redis.host: 127.0.0.1
+  # Redis服务器连接端口
+  redis.port: 6379
+  # Redis服务器连接密码（默认为空）
+  redis.password:
+  # 连接池最大连接数（使用负值表示没有限制）
+  redis.jedis.pool.max-active: 8
+
+
+  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+  spring.redis.jedis.pool.max-wait: -1
+
+
+  # 连接池中的最大空闲连接
+  spring.redis.jedis.pool.max-idle: 8
+
+
+  # 连接池中的最小空闲连接
+  spring.redis.jedis.pool.min-idle: 0
+
+  # 连接超时时间（毫秒）
+  spring.redis.timeout: 5000
 
 #配置模型路径
 mybatis.type-aliases-package: com/neu/group/domain

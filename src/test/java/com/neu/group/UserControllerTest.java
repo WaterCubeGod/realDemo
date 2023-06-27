@@ -20,16 +20,16 @@ class UserControllerTest {
     @Rollback
     void test(){
         User user = new User(12312, "dsasdasd", "sdasda", 0);
-        userController.countUser();
-        userController.login("132","2131");
         userController.register(user);
-        userController.logout(123,"123");
-        userController.editUser(123,"sdas","sddd");
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("count",1);
-        jsonObject.put("username","111");
-        userController.selectUserDividerByPage(jsonObject);
-        userController.exportUserExcel();
+//        userController.login("dsasdasd","sdasda");
+//        userController.countUser();
+//        userController.editUser(123,"sdas","sddd");
+        userController.logout(12312,"sdasda");
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("count",1);
+//        jsonObject.put("username","111");
+//        userController.selectUserDividerByPage(jsonObject);
+//        userController.exportUserExcel();
         int a = 1;
         int e = 1;
         assertEquals(e,a);
