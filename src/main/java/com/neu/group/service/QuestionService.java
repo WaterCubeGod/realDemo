@@ -15,4 +15,6 @@ public interface QuestionService {
 
     public Questionnaire selectQuestionnaire(String link);
 
+
+    List<Option> selectSameQuestionInProject(int qId, int qnId);
 }

@@ -19,4 +19,6 @@ public interface QuestionDao {
 
     List<Question> selectAllByQnId(@Param("qnId") int qnId);
 
+
+    Question selectQuestion(@Param("qnId") int qnId,@Param("qId") int qId);
 }

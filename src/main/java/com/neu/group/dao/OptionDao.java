@@ -44,4 +44,7 @@ public interface OptionDao {
 
     List<SingleOption> selectAllScale(@Param("qnId") int qnId,
                                  @Param("qId") int qId);
+
+    SingleOption selectSingleOption(@Param("qnId") int qnId,
+                                    @Param("qId") int qId);
 }

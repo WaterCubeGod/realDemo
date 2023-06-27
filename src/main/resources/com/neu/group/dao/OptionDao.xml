@@ -39,5 +39,9 @@
         select qn_id as qnId, q_id as qId, title as content, score
         from scale where qn_id = #{qnId} and q_id = #{qId} order by s_id
     </select>
+    <select id="selectSingleOption" resultType="com.neu.group.domain.SingleOption">
+        select qn_id as qnId, q_id as qId, title as content, score
+        from scale where qn_id = #{qnId} and q_id = #{qId}
+    </select>
 
 </mapper>

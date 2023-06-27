@@ -21,5 +21,8 @@
     <select id="selectAllByQnId" resultMap="findeByidBymapcheck">
         select * from question where qn_id = #{qnId} order by q_id
     </select>
+    <select id="selectQuestion" resultType="com.neu.group.domain.Question">
+        select * from question where qn_id = #{qnId} and q_id = #{qId}
+    </select>
 
 </mapper>

@@ -57,6 +57,9 @@
         from questionnaire
         where id = #{id}
     </select>
+    <select id="selectProjectBelong" resultType="java.lang.Integer">
+        select project_belong from questionnaire where id = #{qn_id}
+    </select>
 
     <update id="deleteQn">
         update questionnaire

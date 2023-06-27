@@ -31,4 +31,6 @@ public interface QuestionnaireDao {
 
     int deleteQn(int id);
 
+    int selectProjectBelong(@Param("qn_id") int qnId);
+
 }

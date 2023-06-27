@@ -4,12 +4,16 @@ onload = () => {
     const url = new URL(queryString);
     const link = url.searchParams.get('link');
     const preview = url.searchParams.get('preview')
-    const id = $util.getPageParam('id')
-
+    let id;
+    if (url.searchParams.get('detail') !== '1')
+        id = $util.getPageParam('id')
+    else
+        id = url.searchParams.get('qnId')
 
     if (link) {
         fetchQuestionList(link);
-    } else if (!(id === undefined) && preview !== '1'){
+    } else if (preview !== '1') {
+        previewQuestionList(id)
         $.ajax({
             url: API_BASE_URL + '/questionnaire/selectById?id=' + id,
             type: 'GET',
@@ -18,10 +22,27 @@ onload = () => {
             success(res) {
                 $(".questionnaire-title").text(res.data.name)
                 $(".questionnaire-description").text(res.data.description)
+                if (url.searchParams.get('detail') === '1') {
+                    $.ajax({
+                        url: API_BASE_URL + '/answer/showDetail',
+                        type: 'POST',
+                        data: {
+                            qnId: url.searchParams.get('qnId'),
+                            aId: url.searchParams.get('aId')
+                        },
+                        success(res){
+                            setTimeout(()=>{
+                                showAnswer(res.data)
+                            },100)
+
+                        }
+                    })
+                }
             }
         })
-        previewQuestionList(id)
+
     }
+
 
 }
 let questionnaire;
@@ -32,7 +53,7 @@ const fetchQuestionList = (link) => {
         dataType: 'json',
         contentType: 'application/json',
         success(res) {
-            questionnaire = eval("(" + res.data[1]  + ")")
+            questionnaire = eval("(" + res.data[1] + ")")
             $(".questionnaire-title").text(questionnaire.name)
             $(".questionnaire-description").text(questionnaire.description)
             const questions = res.data[0];
@@ -53,7 +74,7 @@ const previewQuestionList = (id) => {
         success(res) {
             console.log(res);
             const questions = res.data[0];
-            questionnaire = eval("(" + res.data[1]  + ")");
+            questionnaire = eval("(" + res.data[1] + ")");
             $('#questionnaire-title').text(questionnaire.name)
             $('#questionnaire-description').text(questionnaire.description)
             allEditFinish(questions);
@@ -175,8 +196,8 @@ const matrixEditFinish = (question) => {
     }
     for (let i = 0; i < question.content.length; i++) {
         for (let j = 0; j < question.columns.length; j++) {
-            $(`#question${question.qId - 1} .table > tbody  #tr${i}`).append(`
-                <td><input type="radio" name="chooseTerm${question.qId-1}${i}" /></td>
+            $(`#question${question.qId - 1} .table > tbody #tr${i}`).append(`
+                <td><input type="radio" name="chooseTerm${question.qId - 1}${i}" /></td>
         `)
         }
     }
@@ -217,30 +238,30 @@ const gaugeEditFinish = (question) => {
     }
 }
 
-const handleSubmit = () =>{
+const handleSubmit = () => {
     const questions = document.querySelectorAll('.question');
     let paramsArray = []
     for (let i = 0; i < questions.length; i++) {
         let params = {
-            id:0,
-            qnId:questionnaire.id,
-            qnName:questionnaire.name,
+            id: 0,
+            qnId: questionnaire.id,
+            qnName: questionnaire.name,
             qId: i,
             userId: 1,
-            userName:'TestName',
+            userName: 'TestName',
             createTime: "t",
             content: "",
-            choice:[],
-            columns:[],
+            choice: [],
+            columns: [],
             score: 0,
-            type:parseInt(questions[i].getAttribute('data-type'))
+            type: parseInt(questions[i].getAttribute('data-type'))
         }
         switch (questions[i].getAttribute('data-type')) {
             case '1':
             case '2':
                 const choiceBox = questions[i].querySelectorAll('input')
                 for (let j = 0; j < choiceBox.length; j++) {
-                    if (choiceBox[j].checked){
+                    if (choiceBox[j].checked) {
                         params.choice.push(j)
                     }
                 }
@@ -253,7 +274,7 @@ const handleSubmit = () =>{
                 for (let j = 0; j < row.length; j++) {
                     const column = row[j].querySelectorAll('input')
                     for (let k = 0; k < column.length; k++) {
-                        if (column[k].checked){
+                        if (column[k].checked) {
                             params.choice.push(j)
                             params.columns.push(k)
                         }
@@ -283,4 +304,53 @@ const handleSubmit = () =>{
             alert("提交成功")
         }
     })
+}
+const showAnswer = (data) => {
+    console.log(data)
+  const questions =  document.querySelectorAll('.question')
+    for (let j = 0; j < questions.length; j++) {
+        switch (questions[j].getAttribute('data-type')) {
+            case '1':
+            case '2':
+                const nodeListOfInput = questions[j].querySelectorAll('input');
+                const choice = data[j].choice;
+                for (const choiceIndex in choice) {
+                    nodeListOfInput[choiceIndex].checked = true
+                }
+                break;
+            case '3':
+                const element = questions[j].querySelector('.form-control');
+                const content = data[j].content
+                element.value = content
+                break;
+            case'4':
+                const choiceM = data[j].choice
+                const columns = data[j].columns
+                const tr =  questions[j].querySelector('tbody').querySelectorAll('tr')
+                console.log(tr)
+                for (let i = 0; i < columns.length; i++) {
+                    console.log(tr[choiceM[i]].querySelectorAll('td'))
+                    tr[choiceM[i]].querySelectorAll('td')[columns[i] + 1].querySelector('input').checked = true;
+                }
+                break;
+            case '5':
+                const choiceS = data[j].choice
+                const th = questions[j].querySelector('tbody').querySelectorAll('th')
+                th[choiceS[0] + 1].querySelector('input').checked = true
+                break;
+
+        }
+    }
+    //设置全局禁用
+    const input = document.querySelectorAll('input')
+    for (let i = 0; i < input.length; i++) {
+        input[i].disabled = true
+    }
+    const content = document.querySelectorAll('textarea')
+    for (let i = 0; i < content.length; i++) {
+        content[i].disabled = true
+    }
+    //去除submit按钮
+
+    document.querySelector('.btn-div').remove();
 }

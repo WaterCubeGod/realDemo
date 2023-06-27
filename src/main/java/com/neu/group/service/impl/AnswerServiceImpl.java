@@ -2,9 +2,7 @@ package com.neu.group.service.impl;
 
 import com.neu.group.dao.AnswerDao;
 import com.neu.group.dao.QuestionnaireDao;
-import com.neu.group.domain.Answer;
-import com.neu.group.domain.Questionnaire;
-import com.neu.group.domain.SingleAnswer;
+import com.neu.group.domain.*;
 import com.neu.group.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,8 +74,8 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public List<Answer> selectAllByQnId(int qnId,String userName) {
-        List<Answer> answers = answerDao.selectAnswer(qnId, userName);
+    public List<Answer> selectAllByQnId(int qnId,int aId) {
+        List<Answer> answers = answerDao.selectAnswer(qnId, aId);
         get(answers);
         return answers;
     }
@@ -107,6 +105,22 @@ public class AnswerServiceImpl implements AnswerService {
         get(answers);
         return answers;
     }
+    //查找相同题目的答案
+    @Override
+    public List<Answer> selectAnswerInSameQuestion(List<Option> options,int qnId){
+        List<Questionnaire> questionnaires = questionnaireDao.selectAll(
+                questionnaireDao.selectProjectBelong(qnId));
+        List<Answer> answers = new ArrayList<>();
+        for (Option option:
+             options) {
+            for (Questionnaire questionnaire:
+                 questionnaires) {
+                answers.addAll( answerDao.selectSameAnswer(questionnaire.getId(),option.getqId() -1));
+            }
+        }
+        return answers;
+    }
+
 
     private void get(List<Answer> answers) {
         for (Answer answer:
@@ -149,5 +163,6 @@ public class AnswerServiceImpl implements AnswerService {
             }
         }
     }
+
 
 }

@@ -35,7 +35,7 @@ const fetchUserList = () => {
             <td>${item.userName}</td>
             <td>${item.createTime}</td>
             <td>
-              <button type="button" class="btn btn-link">明细</button>
+              <button type="button" class="btn btn-link" onclick="showDetail(${item.aId},${item.qnId})" value="${item.qnId}" name="${item.aId}">明细</button>
             </td>
           </tr>
         `)
@@ -78,3 +78,8 @@ const handleTableChange = (page) => {
     }
   })
 }
+
+const showDetail = (aId,qnId)=>{
+  window.location.href = API_BASE_URL + '/pages/answerSheet/index.html?detail=1&qnId=' + qnId + '&aId=' + aId
+}
+

@@ -36,7 +36,7 @@ public interface AnswerDao {
                           @Param("score") int score);
 
     List<Answer> selectAnswer(@Param("qnId") int qnId,
-                              @Param("userName") String userName);
+                              @Param("aId") int aId);
 
     List<SingleAnswer> selectAnswerOptionById(@Param("type") int type,
                                               @Param("id") int id);
@@ -51,4 +51,7 @@ public interface AnswerDao {
     List<Answer> selectAnswer2(@Param("qnId") int qnId);
 
     List<Answer> selectAllAnswerByQnId(@Param("qnId") int qnId);
+
+    List<Answer> selectSameAnswer(@Param("qnId") int qnId,
+                                  @Param("qId") int qId);
 }

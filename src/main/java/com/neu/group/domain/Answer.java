@@ -20,9 +20,26 @@ public class Answer {
     private List<Integer> columns;
     private int score;
 
+    private int aId;
+
     public Answer() {
     }
 
+    public Answer(int id, int qnId, String qnName, int type, int qId, int userId, String userName, String createTime, String content, List<Integer> choice, List<Integer> columns, int score, int aId) {
+        this.id = id;
+        this.qnId = qnId;
+        this.qnName = qnName;
+        this.type = type;
+        this.qId = qId;
+        this.userId = userId;
+        this.userName = userName;
+        this.createTime = createTime;
+        this.content = content;
+        this.choice = choice;
+        this.columns = columns;
+        this.score = score;
+        this.aId = aId;
+    }
 
     public Answer(int id, int qnId, String qnName, int type, int qId, int userId, String userName, String createTime, String content, List<Integer> choice, List<Integer> columns, int score) {
         this.id = id;
@@ -140,15 +157,25 @@ public class Answer {
         return "Answer{" +
                 "id=" + id +
                 ", qnId=" + qnId +
-                ", qnName=" + qnName +
+                ", qnName='" + qnName + '\'' +
+                ", type=" + type +
                 ", qId=" + qId +
                 ", userId=" + userId +
-                ", userName=" + userName +
+                ", userName='" + userName + '\'' +
                 ", createTime='" + createTime + '\'' +
                 ", content='" + content + '\'' +
                 ", choice=" + choice +
                 ", columns=" + columns +
                 ", score=" + score +
+                ", aId=" + aId +
                 '}';
+    }
+
+    public int getaId() {
+        return aId;
+    }
+
+    public void setaId(int aId) {
+        this.aId = aId;
     }
 }

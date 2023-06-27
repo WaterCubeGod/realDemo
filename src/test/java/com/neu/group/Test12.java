@@ -17,10 +17,15 @@ public class Test12 {
     @Test
     @Transactional
     void testDemo(){
-        List<SingleAnswer> singleAnswers = answerDao.selectAnswerOptionById(1, 21);
-        for (SingleAnswer singleAnswer:
-             singleAnswers) {
-            System.out.println(singleAnswer);
+        List<Answer> answers = answerDao.selectAnswer2(90);
+        for (Answer answer:
+             answers) {
+            System.out.println(answer);
         }
+//        List<SingleAnswer> singleAnswers = answerDao.selectAnswerOptionById(1, 21);
+//        for (SingleAnswer singleAnswer:
+//             singleAnswers) {
+//            System.out.println(singleAnswer);
+//        }
     }
 }

@@ -50,7 +50,7 @@ public class QuestionServiceImpl implements QuestionService {
                     for (int i = 0; i < option.getContent().size(); i++) {
                         flag = flag && optionDao.addChoice(option.getQnId(),
                                 option.getqId(),
-                                i+1,
+                                i + 1,
                                 option.getContent().get(i)) > 0;
                     }
                     break;
@@ -65,14 +65,14 @@ public class QuestionServiceImpl implements QuestionService {
                     for (int i = 0; i < option.getContent().size(); i++) {
                         flag = flag && optionDao.addMatrix(option.getQnId(),
                                 option.getqId(),
-                                i+1,
+                                i + 1,
                                 option.getContent().get(i)) > 0;
                     }
                     //添加矩阵列
                     for (int i = 0; i < option.getColumns().size(); i++) {
                         flag = flag && optionDao.addMatrixColumn(option.getQnId(),
                                 option.getqId(),
-                                i+1,
+                                i + 1,
                                 option.getColumns().get(i)) > 0;
                     }
                     break;
@@ -81,7 +81,7 @@ public class QuestionServiceImpl implements QuestionService {
                     for (int i = 0; i < option.getContent().size(); i++) {
                         flag = flag && optionDao.addScale(option.getQnId(),
                                 option.getqId(),
-                                i+1,
+                                i + 1,
                                 option.getContent().get(i),
                                 option.getScore().get(i)) > 0;
                     }
@@ -109,9 +109,9 @@ public class QuestionServiceImpl implements QuestionService {
     @Transactional
     @Override
     public List<Option> selectByLink(String link) {
-        List<Question> questions =  null;
+        List<Question> questions = null;
         Questionnaire a = questionnaireDao.selectByLink(link);
-        if(questionnaireDao.selectByLink(link) != null) {
+        if (questionnaireDao.selectByLink(link) != null) {
             questions = questionDao.
                     selectAllByQnId(questionnaireDao.selectByLink(link).getId());
             return questionList(questions);
@@ -127,11 +127,46 @@ public class QuestionServiceImpl implements QuestionService {
         return questionnaireDao.selectByLink(link);
     }
 
+    @Override
+    public List<Option> selectSameQuestionInProject(int qId, int qnId) {
+        //找到具体问题
+        Question question = questionDao.selectQuestion(qnId, qId);
+        //封装为question
+        List<Question> questions = new ArrayList<>();
+        questions.add(question);
+        //封装成options
+        List<Option> options = questionList(questions);
+        //找到对应qnId的projectId
+
+        //找到对应的所有问卷
+        List<Questionnaire> questionnaires = questionnaireDao.selectAll(
+                questionnaireDao.selectProjectBelong(qnId));
+        //问卷所有题目
+        List<Question> questionsInProject = new ArrayList<>();
+        List<Option> returnOption = new ArrayList<>();
+        for (Questionnaire questionnaire :
+                questionnaires) {
+            List<Question> questions2 = questionDao.selectAllByQnId(questionnaire.getId());
+            questionsInProject.addAll(questions2);
+        }
+        //将题目封装成option
+        List<Option> options2 = questionList(questionsInProject);
+        //判断是否为相同的题目
+        for (int i = 0; i < options2.size(); i++) {
+                if (options.get(0).getTitle().equals(options2.get(i).getTitle()) &&
+                        options.get(0).getContent().equals(options2.get(i).getContent()) &&
+                        options.get(0).getColumns().equals(options2.get(i).getColumns()) &&
+                        options.get(0).getScore().equals(options2.get(i).getScore())) {
+                    //说明两个option是相同的
+                    returnOption.add(options.get(i));
+            }
+        }
+        return returnOption;
+    }
 
     //从题目获取题目选项并封装
-    private List<Option> questionList(List<Question> questions) {
+    private  List<Option> questionList(List<Question> questions) {
         List<Option> options = new ArrayList<>();
-
         for (Question question : questions) {
             //根据题目类型添加
             switch (question.getType()) {
@@ -139,14 +174,14 @@ public class QuestionServiceImpl implements QuestionService {
                 case 2:
                 case 3:
                     //添加选项
-                    options.add(SPToP(optionDao.selectAllChoice(question.getQnId(),question.getqId()),
+                    options.add(SPToP(optionDao.selectAllChoice(question.getQnId(), question.getqId()),
                             question));
                     break;
                 case 4:
                     //添加矩阵行、列
-                    Option optionM = SPToP(optionDao.selectAllMatrix(question.getQnId(),question.getqId()),
+                    Option optionM = SPToP(optionDao.selectAllMatrix(question.getQnId(), question.getqId()),
                             question);
-                    Option optionC = SPToP(optionDao.selectAllMatrixColumn(question.getQnId(),question.getqId()),
+                    Option optionC = SPToP(optionDao.selectAllMatrixColumn(question.getQnId(), question.getqId()),
                             question);
                     //合并为一个选项集合
                     List<String> columns = optionC.getColumns();
@@ -156,7 +191,7 @@ public class QuestionServiceImpl implements QuestionService {
                     break;
                 case 5:
                     //添加量表项
-                    options.add(SPToP(optionDao.selectAllScale(question.getQnId(),question.getqId()),
+                    options.add(SPToP(optionDao.selectAllScale(question.getQnId(), question.getqId()),
                             question));
                     break;
             }
@@ -183,6 +218,6 @@ public class QuestionServiceImpl implements QuestionService {
             scores.add(singleOption.getScore());
         }
 
-        return new Option(qnId,qId,title,req,type,contents,columns,scores);
+        return new Option(qnId, qId, title, req, type, contents, columns, scores);
     }
 }

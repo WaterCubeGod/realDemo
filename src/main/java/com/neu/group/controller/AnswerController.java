@@ -33,11 +33,9 @@ public class AnswerController {
     }
     @PostMapping("/count")
     public R getAnsweredQuestionnaireInProject(@RequestBody JSONObject jsonObject){
-        Integer projectId = jsonObject.getInteger("projectId");
+        Integer projectId = jsonObject.getInteger("projecStId");
         List<Answer> answers = answerService.selectAllQuestionnaireInProject(projectId);
-        boolean flag = true;
-        if (answers.isEmpty())
-            flag = false;
+        boolean flag = !answers.isEmpty();
         return new R(flag, answers,flag?"成功":"失败");
     }
     @PostMapping("/statistics")
@@ -49,4 +47,20 @@ public class AnswerController {
         jsonArray.add(parseToJsonArray(answers));
         return new R(true,jsonArray,"");
     }
+    @PostMapping("/showDetail")
+    public R getAnswer(@RequestParam("qnId") int qnId,@RequestParam("aId") int aId){
+        List<Answer> answers = answerService.selectAllByQnId(qnId, aId);
+        return new R(true,answers,"");
+    }
+
+    @PostMapping("/getAnswerInSameQuestion")
+    public R getAnswerInSameQuestion(@RequestParam("qnId") int qnId,@RequestParam("qId") int qId){
+        List<Option> options = questionService.selectSameQuestionInProject(qId, qnId);
+        List<Answer> answers = answerService.selectAnswerInSameQuestion(options, qnId);
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(parseToJsonArray(options));
+        jsonArray.add(parseToJsonArray(answers));
+        return new R(true,jsonArray,"");
+    }
+
 }
