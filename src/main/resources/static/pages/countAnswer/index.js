@@ -3,22 +3,18 @@ onload = () => {
 }
 
 const countAnswers = []
-const total = 0
 
 const fetchUserList = () => {
-    let params = {
-        username: $('#username').val()
-    }
     const path = new URLSearchParams(window.location.search)
     $.ajax({
-        url: API_BASE_URL + '/answer' + '/statistics',
+        url: API_BASE_URL + '/answer/statistics',
         type: 'POST',
         data: { qnId: path.get('qnId') }, // 直接传递整数值
         success(res) {
             console.log(res)
             initAnswer(res.data[0])
             allAnswer(res.data[1])
-            initAnswerForm(res.data[1])
+            initAnswerForm(res.data[0])
         }
     })
 }
@@ -30,8 +26,10 @@ initAnswer = (questions) => {
             conChoice: [],
             columns: [],
             colChoice: [],
-            score: 0
+            score: 0,
+            total: 0
         }
+
         let question = eval("(" + questions[i] + ")");
         switch (question.type) {
             case 1:
@@ -45,16 +43,17 @@ initAnswer = (questions) => {
                 break
             case 4:
                 for (let j = 0; j < question.content.length; j++) {
-                    answer.content.push(question.content[j])
-                }
-                for (let j = 0; j < question.columns.length; j++) {
-                    answer.columns.push(question.columns[j])
-                    answer.colChoice.push([j, 0])
+                    let columns = []
+                    for (let k = 0; k < question.columns.length; k++) {
+                        columns.push(0)
+                    }
+                    answer.colChoice.push(columns)
                 }
                 break
             case 5:
                 for (let j = 0; j < question.content.length; j++) {
                     answer.content.push(question.content[j])
+                    answer.conChoice.push(0)
                 }
                 break
             default:
@@ -62,42 +61,46 @@ initAnswer = (questions) => {
         }
         countAnswers.push(answer)
     }
-    countAnswers.push(total)
 }
 
 allAnswer = (answers) => {
 
     for (let i = 0; i < answers.length; i++) {
         let answer = eval("(" + answers[i] + ")");
-        countAnswers.total += 1
         switch (answer.type) {
             case 1:
             case 2:
                 for (let j = 0; j < answer.choice.length; j++) {
-                    countAnswers[i].conChoice[answer.choice[j]]++;
+                    countAnswers[answer.qId].conChoice[answer.choice[j]]++;
+                    countAnswers[answer.qId].total ++
                 }
                 break
             case 3:
+                answer.total ++
                 break
             case 4:
-                for (let j = 0; j < answer.content.length; j++) {
-                    countAnswers[i].colChoice[answer.columns[j]][j][1]++;
+                for (let j = 0; j < answer.choice.length; j++) {
+                    countAnswers[answer.qId].colChoice[answer.choice[j]][answer.columns[j]]++;
                 }
+                countAnswers[answer.qId].total ++
                 break
             case 5:
                 for (let j = 0; j < answer.choice.length; j++) {
-                    countAnswers[i].conChoice[answer.choice[j]]++;
-                    countAnswers[i].score += answer.score
+                    countAnswers[answer.qId].conChoice[answer.choice[j]]++;
+                    countAnswers[answer.qId].score += answer.score
                 }
+                countAnswers[answer.qId].total ++
                 break
             default:
                 console.log(answer.type)
         }
     }
+
+    console.log(countAnswers)
 }
 
 initAnswerForm = (questions) => {
-    for (let i = 0; i < questions; i++) {
+    for (let i = 0; i < questions.length; i++) {
         let question = eval("(" + questions[i] + ")");
         editTable(question)
     }
@@ -123,49 +126,54 @@ editTable = (question) => {
             break
     }
 
-    $(`.divSumData`).append(`
-    <div class="title-item">
+    let questionJson = JSON.stringify(question)
+    questionJson = htmlspecialchars(questionJson)
+
+    $(`.container`).append(`
+    <div class="title-item${question.qId}">
     <div class="title" exportbackup="1">
       <dl class="clearfix">
         <dt>第${question.qId}题：</dt>
         <dd>${question.title}<span>[${type}]</span></dd>
+        <span onclick="countSame(${questionJson})">同类问题统计</span>
       </dl>
     </div>
     <div class="count unit">
       <div class="radiu-box" exportbackup="1">
-        <table class="table${question.qId}">
-          <tbody>
+        <table id="table${question.qId}">
+          <thead>
           <tr style="background:#f5f5f5;font-weight:600;">
             <td class="arrge">选项</td>
             <td id="sort-10000" align="center" class="arrge" style="width:50px;">小计</td>
             <td align="left" style="width:360px;">比例</td>
           </tr>
-          </tbody>
+          </thead>
+          <tbody></tbody>
         </table>
       </div>
     </div>
     <div cat="4" id="divChart4" type="0" class="divResultCss clearfix center-align" style="margin-top:10px;" dignore="1">
       <ul class="fr">
         <li class="liSelect tabletoggleli" index="-1">
-            <img class="vam" src="static/static/images/list.png" onclick="editEcharts(5, ${question})" alt="折线">
+            <img class="vam" src="../../static/images/list.png" style="width: 1.3em; height: 1.3em;" alt="折线">
             <span class="vam">表格</span></li>
         <li index="1">
-            <img class="vam" src="static/static/images/pie.png" onclick="editEcharts(5, ${question})" alt="折线">
-            <span class="vam" onclick="editEcharts(1, ${question})">饼状</span></li>
+            <img class="vam" src="../../static/images/pie.png" onclick="editEcharts(1, ${questionJson})" style="width: 1.3em; height: 1.3em;" alt="折线">
+            <span class="vam" onclick="editEcharts(1, ${questionJson})">饼状</span></li>
         <li index="6">
-            <img class="vam" src="static/static/images/doughnut.png" onclick="editEcharts(5, ${question})" alt="折线">
-            <span class="vam" onclick="editEcharts(2, ${question})">圆环</span></li>
+            <img class="vam" src="../../static/images/doughnut.png" onclick="editEcharts(2, ${questionJson})" style="width: 1.3em; height: 1.3em;" alt="折线">
+            <span class="vam" onclick="editEcharts(2, ${questionJson})">圆环</span></li>
         <li index="2">
-            <img class="vam" src="static/static/images/bar.png" onclick="editEcharts(5, ${question})" alt="折线">
-            <span class="vam" onclick="editEcharts(3, ${question})">柱状</span>
+            <img class="vam" src="../../static/images/bar.png" onclick="editEcharts(3, ${questionJson})" style="width: 1.3em; height: 1.3em;" alt="折线">
+            <span class="vam" onclick="editEcharts(3, ${questionJson})">柱状</span>
         </li>
         <li index="4">
-            <img class="vam" src="static/static/images/bar2.png" onclick="editEcharts(5, ${question})" alt="折线">
-            <span class="vam" onclick="editEcharts(4, ${question})">条形</span>
+            <img class="vam" src="../../static/images/bar2.png" onclick="editEcharts(4, ${questionJson})" style="width: 1.3em; height: 1.3em;" alt="折线">
+            <span class="vam" onclick="editEcharts(4, ${questionJson})">条形</span>
         </li>
         <li index="3">
-            <img class="vam" src="static/static/images/line.png" onclick="editEcharts(5, ${question})" alt="折线">
-            <span class="vam" onclick="editEcharts(5, ${question})">折线</span>
+            <img class="vam" src="../../static/images/line.png" onclick="editEcharts(5, ${questionJson})" style="width: 1.3em; height: 1.3em;" alt="折线">
+            <span class="vam" onclick="editEcharts(5, ${questionJson})">折线</span>
         </li>
       </ul>
     </div>
@@ -175,40 +183,41 @@ editTable = (question) => {
     if (question.type === 4) {
         $(`#table${question.qId}`).html(``)
         $(`#table${question.qId}`).append(`
-        <tbody>
+        <thead>
             <tr><td>题目\选项</td></tr>
-        </tbody>
-        <thead></thead>
+        </thead>
+        <tbody></tbody>
         `)
         for (let i = 0; i < question.columns.length; i++) {
-            $(`#table${question.qId} > tbody > tr`).append(`
+            $(`#table${question.qId} > thead > tr`).append(`
                 <td>${question.columns[i]}</td>
             `)
         }
         for (let i = 0; i < question.content.length; i++) {
-            $(`#table${question.qId} > thead`).append(`
-                <tr class="${i}"><td>${question.columns[i]}</td></tr>
+            $(`#table${question.qId} > tbody`).append(`
+                <tr class="${i}"><td>${question.content[i]}</td></tr>
             `)
         }
         for (let i = 0; i < question.content.length; i++) {
             for (let j = 0; j < question.columns.length; j++) {
-                $(`#table${question.qId} > thead .#{i}`).append(`
-                    <td>${countAnswers[question.qId - 1].colChoice[j][1]}</td>
+                $(`#table${question.qId} > tbody .${i}`).append(`
+                    <td>${countAnswers[question.qId - 1].colChoice[i][j]}</td>
                 `)
             }
         }
     } else {
-        for (let i = 0; i < question.content; i++) {
+        for (let i = 0; i < question.content.length; i++) {
+            let percent = countAnswers[question.qId - 1].conChoice[i] * 100.0 / countAnswers[question.qId - 1].total
             $(`#table${question.qId} > tbody`).append(`
           <tr>
             <td val="1">${question.content[i]}</td>
             <td align="center">${countAnswers[question.qId - 1].conChoice[i]}</td>
             <td percent="100">
               <div class="bar">
-                <div style="width: ${countAnswers[question.qId - 1].conChoice[i] * 100.0 / countAnswers[question.qId - 1].score}%; display: block;" class="precent barcont"></div>
+                <div style="width: ${percent}%; display: block;" class="precent barcont"></div>
               </div>
               <div style="margin-top:3px;float:left;">
-                ${countAnswers[question.qId - 1].conChoice[i] * 100.0 / countAnswers[question.qId - 1].score}%
+                ${percent}%
               </div>
               <div style="clear:both;"></div>
             </td>
@@ -220,19 +229,29 @@ editTable = (question) => {
     $(`#table${question.qId} > tbody`).append(`
   <tr style="background:#f5f5f5;font-weight:600;" total="1">
             <td><b>本题有效填写人次</b></td>
-            <td align="center"><b>${countAnswers[question.qId - 1].score}</b></td>
+            <td align="center"><b>${countAnswers[question.qId - 1].total}</b></td>
             <td></td>
           </tr>
   `)
-    $(`#title-item`).append(`
-    <div class="editEcharts${question.qId}"></div>
+    $(`.title-item${question.qId}`).append(`
+    <div id="editEcharts${question.qId}" style="width: 400px;height: 300px"></div>
   `)
 
 }
 
+const htmlspecialchars = (str) =>
+{  //将json转成的字符串里面的双引号变单引号
+    str = str.replace(/&/g, '&amp;');
+    str = str.replace(/</g, '&lt;');
+    str = str.replace(/>/g, '&gt;');
+    str = str.replace(/"/g, '&quot;');
+    str = str.replace(/'/g, '&#039;');
+    return str;
+}
+
 
 editEcharts = (type, question) => {
-    alert('点击成功')
+    $(`.editEcharts${question.qId}`).html(``)
     switch (type) {
         case 1:
             pieCharts(question)
@@ -261,8 +280,15 @@ pieCharts = (question) => {
         }
         datas.push(data)
     }
-    // 绘制echarts图表
-    let chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    console.log(document.getElementById('editEcharts' + question.qId))
+// 绘制echarts图表
+    let chart= echarts.getInstanceByDom(document.getElementById('editEcharts' + question.qId)); //有的话就获取已有echarts实例的DOM节点。
+    if (chart != null) { // 如果不存在，就进行初始化。
+        chart.dispose();
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    } else {
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    }
 
     let option = {
         title: {
@@ -306,7 +332,13 @@ doughnutChart = (question) => {
         datas.push(data)
     }
     // 绘制echarts图表
-    let chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    let chart= echarts.getInstanceByDom(document.getElementById('editEcharts' + question.qId)); //有的话就获取已有echarts实例的DOM节点。
+    if (chart != null) { // 如果不存在，就进行初始化。
+        chart.dispose();
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    } else {
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    }
 
     let option = {
         title: {
@@ -354,47 +386,52 @@ doughnutChart = (question) => {
 }
 //柱状图
 barChart = (question) => {
-    let datas = []
+    let datas1 = []
     let series = []
-    if (question.columns.length === 0) {
+    if (countAnswers[question.qId - 1].colChoice.length === 0) {
         series.push({type: 'bar', seriesLayoutBy: 'row'})
         let data1 = ['content']
-        for (let j = 0; j < question.content; j++) {
+        for (let j = 0; j < question.content.length; j++) {
             data1.push(question.content[j])
         }
-        datas.push(data1)
+        datas1.push(data1)
         let data2 = ['choice']
         for (let j = 0; j < countAnswers[question.qId - 1].conChoice.length; j++) {
             data2.push(countAnswers[question.qId - 1].conChoice[j])
             series.push({type: 'bar', xAxisIndex: 1, yAxisIndex: 1})
         }
-        datas.push(data2)
+        datas1.push(data2)
     } else {
         let data1 = ['content']
-        for (let j = 0; j < question.content.length; j++) {
-            data1.push(question.content[j])
+        for (let j = 0; j < question.columns.length; j++) {
+            data1.push(question.columns[j])
         }
-        datas.push(data1)
+        datas1.push(data1)
         for (let i = 0; i < question.content.length; i++) {
             let data = [question.content[i]]
             for (let j = 0; j < question.columns.length; j++) {
-                data.push(countAnswers[question.qId - 1].colChoice[i][j][1])
+                data.push(countAnswers[question.qId - 1].colChoice[i][j])
             }
-            datas.push(data)
+            datas1.push(data)
             series.push({type: 'bar', seriesLayoutBy: 'row'})
         }
         for (let j = 0; j < question.content.length; j++) {
             series.push({type: 'bar', xAxisIndex: 1, yAxisIndex: 1})
         }
     }
-
     // 绘制echarts图表
-    let chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    let chart= echarts.getInstanceByDom(document.getElementById('editEcharts' + question.qId)); //有的话就获取已有echarts实例的DOM节点。
+    if (chart != null) { // 如果不存在，就进行初始化。
+        chart.dispose();
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    } else {
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    }
     let option = {
         legend: {},
         tooltip: {},
         dataset: {
-            source: datas
+            source: datas1
         },
         xAxis: [
             {type: 'category', gridIndex: 0},
@@ -413,11 +450,10 @@ barChart2 = (question) => {
         data: []
     }
     let series = []
-    for (let i = 0; i < question.content.length; i++) {
-        yAxis.data.push(question.content[i])
+    for (let i = 0; i < question.columns.length; i++) {
+        yAxis.data.push(question.columns[i])
     }
-
-    if (question.columns.length === 0) {
+    if (countAnswers[question.qId - 1].colChoice.length === 0) {
         let serie = {
             name: 'choice',
             type: 'bar',
@@ -435,14 +471,19 @@ barChart2 = (question) => {
                 data: []
             }
             for (let j = 0; j < question.columns.length; j++) {
-                serie.data.push(countAnswers[question.qId - 1].colChoice[i][j][1])
+                serie.data.push(countAnswers[question.qId - 1].colChoice[i][j])
             }
             series.push(serie)
         }
     }
-
     // 绘制echarts图表
-    let chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    let chart= echarts.getInstanceByDom(document.getElementById('editEcharts' + question.qId)); //有的话就获取已有echarts实例的DOM节点。
+    if (chart != null) { // 如果不存在，就进行初始化。
+        chart.dispose();
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    } else {
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    }
     let option = {
         title: {
             text: question.title
@@ -474,12 +515,12 @@ barChart2 = (question) => {
 lineChart = (question) => {
     let lData = []
     let xData = []
-    let series = []
+    let seriess = []
 
-    for (let i = 0; i < question.content.length; i++) {
-        xData.push(question.content[i])
+    for (let i = 0; i < question.columns.length; i++) {
+        xData.push(question.columns[i])
     }
-    if (question.columns.length === 0) {
+    if (countAnswers[question.qId - 1].colChoice.length === 0) {
         lData.push('choice')
         let serie = {
             name: 'choice',
@@ -488,30 +529,43 @@ lineChart = (question) => {
             data: []
         }
         for (let i = 0; i < question.content.length; i++) {
-            data.push(countAnswers[question.qId - 1].conChoice[i])
+            serie.data.push(countAnswers[question.qId - 1].conChoice[i])
         }
-        series.push(serie)
+        seriess.push(serie)
     } else {
+        let total = []
         for (let i = 0; i < question.columns.length; i++) {
-            lData.push(question.columns[i])
+            total.push(0)
+        }
+        for (let i = 0; i < question.content.length; i++) {
+            lData.push(question.content[i])
             let serie = {
                 name: 'choice',
                 type: 'line',
                 stack: 'Total',
                 data: []
             }
-            for (let j = 0; j < question.content.length; j++) {
-                serie.data.push(countAnswers[question.qId - 1].colChoice[j][i][1])
+            for (let j = 0; j < question.columns.length; j++) {
+                serie.name = question.content[i]
+                serie.data.push(countAnswers[question.qId - 1].colChoice[i][j])
+                total[j] += countAnswers[question.qId - 1].colChoice[i][j]
             }
-            series.push(serie)
+            seriess.push(serie)
+            console.log(total)
+            console.log(serie)
         }
     }
-
     // 绘制echarts图表
-    let chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    let chart= echarts.getInstanceByDom(document.getElementById('editEcharts' + question.qId)); //有的话就获取已有echarts实例的DOM节点。
+    if (chart != null) { // 如果不存在，就进行初始化。
+        chart.dispose();
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    } else {
+        chart = echarts.init(document.getElementById('editEcharts' + question.qId));
+    }
     let option = {
         title: {
-            text: 'Stacked Line'
+            text: question.title
         },
         tooltip: {
             trigger: 'axis'
@@ -538,7 +592,25 @@ lineChart = (question) => {
         yAxis: {
             type: 'value'
         },
-        series: series
+        series: seriess
     };
     chart.setOption(option)
+}
+
+countSame = (question) => {
+    const path = new URLSearchParams(window.location.search)
+    let params = {
+        qnId: path.get('qnId'),
+        qId: question.qId
+    }
+    $.ajax({
+        url: API_BASE_URL + '/answer' + '/statistics',
+        type: 'POST',
+        data: params, // 直接传递整数值
+        success(res) {
+            initAnswer(res.data[0])
+            allAnswer(res.data[1])
+            initAnswerForm(res.data[0])
+        }
+    })
 }
