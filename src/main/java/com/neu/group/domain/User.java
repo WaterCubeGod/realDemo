@@ -4,6 +4,8 @@ import cc.aicode.e2e.annotation.ExcelEntity;
 import cc.aicode.e2e.annotation.ExcelProperty;
 import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
+
 /**
  * User: 用户实体类
  */
@@ -11,8 +13,8 @@ import org.apache.ibatis.type.Alias;
 
 @ExcelEntity
 @Alias("User")
-public class User {
-
+public class User implements Serializable {
+    private static final long serialVersionUID = -1;
     private int id;
     @ExcelProperty(value = "username")
     private String username;

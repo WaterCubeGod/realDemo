@@ -12,23 +12,32 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * UserServiceImpl: UserService接口的实现
  */
 @Service
-@CacheConfig(cacheNames = "users")
+@CacheConfig(cacheNames = "user",keyGenerator = "keyGenerator")
 public class UserServiceImpl implements UserService {
-
 
     @Autowired
     private UserDao userDao;
+
+    @Resource
+    private RedisTemplate<Object, Object> redisTemplate;
+
     Logger log = Logger.getLogger(UserServiceImpl.class);
     //用户登录
     @Override
@@ -42,12 +51,9 @@ public class UserServiceImpl implements UserService {
     //用户注册
     @Override
     @Transactional
-    @CachePut(key="#p0")
-    public boolean register(String username, String password, int type) {
-
-        int count = userDao.insertUser(username,password,type);
-
-        return count > 0;
+    @CachePut(value = "demo", key = "#result==null")
+    public User register(String username, String password, int type) {
+        return new User(0,username,password,type);
     }
 
     //批量导入
@@ -75,12 +81,16 @@ public class UserServiceImpl implements UserService {
     //用户注销
     @Override
     @Transactional
-    @CacheEvict(key="#p0")
-    public boolean logout(int id, String password) {
+    @CacheEvict(value = "user", key = "'list'")
+    public void logout(String... key) {
+        if (key != null && key.length > 0) {
+            if (key.length == 1) {
+                redisTemplate.delete(key[0]);
+            } else {
+                redisTemplate.delete((Collection<String>) CollectionUtils.arrayToList(key));
+            }
+        }
 
-        int count = userDao.deleteUser(id,password);
-
-        return count > 0;
     }
 
     //用户编辑

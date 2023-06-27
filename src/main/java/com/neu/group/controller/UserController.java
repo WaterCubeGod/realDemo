@@ -39,9 +39,9 @@ public class UserController {
     //用户注册
     @PutMapping
     public R register(@RequestBody User user){
-        boolean flag = userService.register(user.getUsername(),user.getPassword(), user.getType());
+        userService.register(user.getUsername(),user.getPassword(), user.getType());
 
-        return new R(flag, "", flag ? "添加成功" : "添加失败,用户名重复");
+        return new R(true, "", "添加成功");
     }
 
     //批量导入用户
@@ -80,9 +80,9 @@ public class UserController {
     //注销用户
     @DeleteMapping("/{id}/{password}")
     public R logout(@PathVariable int id, @PathVariable String password){
-        boolean flag = userService.logout(id,password);
+        userService.logout("1");
 
-        return new R(flag, "", flag ? "删除成功" : "删除失败");
+        return new R(true, "", "删除成功");
     }
 
     @GetMapping("/{id}/{username}/{password}")

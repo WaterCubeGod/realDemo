@@ -16,13 +16,13 @@ public interface UserService {
     User login(String username, String password);
 
     //注册接口
-    boolean register(String username, String password, int type);
+    User register(String username, String password, int type);
 
     //批量及加入接口
     boolean bulkImport(File file) throws IOException, InvalidFormatException;
 
     //注销接口
-    boolean logout(int id, String password);
+    void logout(String... key);
 
     //编辑接口
     boolean editUser(int id, String username, String password);
