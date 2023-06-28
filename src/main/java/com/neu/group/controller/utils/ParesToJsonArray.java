@@ -9,9 +9,14 @@ import java.util.List;
 public class ParesToJsonArray {
     public static <T> JSONArray parseToJsonArray(List<T> items) {
         JSONArray jsonArray = new JSONArray();
-        for (T item : items) {
-            jsonArray.add(JSONObject.toJSONString(item));
+        try {
+            for (T item : items) {
+                jsonArray.add(JSONObject.toJSONString(item));
+            }
+        }catch (Exception e) {
+            return null;
         }
+
         return jsonArray;
     }
 }

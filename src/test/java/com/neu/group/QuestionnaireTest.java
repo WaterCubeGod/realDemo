@@ -26,6 +26,7 @@ class QuestionnaireTest {
 //    @Transactional
 //    @Rollback
     void test(){
+        Questionnaire questionnaire = new Questionnaire(1,"23","234",14,"234","we","234","234",1);
         questionnaireService.addQuestionnaire("aefuifee","d1dsda",1,"ddsad","2023-06-02 12:49:17","2023-06-12 12:49:17");
         int a = 1;
         int e = 1;

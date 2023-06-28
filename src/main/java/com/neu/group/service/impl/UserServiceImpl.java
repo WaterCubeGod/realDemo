@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
     //用户登录
     @Override
     @Transactional
-    @Cacheable(key="username and password")
     public User login(String username, String password) {
 
         return userDao.selectByUsernameAndPassword(username,password);
@@ -56,7 +55,6 @@ public class UserServiceImpl implements UserService {
     //批量导入
     @Override
     @Transactional
-    @CachePut(key="#p0")
     public boolean bulkImport(File file) throws IOException, InvalidFormatException {
         boolean flag = false;
 
@@ -77,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
     //用户注销
     @Override
-    @CacheEvict(value = "user", key = "'list'")
+    @Cacheable()
     public void logout(String... key) {
         Set<Object> keys = redisTemplate.keys("*");
         User user = (User) redisTemplate.opsForValue().get("12312");
@@ -95,7 +93,6 @@ public class UserServiceImpl implements UserService {
     //用户编辑
     @Override
     @Transactional
-    @CachePut(key="#p0")
     public boolean editUser(int id, String username, String password) {
 
         int count = userDao.updateUser(id,username,password);
@@ -106,7 +103,6 @@ public class UserServiceImpl implements UserService {
     //分页查询用户
     @Override
     @Transactional
-    @Cacheable(key="#p0")
     public List<User> selectAllUser() {
         return userDao.selectAllUser();
     }
@@ -114,7 +110,6 @@ public class UserServiceImpl implements UserService {
     //查询
     @Override
     @Transactional
-    @Cacheable(key="#p0")
     public List<User> selectUserByUsername(String username, int count){
         return userDao.selectByUsername(username,count);
     }
@@ -122,7 +117,6 @@ public class UserServiceImpl implements UserService {
     //返回用户数量
     @Override
     @Transactional
-    @Cacheable(key="#p0")
     public Integer countUser() {
         return userDao.countUser();
     }

@@ -45,37 +45,37 @@ public class UserController {
     }
 
     //批量导入用户
-    @PutMapping("/all")
-    public R register(MultipartFile multiFile) throws IOException {
-        String fileName = multiFile.getOriginalFilename();
-        System.out.println("fileName:" + fileName);
-        String prefix = null;
-        if (fileName != null) {
-            prefix = fileName.substring(fileName.lastIndexOf("."));
-            System.out.println("prefix:" + prefix);
-            boolean flag = false;
-            File file = null;
-            try {
-                file = File.createTempFile(fileName, prefix);
-                multiFile.transferTo(file);
-                flag = userService.bulkImport(file);
-            } catch (Exception e) {
-                log.error(">>未知错误");
-
-            } finally {
-                // 操作完上面的文件 需要删除在根目录下生成的临时文件
-                assert file != null;
-//                if(flag) {
-//                    File f = new File(file.toURI());
-//                    Files.delete(f.toPath());
-//                    file.deleteOnExit();
-//                }
-            }
-
-            return new R(flag, "", flag ? "添加成功" : "添加失败,用户名重复");
-        }
-        return new R(false, "", "未导入文件");
-    }
+//    @PutMapping("/all")
+//    public R register(MultipartFile multiFile) throws IOException {
+//        String fileName = multiFile.getOriginalFilename();
+//        System.out.println("fileName:" + fileName);
+//        String prefix = null;
+//        if (fileName != null) {
+//            prefix = fileName.substring(fileName.lastIndexOf("."));
+//            System.out.println("prefix:" + prefix);
+//            boolean flag = false;
+//            File file = null;
+//            try {
+//                file = File.createTempFile(fileName, prefix);
+//                multiFile.transferTo(file);
+//                flag = userService.bulkImport(file);
+//            } catch (Exception e) {
+//                log.error(">>未知错误");
+//
+//            } finally {
+//                // 操作完上面的文件 需要删除在根目录下生成的临时文件
+//                assert file != null;
+////                if(flag) {
+////                    File f = new File(file.toURI());
+////                    Files.delete(f.toPath());
+////                    file.deleteOnExit();
+////                }
+//            }
+//
+//            return new R(flag, "", flag ? "添加成功" : "添加失败,用户名重复");
+//        }
+//        return new R(false, "", "未导入文件");
+//    }
 
     //注销用户
     @DeleteMapping("/{id}/{password}")

@@ -31,6 +31,7 @@ class ProjectControllerTest {
                 "31231","3123"));
         projectController.deleteProject(new Project(123,233,"1231",
                 "31231","3123"));
+        projectController.seeProject(1,"awdfs");
         int a = 1;
         int e = 1;
         assertEquals(e,a);

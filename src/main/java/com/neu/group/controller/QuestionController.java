@@ -1,5 +1,6 @@
 package com.neu.group.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.neu.group.controller.utils.*;
@@ -9,12 +10,13 @@ import com.neu.group.service.QuestionService;
 
 import com.neu.group.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static com.neu.group.controller.utils.ParesToJsonArray.parseToJsonArray;
-
+@Controller
 @RestController
 @RequestMapping("/question")
 public class QuestionController {

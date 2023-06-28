@@ -1,7 +1,6 @@
 package com.neu.group;
 
-import com.neu.group.domain.Option;
-import com.neu.group.domain.Questionnaire;
+import com.neu.group.domain.*;
 import com.neu.group.service.QuestionService;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
@@ -21,6 +20,32 @@ public class QuestionTest {
     @Transactional
     @Test
     void insertTest() {
+        SingleOption singleOption1 = new SingleOption("31","431",1);
+        SingleOption singleOption2 = new SingleOption(1,1,"23",1,1,"31","431",1);
+        String a = singleOption2.toString();
+        singleOption2.setColumn("q3");
+        List<String> A = new ArrayList<>();
+        List<String> B = new ArrayList<>();
+        List<Integer> C = new ArrayList<>();
+        A.add("1");
+        B.add("2");
+        C.add(1);
+        Option option1 = new Option(A,B,C);
+        option1.setScore(C);
+
+        SingleAnswer singleAnswer1 = new SingleAnswer(1,1);
+        SingleAnswer singleAnswer2 = new SingleAnswer(1,1,1);
+        SingleAnswer singleAnswer3 = new SingleAnswer(1,"1");
+        SingleAnswer singleAnswer4 = new SingleAnswer(1,"1",1,1,1);
+        singleAnswer4.toString();
+        singleAnswer4.getId();
+
+        Answer answer1 = new Answer(1,1,"1",1,1,1,"1","1","1",C,C,1);
+        Answer answer2 = new Answer(1,1,"1",1,1,1,"1","1","1",C,C,1,1);
+        answer2.setaId(1);
+        answer2.toString();
+
+
         List<String> contents = new ArrayList<>();
         contents.add("k");
         contents.add("f");
@@ -37,7 +62,7 @@ public class QuestionTest {
         scores.add(100);
 
         List<Option> options = new ArrayList<>();
-        Option option = new Option(2,3,"量表",0,5,contents,null,scores);
+        Option option = new Option(2,7,"量表",0,5,contents,null,scores);
         options.add(option);
 
         boolean flag = questionService.addQuestion(options);
