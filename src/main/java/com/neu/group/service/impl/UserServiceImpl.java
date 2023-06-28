@@ -20,10 +20,7 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * UserServiceImpl: UserService接口的实现
@@ -50,10 +47,10 @@ public class UserServiceImpl implements UserService {
 
     //用户注册
     @Override
-    @Transactional
-    @CachePut(value = "demo", key = "#result==null")
-    public User register(String username, String password, int type) {
-        return new User(0,username,password,type);
+    @Cacheable()
+    public User register(User user) {
+//        redisTemplate.opsForValue().set(user.getId()+"",user);
+        return user;
     }
 
     //批量导入
@@ -80,16 +77,18 @@ public class UserServiceImpl implements UserService {
 
     //用户注销
     @Override
-    @Transactional
     @CacheEvict(value = "user", key = "'list'")
     public void logout(String... key) {
-        if (key != null && key.length > 0) {
-            if (key.length == 1) {
-                redisTemplate.delete(key[0]);
-            } else {
-                redisTemplate.delete((Collection<String>) CollectionUtils.arrayToList(key));
-            }
-        }
+        Set<Object> keys = redisTemplate.keys("*");
+        User user = (User) redisTemplate.opsForValue().get("12312");
+        System.out.println(user);
+//        if (key != null && key.length > 0) {
+//            if (key.length == 1) {
+//                redisTemplate.delete(key[0]);
+//            } else {
+//                redisTemplate.delete((Collection<String>) CollectionUtils.arrayToList(key));
+//            }
+//        }
 
     }
 

@@ -16,7 +16,7 @@ public interface UserService {
     User login(String username, String password);
 
     //注册接口
-    User register(String username, String password, int type);
+    User register(User user);
 
     //批量及加入接口
     boolean bulkImport(File file) throws IOException, InvalidFormatException;

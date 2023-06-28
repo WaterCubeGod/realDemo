@@ -39,7 +39,7 @@ public class UserController {
     //用户注册
     @PutMapping
     public R register(@RequestBody User user){
-        userService.register(user.getUsername(),user.getPassword(), user.getType());
+        userService.register(user);
 
         return new R(true, "", "添加成功");
     }
@@ -80,7 +80,7 @@ public class UserController {
     //注销用户
     @DeleteMapping("/{id}/{password}")
     public R logout(@PathVariable int id, @PathVariable String password){
-        userService.logout("1");
+        userService.logout("'list'");
 
         return new R(true, "", "删除成功");
     }
