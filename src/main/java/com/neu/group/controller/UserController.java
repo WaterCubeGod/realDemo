@@ -2,6 +2,7 @@ package com.neu.group.controller;
 
 import com.neu.group.controller.utils.R;
 import com.neu.group.domain.User;
+import com.neu.group.domain.UserDelete;
 import com.neu.group.service.UserService;
 
 import net.sf.json.JSONObject;
@@ -80,7 +81,7 @@ public class UserController {
     //注销用户
     @DeleteMapping("/{id}/{password}")
     public R logout(@PathVariable int id, @PathVariable String password){
-        userService.logout("'list'");
+        userService.logout(new UserDelete(id,password));
 
         return new R(true, "", "删除成功");
     }

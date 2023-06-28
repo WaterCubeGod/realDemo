@@ -1,7 +1,9 @@
 package com.neu.group.service;
 
 import com.neu.group.domain.User;
+import com.neu.group.domain.UserDelete;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +23,8 @@ public interface UserService {
     //批量及加入接口
     boolean bulkImport(File file) throws IOException, InvalidFormatException;
 
-    //注销接口
-    void logout(String... key);
+    //用户注销
+    UserDelete logout(UserDelete userDelete);
 
     //编辑接口
     boolean editUser(int id, String username, String password);
@@ -35,5 +37,7 @@ public interface UserService {
 
     //用户总数
     Integer countUser();
+
+    void a();
 
 }

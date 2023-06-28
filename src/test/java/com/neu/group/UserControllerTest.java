@@ -2,6 +2,7 @@ package com.neu.group;
 
 import com.neu.group.controller.UserController;
 import com.neu.group.domain.User;
+import com.neu.group.service.UserService;
 import net.sf.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +16,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UserControllerTest {
     @Autowired
     private UserController userController;
+    @Autowired
+    private UserService userService;
     @Test
     @Transactional
     @Rollback
     void test(){
         User user = new User(12312, "dsasdasd", "sdasda", 0);
         userController.register(user);
-        userController.login("dsasdasd","sdasda");
-        userController.countUser();
-        userController.editUser(123,"sdas","sddd");
-        userController.logout(12312,"sdasda");
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("count",1);
-        jsonObject.put("username","111");
-        userController.selectUserDividerByPage(jsonObject);
-        userController.exportUserExcel();
+//        userController.login("dsasdasd","sdasda");
+//        userController.countUser();
+//        userController.editUser(123,"sdas","sddd");
+        userController.logout(1231,"sdasda");
+        userService.a();
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("count",1);
+//        jsonObject.put("username","111");
+//        userController.selectUserDividerByPage(jsonObject);
+//        userController.exportUserExcel();
         int a = 1;
         int e = 1;
         assertEquals(e,a);

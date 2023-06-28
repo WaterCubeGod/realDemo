@@ -1,6 +1,9 @@
 package com.neu.group.domain;
 
-public class UserDelete {
+import java.io.Serializable;
+
+public class UserDelete implements Serializable {
+    private static final long serialVersionUID = -1;
     int id;
     String password;
 
@@ -27,5 +30,13 @@ public class UserDelete {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDelete{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

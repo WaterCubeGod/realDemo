@@ -4,18 +4,16 @@ import cc.aicode.e2e.ExcelHelper;
 
 import com.neu.group.dao.UserDao;
 import com.neu.group.domain.User;
+import com.neu.group.domain.UserDelete;
 import com.neu.group.service.UserService;
 import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.io.File;
@@ -76,18 +74,12 @@ public class UserServiceImpl implements UserService {
     //用户注销
     @Override
     @Cacheable()
-    public void logout(String... key) {
-        Set<Object> keys = redisTemplate.keys("*");
-        User user = (User) redisTemplate.opsForValue().get("12312");
-        System.out.println(user);
-//        if (key != null && key.length > 0) {
-//            if (key.length == 1) {
-//                redisTemplate.delete(key[0]);
-//            } else {
-//                redisTemplate.delete((Collection<String>) CollectionUtils.arrayToList(key));
-//            }
-//        }
+    public UserDelete logout(UserDelete userDelete) {;
+        return userDelete;
+    }
 
+    public void a() {
+        System.out.println(redisTemplate.keys("*"));
     }
 
     //用户编辑
